@@ -438,6 +438,14 @@
     // },
     // 
     {
+      "packageName": "@magic/api",
+      "projectFolder": "packages/api",
+      "reviewCategory": "production",
+      "tags": [
+        "tool"
+      ]
+    },
+    {
       "packageName": "@magic/template",
       "projectFolder": "packages/template",
       "reviewCategory": "production",
