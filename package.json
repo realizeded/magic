@@ -1,0 +1,9 @@
+{
+	"devDependencies": {
+		"prettier": "2.7.1"
+	},
+	"dependencies": {
+		"global": "^4.4.0",
+		"npm": "^8.18.0"
+	}
+}
