@@ -18,6 +18,7 @@ specifiers:
   eslint-config-standard-with-typescript: ^22.0.0
   eslint-plugin-import: ^2.25.2
   eslint-plugin-n: ^15.0.0
+  eslint-plugin-only-warn: ^1.0.3
   eslint-plugin-prettier: ^4.2.1
   eslint-plugin-promise: ^6.0.0
   eslint-plugin-react: ^7.30.1
@@ -45,6 +46,7 @@ dependencies:
   '@types/react-dom': 18.0.6
   '@typescript-eslint/parser': 5.33.1
   eslint-config-prettier: 8.5.0_eslint@8.22.0
+  eslint-plugin-only-warn: 1.0.3
   eslint-plugin-prettier: 4.2.1_vlh76yp6mdwtk5bzp6objvozmi
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -5139,6 +5141,11 @@ packages:
       resolve: 1.22.1
       semver: 7.3.7
     dev: true
+
+  /eslint-plugin-only-warn/1.0.3:
+    resolution: {integrity: sha512-XQOX/TfLoLw6h8ky51d29uUjXRTQHqBGXPylDEmy5fe/w7LIOnp8MA24b1OSMEn9BQoKow1q3g1kLe5/9uBTvw==}
+    engines: {node: '>=6'}
+    dev: false
 
   /eslint-plugin-prettier/4.2.1_vlh76yp6mdwtk5bzp6objvozmi:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
