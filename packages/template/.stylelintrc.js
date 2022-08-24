@@ -46,6 +46,7 @@ module.exports = {
         'property-no-vendor-prefix': true, // 禁止属性使用浏览器引擎前缀
         'value-no-vendor-prefix': true, // 禁止给值添加浏览器引擎前缀
         'selector-no-vendor-prefix': true, // 禁止使用浏览器引擎前缀
-        'no-descending-specificity': null // 禁止低优先级的选择器出如今高优先级的选择器以后
+        'no-descending-specificity': null, // 禁止低优先级的选择器出如今高优先级的选择器以后
+        'selector-class-pattern': '^[a-z][a-zA-Z0-9]+$'
     }
 };

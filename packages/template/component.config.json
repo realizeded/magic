@@ -1,0 +1,24 @@
+{
+    "component": {
+        "file": [
+            "index.tsx",
+            "style.module.less",
+            "type.ts",
+            "constant.ts",
+            "CtName.tsx"
+        ],
+        "dir": [
+            "components",
+            "hooks"
+        ]
+    },
+    "page": {
+        "file": [
+            "index.tsx",
+            "style.module.less"
+        ],
+        "dir": [
+            "components"
+        ]
+    }
+}
