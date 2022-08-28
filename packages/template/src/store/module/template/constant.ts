@@ -2,10 +2,14 @@ import { EControlTypes, ITemplateState } from './type';
 
 export const initState: ITemplateState = {
     project: {
+        activeIndex: '',
         template: {
             stages: [
                 {
                     value: '1212'
+                },
+                {
+                    value: '12123'
                 }
             ],
             controls: {
@@ -18,7 +22,19 @@ export const initState: ITemplateState = {
                         left: '-100px'
                     },
                     data: {
-                        src: 'https://lf9-creativelab-sign.bytetos.com/creative-lab/material/private/2b668063605244f8b1793c6ddeb2edba.png?x-expires=1661675138&x-signature=lQDBi3KrYHtHpmyE2L5fv6oRTXE%3D'
+                        src: 'https://lf9-creativelab-sign.bytetos.com/creative-lab/material/74c8cd24e919762dcfa5a24baa3616aa.jpg?x-expires=1661690529&x-signature=S%2BiXX3PZMaCkQ%2F2yAkIV6DluJCE%3D'
+                    }
+                },
+                '12123': {
+                    type: EControlTypes.Img,
+                    box: {
+                        width: '200px',
+                        height: '200px',
+                        top: '20px',
+                        left: '-100px'
+                    },
+                    data: {
+                        src: 'https://lf9-creativelab-sign.bytetos.com/creative-lab/material/74c8cd24e919762dcfa5a24baa3616aa.jpg?x-expires=1661690529&x-signature=S%2BiXX3PZMaCkQ%2F2yAkIV6DluJCE%3D'
                     }
                 }
             }

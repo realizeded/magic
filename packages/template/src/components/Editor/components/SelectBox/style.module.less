@@ -1,0 +1,108 @@
+.selectBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: content-box;
+    width: 100%;
+    height: 100%;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 4px solid rgb(129, 137, 225);
+        content: '';
+    }
+}
+
+.topStart {
+    position: absolute;
+    top: -14px;
+    left: -14px;
+    z-index: 999;
+    width: 8px;
+    height: 8px;
+    cursor: nw-resize;
+    background-color: rgb(40, 120, 224);
+}
+
+.top {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    z-index: 999;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(40, 120, 224);
+    transform: translateX(-4px);
+    cursor: n-resize;
+}
+
+.topEnd {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    z-index: 999;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(40, 120, 224);
+    cursor: ne-resize;
+}
+
+.leftCenter {
+    position: absolute;
+    top: 50%;
+    left: -14px;
+    z-index: 999;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(40, 120, 224);
+    cursor: e-resize;
+}
+
+.rightCenter {
+    position: absolute;
+    top: 50%;
+    right: -14px;
+    z-index: 999;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(40, 120, 224);
+    cursor: w-resize;
+}
+
+.bottomStart {
+    position: absolute;
+    bottom: -14px;
+    left: -14px;
+    z-index: 999;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(40, 120, 224);
+    cursor: sw-resize;
+}
+
+.bottom {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    z-index: 999;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(40, 120, 224);
+    transform: translateX(-4px);
+    cursor: s-resize;
+}
+
+.bottomEnd {
+    position: absolute;
+    right: -14px;
+    bottom: -14px;
+    z-index: 999;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(40, 120, 224);
+    cursor: se-resize;
+}

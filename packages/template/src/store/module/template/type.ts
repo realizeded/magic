@@ -1,3 +1,5 @@
+import { IAction } from '../../type';
+import { CHANGE_ACTIVE_INDEX, CHANGE_CONTROL } from './actionTypes';
 export interface IBox {
     width: string;
     height: string;
@@ -40,12 +42,14 @@ export interface ITemplate {
 }
 export interface IProject {
     template: ITemplate;
+    activeIndex: string;
 }
 
 export interface ITemplateState {
     project: IProject;
 }
 
-export type TTemplateAction = {
-    type: string;
-};
+export type TChangeControlAction = IAction<typeof CHANGE_CONTROL, { id: string; control: TControls }>;
+export type TChangeActiveIndex = IAction<typeof CHANGE_ACTIVE_INDEX, string>;
+
+export type TTemplateAction = TChangeControlAction;

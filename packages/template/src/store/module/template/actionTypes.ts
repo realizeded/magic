@@ -1,1 +1,3 @@
-export default {};
+export const CHANGE_CONTROL = 'CHANGE_CONTROL';
+
+export const CHANGE_ACTIVE_INDEX = 'CHANGE_ACTIVE_INDEX';
