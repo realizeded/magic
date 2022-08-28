@@ -1,10 +1,13 @@
 import React from 'react';
-import $style from './style.module.less';
-import { Button } from 'antd';
 
 import 'antd/dist/antd.min.css';
 import { Editor } from './components/Editor';
-
+import { Provider } from 'react-redux';
+import { store } from './store';
 export const App = () => {
-    return <Editor />;
+    return (
+        <Provider store={store}>
+            <Editor />;
+        </Provider>
+    );
 };

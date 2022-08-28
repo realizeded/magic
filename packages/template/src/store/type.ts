@@ -1,9 +1,8 @@
-import { TTemplateAction } from './module/template/type';
+import { IProject, TTemplateAction, ITemplateState } from './module/template/type';
 import { CombinedState } from 'redux';
-import { ITemplateState } from './module/template';
 
 interface IState {
-    template: ITemplateState;
+    project: ITemplateState;
 }
 
 export type TRootState = CombinedState<IState>;
