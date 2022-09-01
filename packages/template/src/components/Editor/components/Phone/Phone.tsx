@@ -15,7 +15,7 @@ export const Phone: React.FC<IProps> = () => {
     const { template, activeIndex } = project;
 
     const { stages, controls } = template;
-    console.log(project);
+
     return (
         <div className={$style.phoneWrapper}>
             {stages.map((stage, key) => {
