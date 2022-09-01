@@ -4,58 +4,53 @@ import { IUseDragProps } from '../../type';
 export const useDrag = (props: IUseDragProps) => {
     const { ref, dragEnd, dragStart } = props;
 
-    const [isTouch, setIsTouch] = useState(false);
-    const positionRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-    const elPositionRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+    const elStartMoveRef = useRef({ x: 0, y: 0 });
+    const elPositionRef = useRef({ x: 0, y: 0 });
+
     const handleMove = (e: MouseEvent) => {
         const current = ref.current;
 
         if (!current) return;
 
-        const { x, y } = positionRef.current;
+        const { x: moveStartX, y: moveStartY } = elStartMoveRef.current;
+        const { x: left, y: top } = elPositionRef.current;
 
-        const afterX = e.offsetX;
-        const afterY = e.offsetY;
+        const moveAfterX = e.x;
+        const moveAfterY = e.y;
 
-        const top = window.getComputedStyle(current).top.replace('px', '');
-        const left = window.getComputedStyle(current).left.replace('px', '');
+        const newLeft = left + (moveAfterX - moveStartX);
+        const newTop = top + (moveAfterY - moveStartY);
 
-        const newY = Number(top) + afterY - y;
-        const newX = Number(left) + afterX - x;
-        current.style.top = newY + 'px';
-        current.style.left = newX + 'px';
-        elPositionRef.current = { x: newX, y: newY };
+        elStartMoveRef.current = { x: moveAfterX, y: moveAfterY };
+        elPositionRef.current = { y: newTop, x: newLeft };
 
+        dragEnd(elPositionRef.current);
         e.stopPropagation();
     };
 
     const handleMouseDown = (e: MouseEvent) => {
-        setIsTouch(true);
-        const x = e.offsetX;
-        const y = e.offsetY;
         const current = ref.current;
 
-        if (!current) return;
+        if (!current) {
+            return;
+        }
         dragStart();
-        current.style.zIndex = '9999';
-        positionRef.current = { x, y };
-        elPositionRef.current = { x, y };
-        current.addEventListener('mousemove', handleMove);
+
+        const top = current.offsetTop;
+        const left = current.offsetLeft;
+
+        elStartMoveRef.current = { x: e.x, y: e.y };
+        elPositionRef.current = { y: top, x: left };
+        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mousemove', handleMove);
+        e.stopPropagation();
     };
 
     const handleMouseUp = (e: MouseEvent) => {
-        const current = ref.current;
+        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('mousemove', handleMove);
 
-        if (!current) return;
-        setIsTouch(false);
-        const x = e.offsetX;
-        const y = e.offsetY;
-        positionRef.current = { x, y };
-
-        current.style.zIndex = '0';
-
-        dragEnd(elPositionRef.current);
-        current.removeEventListener('mousemove', handleMove);
+        e.stopPropagation();
     };
 
     useEffect(() => {
@@ -64,7 +59,5 @@ export const useDrag = (props: IUseDragProps) => {
         if (!current) return;
 
         current.addEventListener('mousedown', handleMouseDown);
-
-        current.addEventListener('mouseup', handleMouseUp);
     }, [ref]);
 };

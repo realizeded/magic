@@ -8,6 +8,7 @@ import { useDrag } from './hooks/useDrag';
 import { useDispatch } from 'react-redux';
 import { getChangeActiveIndexAction, getChangeControlAction } from '../../../../store/module/template';
 import { SelectBox } from '../SelectBox';
+import _ from 'lodash';
 
 export const BoxHoc = (C: TRenderComponentType) => {
     const Box: TBoxComponentType = (props: IBoxProps) => {
@@ -33,24 +34,38 @@ export const BoxHoc = (C: TRenderComponentType) => {
         `;
 
         const handleDragEnd = (position: IDragPosition) => {
-            controlOfStage.box.top = position.y + 'px';
-            controlOfStage.box.left = position.x + 'px';
+            const newControl = _.clone(controlOfStage);
+            newControl.box.top = position.y + 'px';
+            newControl.box.left = position.x + 'px';
 
-            dispatch(getChangeControlAction(value, controlOfStage));
+            dispatch(getChangeControlAction(value, newControl));
         };
 
         const handleDragStart = () => {
             dispatch(getChangeActiveIndexAction(value));
         };
 
+        const handleResizeDone = (newWdith: number, newHeight: number, top: number, left: number) => {
+            const newControl = _.clone(controlOfStage);
+            newControl.box.top = top + 'px';
+            newControl.box.left = left + 'px';
+            newControl.box.width = newWdith + 'px';
+            newControl.box.height = newHeight + 'px';
+            dispatch(getChangeControlAction(value, newControl));
+        };
         const ref = useRef<HTMLDivElement>(null);
+
         useDrag({ ref, dragEnd: handleDragEnd, dragStart: handleDragStart });
 
+        const wrapperClassNames = classnames($style.box, boxStyle, $style.select);
+
         return (
-            <div className={classnames($style.box, boxStyle, $style.select)} ref={ref}>
-                <C stage={stage} controls={controls} />
-                <SelectBox isSelect={isSelect} />
-            </div>
+            <>
+                <div className={wrapperClassNames} ref={ref}>
+                    <C stage={stage} controls={controls} />
+                    {isSelect && <SelectBox parentRef={ref} resizeDone={handleResizeDone} />}
+                </div>
+            </>
         );
     };
 
