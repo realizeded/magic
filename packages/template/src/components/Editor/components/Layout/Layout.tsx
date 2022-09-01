@@ -7,7 +7,7 @@ interface IProps {}
 
 export const Layout: React.FC<IProps> = props => {
     return (
-        <div className={$style.layoutWrapper}>
+        <div className={$style.layoutWrapper} id="layoutCanvas">
             <Phone />
         </div>
     );

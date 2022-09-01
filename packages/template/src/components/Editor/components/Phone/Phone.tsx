@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { IProject } from '../../../../store/module/template';
@@ -15,6 +15,7 @@ export const Phone: React.FC<IProps> = () => {
     const { template, activeIndex } = project;
 
     const { stages, controls } = template;
+    console.log(project);
     return (
         <div className={$style.phoneWrapper}>
             {stages.map((stage, key) => {

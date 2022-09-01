@@ -3,17 +3,16 @@ import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
 import { ITemplateState, TChangeActiveIndex, TTemplateAction } from './type';
 
+import _ from 'lodash';
+
 const actionTypeMapToState = {
     [CHANGE_CONTROL](state: ITemplateState, action: TTemplateAction) {
+        const newState = _.clone(state);
         const data = action.data;
-
         const { id, control } = data;
+        newState.project.template.controls[id] = control;
 
-        const controls = state.project.template.controls;
-        const newControls = { ...controls };
-        newControls[id] = control;
-        state.project.template.controls = newControls;
-        return state;
+        return { ...newState, project: { ...newState.project } };
     },
     [CHANGE_ACTIVE_INDEX](state: ITemplateState, action: TChangeActiveIndex) {
         const val = action.data;

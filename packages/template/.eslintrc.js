@@ -24,7 +24,6 @@ module.exports = {
     },
     plugins: ['react', '@typescript-eslint', 'only-warn'],
     rules: {
-        'prettier/prettier': 'error',
-        'react/prop-types': '0'
+        'prettier/prettier': 'error'
     }
 };
