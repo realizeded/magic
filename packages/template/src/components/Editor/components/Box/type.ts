@@ -4,6 +4,7 @@ export interface IBoxProps {
     stage: IStage;
     controls: IControls;
     activeIndex: string;
+    controlValue: string;
 }
 
 export type TBoxComponentType = React.FC<IBoxProps>;

@@ -12,14 +12,25 @@ const Flow = compose(BoxHoc)(Render);
 export const Phone: React.FC<IProps> = () => {
     const project = useSelector<TRootState, IProject>(state => state.project.project);
 
-    const { template, activeIndex } = project;
+    const { template, activeIndex, activeStageIndex } = project;
 
     const { stages, controls } = template;
 
+    const activeStage = stages[activeStageIndex];
+
+    const stageValues = activeStage.value;
     return (
         <div className={$style.phoneWrapper}>
-            {stages.map((stage, key) => {
-                return <Flow key={stage.value} activeIndex={activeIndex} stage={stage} controls={controls} />;
+            {stageValues.map((controlValue, key) => {
+                return (
+                    <Flow
+                        key={controlValue}
+                        activeIndex={activeIndex}
+                        stage={activeStage}
+                        controls={controls}
+                        controlValue={controlValue}
+                    />
+                );
             })}
         </div>
     );

@@ -12,11 +12,10 @@ export const Render: TRenderComponentType = props => {
         }
     };
 
-    const { stage, controls } = props;
+    const { controlValue, controls } = props;
 
     const el = useMemo(() => {
-        const val = stage.value;
-        const control = controls[val];
+        const control = controls[controlValue];
         const { type } = control;
 
         const processFn = typeMapToEl[type];
@@ -26,7 +25,7 @@ export const Render: TRenderComponentType = props => {
         }
 
         return null;
-    }, [stage, controls]);
+    }, [controlValue, controls]);
 
     return <div className={$style.renderWrapper}>{el}</div>;
 };

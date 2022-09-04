@@ -14,15 +14,14 @@ export const BoxHoc = (C: TRenderComponentType) => {
     const Box: TBoxComponentType = (props: IBoxProps) => {
         const dispatch = useDispatch();
 
-        const { stage, controls, activeIndex } = props;
+        const { stage, controls, activeIndex, controlValue } = props;
 
-        const { value } = stage;
-        const controlOfStage = controls[value];
+        const controlOfStage = controls[controlValue];
         const box = controlOfStage.box;
 
         const { width, height, top, right, bottom, left } = box;
 
-        const isSelect = activeIndex === value;
+        const isSelect = activeIndex === controlValue;
 
         const boxStyle = css`
             width: ${width};
@@ -38,11 +37,11 @@ export const BoxHoc = (C: TRenderComponentType) => {
             newControl.box.top = position.y + 'px';
             newControl.box.left = position.x + 'px';
 
-            dispatch(getChangeControlAction(value, newControl));
+            dispatch(getChangeControlAction(controlValue, newControl));
         };
 
         const handleDragStart = () => {
-            dispatch(getChangeActiveIndexAction(value));
+            dispatch(getChangeActiveIndexAction(controlValue));
         };
 
         const handleResizeDone = (newWdith: number, newHeight: number, top: number, left: number) => {
@@ -51,7 +50,7 @@ export const BoxHoc = (C: TRenderComponentType) => {
             newControl.box.left = left + 'px';
             newControl.box.width = newWdith + 'px';
             newControl.box.height = newHeight + 'px';
-            dispatch(getChangeControlAction(value, newControl));
+            dispatch(getChangeControlAction(controlValue, newControl));
         };
         const ref = useRef<HTMLDivElement>(null);
 
@@ -62,7 +61,7 @@ export const BoxHoc = (C: TRenderComponentType) => {
         return (
             <>
                 <div className={wrapperClassNames} ref={ref}>
-                    <C stage={stage} controls={controls} />
+                    <C controlValue={controlValue} controls={controls} />
                     {isSelect && <SelectBox parentRef={ref} resizeDone={handleResizeDone} />}
                 </div>
             </>

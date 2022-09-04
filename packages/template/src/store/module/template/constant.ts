@@ -3,13 +3,14 @@ import { EControlTypes, ITemplateState } from './type';
 export const initState: ITemplateState = {
     project: {
         activeIndex: '',
+        activeStageIndex: 0,
         template: {
             stages: [
                 {
-                    value: '1212'
+                    value: ['1212']
                 },
                 {
-                    value: '12123'
+                    value: ['12123']
                 }
             ],
             controls: {

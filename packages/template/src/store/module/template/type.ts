@@ -20,7 +20,7 @@ export interface IControlCommon {
 export type TControlType = EControlTypes.Img;
 
 export interface IStage {
-    value: string;
+    value: string[];
 }
 
 export interface IImg extends IControlCommon {
@@ -43,6 +43,7 @@ export interface ITemplate {
 export interface IProject {
     template: ITemplate;
     activeIndex: string;
+    activeStageIndex: number;
 }
 
 export interface ITemplateState {
