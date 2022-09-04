@@ -17,7 +17,6 @@ export const Phone: React.FC<IProps> = () => {
     const { stages, controls } = template;
 
     const activeStage = stages[activeStageIndex];
-
     const stageValues = activeStage.value;
     return (
         <div className={$style.phoneWrapper}>

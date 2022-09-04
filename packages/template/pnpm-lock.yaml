@@ -5,6 +5,7 @@ specifiers:
   '@babel/plugin-syntax-flow': ^7.14.5
   '@babel/plugin-transform-react-jsx': ^7.14.9
   '@emotion/css': ^11.10.0
+  '@icon-park/react': ^1.4.2
   '@pmmmwh/react-refresh-webpack-plugin': ^0.5.3
   '@svgr/webpack': ^5.5.0
   '@testing-library/dom': 7.21.4
@@ -92,6 +93,7 @@ dependencies:
   '@babel/plugin-syntax-flow': 7.18.6_@babel+core@7.18.10
   '@babel/plugin-transform-react-jsx': 7.18.10_@babel+core@7.18.10
   '@emotion/css': 11.10.0_@babel+core@7.18.10
+  '@icon-park/react': 1.4.2_biqbaboplfbrettd7655fr4n2y
   '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_dziwpuya6nkpeg2ezq2n55ytgi
   '@svgr/webpack': 5.5.0
   '@testing-library/dom': 7.21.4
@@ -1881,6 +1883,17 @@ packages:
 
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+
+  /@icon-park/react/1.4.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-+MtQLjNiRuia3fC/NfpSCTIy5KH5b+NkMB9zYd7p3R4aAIK61AjK0OSraaICJdkKooU9jpzk8m0fY4g9A3JqhQ==}
+    engines: {node: '>= 8.0.0', npm: '>= 5.0.0'}
+    peerDependencies:
+      react: '>=16.9'
+      react-dom: '>=16.9'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@istanbuljs/load-nyc-config/1.1.0:
     resolution: {integrity: sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ==}

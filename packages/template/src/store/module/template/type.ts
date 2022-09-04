@@ -1,5 +1,10 @@
 import { IAction } from '../../type';
-import { CHANGE_ACTIVE_INDEX, CHANGE_CONTROL } from './actionTypes';
+import {
+    CHANGE_ACTIVE_INDEX,
+    CHANGE_CONTROL,
+    CHANGE_ACTVIE_STAGE_INDEX,
+    CREATE_NEW_STAGE
+} from './actionTypes';
 export interface IBox {
     width: string;
     height: string;
@@ -21,6 +26,8 @@ export type TControlType = EControlTypes.Img;
 
 export interface IStage {
     value: string[];
+    name: string;
+    posts: string;
 }
 
 export interface IImg extends IControlCommon {
@@ -52,5 +59,8 @@ export interface ITemplateState {
 
 export type TChangeControlAction = IAction<typeof CHANGE_CONTROL, { id: string; control: TControls }>;
 export type TChangeActiveIndex = IAction<typeof CHANGE_ACTIVE_INDEX, string>;
+export type TChangeActiveStageIndex = IAction<typeof CHANGE_ACTVIE_STAGE_INDEX, number>;
+export type TChangeNewStage = IAction<typeof CREATE_NEW_STAGE, null>;
+export type TDeleteStage = IAction<typeof CHANGE_ACTVIE_STAGE_INDEX, number>;
 
 export type TTemplateAction = TChangeControlAction;

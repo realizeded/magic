@@ -1,11 +1,21 @@
 .sideWrapper {
-    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    background-color: rgb(255 255 255);
     border-right: 1px solid #eaeaea;
     cursor: pointer;
-    padding: 0 10px;
 
     .createbuttonStyle {
-        width: 100% !important;
+        padding: 0 10px;
+        .createBtn {
+            width: 100% !important;
+        }
+    }
+
+    .list {
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 }

@@ -1,3 +1,11 @@
+.activeStage {
+    background-color: #eef3fe;
+}
+
+.listWrapper {
+    padding: 0 10px;
+}
+
 .listItemWrapper {
     display: flex;
     flex-direction: column;
@@ -5,8 +13,10 @@
     height: 278px;
     margin: 10px 0;
     padding: 8px;
-    background-color: #eef3fe;
 
+    &:hover {
+        .activeStage();
+    }
     .stageText {
         height: 20px;
         margin-top: 8px;
@@ -26,5 +36,26 @@
         background-size: 100% 100%;
         border: 1px solid rgb(57 85 246);
         border-radius: 1px;
+        position: relative;
+        &:hover {
+            .delWrapper {
+                display: block;
+            }
+        }
+        > img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .delWrapper {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            display: none;
+        }
     }
+}
+
+.hide {
+    display: none !important;
 }
