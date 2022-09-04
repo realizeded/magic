@@ -38,7 +38,6 @@ export const useDrag = (props: IUseDragProps) => {
 
         const top = current.offsetTop;
         const left = current.offsetLeft;
-
         elStartMoveRef.current = { x: e.x, y: e.y };
         elPositionRef.current = { y: top, x: left };
         document.addEventListener('mouseup', handleMouseUp);

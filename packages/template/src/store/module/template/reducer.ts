@@ -3,7 +3,8 @@ import {
     CHANGE_ACTIVE_INDEX,
     CHANGE_ACTVIE_STAGE_INDEX,
     CREATE_NEW_STAGE,
-    DELETE_STAGE
+    DELETE_STAGE,
+    CREATE_CONTROL_OF_ACTIVE_STAGE
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -13,10 +14,12 @@ import {
     TTemplateAction,
     TChangeActiveStageIndex,
     TChangeNewStage,
-    TDeleteStage
+    TDeleteStage,
+    TCreateControlOfActiveStage
 } from './type';
 
 import _ from 'lodash';
+import { generatorId } from './util';
 
 const actionTypeMapToState = {
     [CHANGE_CONTROL](state: ITemplateState, action: TTemplateAction) {
@@ -72,6 +75,21 @@ const actionTypeMapToState = {
         const stages = project.template.stages;
         stages.splice(index, 1);
         return { ...newState, project: { ...newState.project, activeStageIndex: newActiveStageIndex } };
+    },
+    [CREATE_CONTROL_OF_ACTIVE_STAGE](state: ITemplateState, action: TCreateControlOfActiveStage) {
+        const newState = _.clone(state);
+        const control = action.data;
+        const project = newState.project;
+        const { stages, controls } = project.template;
+        const { activeStageIndex } = project;
+        const activeStage = stages[activeStageIndex];
+
+        const newControlValue = generatorId(Object.keys(controls));
+
+        activeStage.value.push(newControlValue);
+        controls[newControlValue] = control;
+
+        return { ...newState, project: { ...newState.project } };
     }
 };
 export const templateReducer: Reducer<ITemplateState, TTemplateAction> = (state = initState, action) => {

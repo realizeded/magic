@@ -49,6 +49,7 @@ export const initState: ITemplateState = {
             ],
             controls: {
                 '1212': {
+                    name: '3',
                     type: EControlTypes.Img,
                     box: {
                         width: '200px',
@@ -61,6 +62,7 @@ export const initState: ITemplateState = {
                     }
                 },
                 '12123': {
+                    name: '2',
                     type: EControlTypes.Img,
                     box: {
                         width: '200px',
@@ -73,6 +75,7 @@ export const initState: ITemplateState = {
                     }
                 },
                 '121233': {
+                    name: '1',
                     type: EControlTypes.Img,
                     box: {
                         width: '200px',

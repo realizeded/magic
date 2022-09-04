@@ -3,7 +3,8 @@ import {
     CHANGE_ACTIVE_INDEX,
     CHANGE_ACTVIE_STAGE_INDEX,
     CREATE_NEW_STAGE,
-    DELETE_STAGE
+    DELETE_STAGE,
+    CREATE_CONTROL_OF_ACTIVE_STAGE
 } from './actionTypes';
 import { TControls } from './type';
 
@@ -39,5 +40,12 @@ export const getDeleteStageAction = (index: number) => {
     return {
         type: DELETE_STAGE,
         data: index
+    };
+};
+
+export const getCreateControlAction = (control: TControls) => {
+    return {
+        type: CREATE_CONTROL_OF_ACTIVE_STAGE,
+        data: control
     };
 };
