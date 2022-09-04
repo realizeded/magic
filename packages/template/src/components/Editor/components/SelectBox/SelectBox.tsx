@@ -13,14 +13,14 @@ export const SelectBox: React.FC<IProps> = ({ parentRef, resizeDone }) => {
     useDragEl(selectBoxRef, parentRef, resizeDone);
     return (
         <div className={$style.selectBox} ref={selectBoxRef}>
-            <div className={$style.topStart} draggable={false} data-drag={EUseDragELType.TopStart} />
-            <div className={$style.top} draggable={false} data-drag={EUseDragELType.Top} />
-            <div className={$style.topEnd} draggable={false} data-drag={EUseDragELType.TopEnd} />
-            <div className={$style.leftCenter} draggable={false} data-drag={EUseDragELType.LeftCenter} />
-            <div className={$style.rightCenter} draggable={false} data-drag={EUseDragELType.RightCenter} />
-            <div className={$style.bottomStart} draggable={false} data-drag={EUseDragELType.BottomStart} />
-            <div className={$style.bottom} draggable={false} data-drag={EUseDragELType.Bottom} />
-            <div className={$style.bottomEnd} draggable={false} data-drag={EUseDragELType.BottomEnd} />
+            <div className={$style.topStart} data-drag={EUseDragELType.TopStart} />
+            <div className={$style.top} data-drag={EUseDragELType.Top} />
+            <div className={$style.topEnd} data-drag={EUseDragELType.TopEnd} />
+            <div className={$style.leftCenter} data-drag={EUseDragELType.LeftCenter} />
+            <div className={$style.rightCenter} data-drag={EUseDragELType.RightCenter} />
+            <div className={$style.bottomStart} data-drag={EUseDragELType.BottomStart} />
+            <div className={$style.bottom} data-drag={EUseDragELType.Bottom} />
+            <div className={$style.bottomEnd} data-drag={EUseDragELType.BottomEnd} />
         </div>
     );
 };

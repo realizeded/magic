@@ -6,3 +6,35 @@
 body {
     overflow: hidden;
 }
+
+::-webkit-scrollbar {
+    /* 滚动条整体部分 */
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    /* 外层轨道 */
+    border-radius: 10px;
+    position: relative;
+    right: -10px;
+}
+::-webkit-scrollbar-track-piece {
+    /*内层轨道，滚动条中间部分 */
+    background-color: #fff;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    /* 滑块 */
+    width: 10px;
+    border-radius: 5px;
+    background: #cbcbcb;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    /* 鼠标移入滑块 */
+    background: #909090;
+}
+
+* {
+    user-select: none;
+}

@@ -1,0 +1,61 @@
+.activeStage {
+    background-color: #eef3fe;
+}
+
+.listWrapper {
+    padding: 0 10px;
+}
+
+.listItemWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 144px;
+    height: 278px;
+    margin: 10px 0;
+    padding: 8px;
+
+    &:hover {
+        .activeStage();
+    }
+    .stageText {
+        height: 20px;
+        margin-top: 8px;
+        overflow: hidden;
+        color: #3955f6;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .imgWrapper {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: #c1c1c1;
+        background-size: 100% 100%;
+        border: 1px solid rgb(57 85 246);
+        border-radius: 1px;
+        position: relative;
+        &:hover {
+            .delWrapper {
+                display: block;
+            }
+        }
+        > img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .delWrapper {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            display: none;
+        }
+    }
+}
+
+.hide {
+    display: none !important;
+}

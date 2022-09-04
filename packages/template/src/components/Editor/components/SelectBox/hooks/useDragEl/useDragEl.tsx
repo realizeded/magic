@@ -163,6 +163,7 @@ export const useDragEl = (
 
                     document.addEventListener('mouseup', handleMouseUp);
 
+                    e.preventDefault();
                     e.stopPropagation();
                 }
             };
@@ -186,16 +187,12 @@ export const useDragEl = (
                     moveMomentX,
                     moveMomentY
                 );
-                // wrapperEl.style.top = newTop + 'px';
-                // wrapperEl.style.left = newLeft + 'px';
-                // wrapperEl.style.width = newWdith + 'px';
-                // wrapperEl.style.height = newHeight + 'px';
                 if (!isNotDrag) {
                     moveStartX = moveAfterx;
                     moveStartY = moveAfterY;
                 }
 
-                resizeDone(newWdith, newHeight, top, left);
+                resizeDone(newWdith, newHeight, newTop, newLeft);
                 e.stopPropagation();
             };
 
