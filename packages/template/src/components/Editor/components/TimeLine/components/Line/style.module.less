@@ -1,0 +1,39 @@
+.lineWrapper {
+    height: 100%;
+    background-color: #fafafa;
+    height: 32px;
+    display: flex;
+    position: relative;
+    .grid {
+        height: 100%;
+        width: 100px;
+        border-left: 1px solid #d9d9d9;
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+    }
+
+    .unitWrapper {
+        &:first-child {
+            border-left: none;
+        }
+        width: 10px;
+        height: 30%;
+        border-left: 1px solid #d9d9d9;
+    }
+
+    .unitText {
+        position: absolute;
+        left: 0;
+        bottom: 30%;
+    }
+
+    .middleLine {
+        height: 40% !important;
+    }
+}
+
+.vLine {
+    display: flex;
+    align-items: flex-end;
+}

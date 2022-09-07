@@ -1,3 +1,5 @@
+import { css } from '@emotion/css';
+import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { compose } from 'redux';
@@ -12,14 +14,25 @@ const Flow = compose(BoxHoc)(Render);
 export const Phone: React.FC<IProps> = () => {
     const project = useSelector<TRootState, IProject>(state => state.project.project);
 
-    const { template, activeIndex, activeStageIndex } = project;
+    const { template, activeIndex, scaleCanvas, activeStageIndex } = project;
 
     const { stages, controls } = template;
 
     const activeStage = stages[activeStageIndex];
     const stageValues = activeStage.value;
+
+    const pxToScale = (pxStr = '') => {
+        const px = pxStr.replace('px', '');
+        return Number(px) * scaleCanvas + 'px';
+    };
+
+    const phoneStyle = css`
+        width: ${pxToScale('375')};
+        height: ${pxToScale('667')};
+        margin: ${pxToScale('100')} auto;
+    `;
     return (
-        <div className={$style.phoneWrapper}>
+        <div className={classNames($style.phoneWrapper, phoneStyle)}>
             {stageValues.map((controlValue, key) => {
                 return (
                     <Flow
@@ -28,6 +41,7 @@ export const Phone: React.FC<IProps> = () => {
                         stage={activeStage}
                         controls={controls}
                         controlValue={controlValue}
+                        scaleCanvas={scaleCanvas}
                     />
                 );
             })}

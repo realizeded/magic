@@ -5,6 +5,7 @@
 
 body {
     overflow: hidden;
+    height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -13,21 +14,24 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    /* 外层轨道 */
-    border-radius: 10px;
     position: relative;
     right: -10px;
+
+    /* 外层轨道 */
+    border-radius: 10px;
 }
+
 ::-webkit-scrollbar-track-piece {
-    /*内层轨道，滚动条中间部分 */
+    /* 内层轨道，滚动条中间部分 */
     background-color: #fff;
     border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
     /* 滑块 */
     width: 10px;
-    border-radius: 5px;
     background: #cbcbcb;
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

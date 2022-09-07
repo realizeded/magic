@@ -4,6 +4,7 @@ export const initState: ITemplateState = {
     project: {
         activeIndex: '',
         activeStageIndex: 0,
+        scaleCanvas: 0.7,
         template: {
             stages: [
                 {
@@ -49,7 +50,7 @@ export const initState: ITemplateState = {
             ],
             controls: {
                 '1212': {
-                    name: '3',
+                    name: '黑暗',
                     type: EControlTypes.Img,
                     box: {
                         width: '200px',
@@ -62,7 +63,7 @@ export const initState: ITemplateState = {
                     }
                 },
                 '12123': {
-                    name: '2',
+                    name: '光明',
                     type: EControlTypes.Img,
                     box: {
                         width: '200px',
@@ -75,7 +76,7 @@ export const initState: ITemplateState = {
                     }
                 },
                 '121233': {
-                    name: '1',
+                    name: '生活',
                     type: EControlTypes.Img,
                     box: {
                         width: '200px',

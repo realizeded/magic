@@ -5,6 +5,7 @@ export interface IBoxProps {
     controls: IControls;
     activeIndex: string;
     controlValue: string;
+    scaleCanvas: number;
 }
 
 export type TBoxComponentType = React.FC<IBoxProps>;

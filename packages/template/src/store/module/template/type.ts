@@ -4,7 +4,8 @@ import {
     CHANGE_CONTROL,
     CHANGE_ACTVIE_STAGE_INDEX,
     CREATE_NEW_STAGE,
-    CREATE_CONTROL_OF_ACTIVE_STAGE
+    CREATE_CONTROL_OF_ACTIVE_STAGE,
+    SET_NEW_TEMPLATE
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -53,6 +54,7 @@ export interface IProject {
     template: ITemplate;
     activeIndex: string;
     activeStageIndex: number;
+    scaleCanvas: number;
 }
 
 export interface ITemplateState {
@@ -65,5 +67,6 @@ export type TChangeActiveStageIndex = IAction<typeof CHANGE_ACTVIE_STAGE_INDEX, 
 export type TChangeNewStage = IAction<typeof CREATE_NEW_STAGE, null>;
 export type TDeleteStage = IAction<typeof CHANGE_ACTVIE_STAGE_INDEX, number>;
 export type TCreateControlOfActiveStage = IAction<typeof CREATE_CONTROL_OF_ACTIVE_STAGE, TControls>;
+export type TSetNewTemplate = IAction<typeof SET_NEW_TEMPLATE, ITemplate>;
 
 export type TTemplateAction = TChangeControlAction;

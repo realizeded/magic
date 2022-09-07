@@ -4,7 +4,8 @@ import {
     CHANGE_ACTVIE_STAGE_INDEX,
     CREATE_NEW_STAGE,
     DELETE_STAGE,
-    CREATE_CONTROL_OF_ACTIVE_STAGE
+    CREATE_CONTROL_OF_ACTIVE_STAGE,
+    SET_NEW_TEMPLATE
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -15,7 +16,8 @@ import {
     TChangeActiveStageIndex,
     TChangeNewStage,
     TDeleteStage,
-    TCreateControlOfActiveStage
+    TCreateControlOfActiveStage,
+    TSetNewTemplate
 } from './type';
 
 import _ from 'lodash';
@@ -90,6 +92,12 @@ const actionTypeMapToState = {
         controls[newControlValue] = control;
 
         return { ...newState, project: { ...newState.project } };
+    },
+    [SET_NEW_TEMPLATE](state: ITemplateState, action: TSetNewTemplate) {
+        const newState = _.clone(state);
+        const newTemplate = action.data;
+
+        return { ...newState, project: { ...newState.project, template: newTemplate } };
     }
 };
 export const templateReducer: Reducer<ITemplateState, TTemplateAction> = (state = initState, action) => {

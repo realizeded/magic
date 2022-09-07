@@ -4,9 +4,10 @@ import {
     CHANGE_ACTVIE_STAGE_INDEX,
     CREATE_NEW_STAGE,
     DELETE_STAGE,
-    CREATE_CONTROL_OF_ACTIVE_STAGE
+    CREATE_CONTROL_OF_ACTIVE_STAGE,
+    SET_NEW_TEMPLATE
 } from './actionTypes';
-import { TControls } from './type';
+import { TControls, ITemplate } from './type';
 
 export const getChangeControlAction = (id: string, control: TControls) => {
     return {
@@ -47,5 +48,12 @@ export const getCreateControlAction = (control: TControls) => {
     return {
         type: CREATE_CONTROL_OF_ACTIVE_STAGE,
         data: control
+    };
+};
+
+export const getSetNewTemplateAction = (template: ITemplate) => {
+    return {
+        type: SET_NEW_TEMPLATE,
+        data: template
     };
 };
