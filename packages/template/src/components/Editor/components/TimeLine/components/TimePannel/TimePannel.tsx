@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { EControlTypes, IProject } from '../../../../../../store/module/template';
+import { useDispatch, useSelector } from 'react-redux';
+import { EControlTypes, getChangeActiveIndexAction, IProject } from '../../../../../../store/module/template';
 import { TRootState } from '../../../../../../store/type';
 import { ControlPannel } from '../ControlPannel';
 import { Line } from '../Line';
@@ -11,6 +11,8 @@ import { CircleDoubleUp } from '@icon-park/react';
 interface IProps {}
 
 export const TimePannel: React.FC<IProps> = props => {
+    const dispatch = useDispatch();
+
     const project = useSelector<TRootState, IProject>(state => state.project.project);
 
     const { template, activeIndex, activeStageIndex, currentTime } = project;
@@ -20,11 +22,15 @@ export const TimePannel: React.FC<IProps> = props => {
     const activeStage = stages[activeStageIndex];
     const activeControls = activeStage.value.map(val => controls[val]);
 
+    const handleChangeControl = (id: string) => {
+        dispatch(getChangeActiveIndexAction(id));
+    };
+
     return (
         <div className={$style.timePannelWrapper}>
             <div className={$style.controlWrapper}>
                 <div className={$style.controlName}>控件名称</div>
-                <ControlPannel />
+                <ControlPannel handleChangeControl={handleChangeControl} />
             </div>
             <div className={$style.life}>
                 <Line />
@@ -36,12 +42,14 @@ export const TimePannel: React.FC<IProps> = props => {
                     const isActive = activeIndex === activeStage.value[i];
                     const type = control.type;
 
+                    const handleClick = handleChangeControl.bind(this, activeStage.value?.[i]);
                     if (type === EControlTypes.Img) {
                         return (
                             <div
                                 key={i}
                                 className={classNames($style.lineControl, isActive && $style.active)}
-                                style={{ background: `url(${control.data.src})`, backgroundSize: '32px' }}
+                                onClick={handleClick}
+                                // style={{ background: `url(${control.data.src})`, backgroundSize: '32px' }}
                             ></div>
                         );
                     }
@@ -51,13 +59,15 @@ export const TimePannel: React.FC<IProps> = props => {
                             <div
                                 key={i}
                                 className={classNames($style.lineControl, isActive && $style.active)}
-                                style={{ background: `url(${control.data.posts})`, backgroundSize: '32px' }}
+                                onClick={handleClick}
+                                // style={{ background: `url(${control.data.posts})`, backgroundSize: '32px' }}
                             ></div>
                         );
                     }
                     return (
                         <div
                             key={i}
+                            onClick={handleClick}
                             className={classNames($style.lineControl, isActive && $style.active)}
                         ></div>
                     );
