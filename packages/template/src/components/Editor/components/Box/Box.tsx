@@ -14,7 +14,7 @@ export const BoxHoc = (C: TRenderComponentType) => {
     const Box: TBoxComponentType = (props: IBoxProps) => {
         const dispatch = useDispatch();
 
-        const { stage, controls, activeIndex, controlValue, scaleCanvas } = props;
+        const { stage, controls, activeIndex, controlValue, scaleCanvas, currentTime, playState } = props;
 
         const controlOfStage = controls[controlValue];
         const box = controlOfStage.box;
@@ -66,7 +66,12 @@ export const BoxHoc = (C: TRenderComponentType) => {
         return (
             <>
                 <div className={wrapperClassNames} ref={ref}>
-                    <C controlValue={controlValue} controls={controls} />
+                    <C
+                        controlValue={controlValue}
+                        controls={controls}
+                        currentTime={currentTime}
+                        playState={playState}
+                    />
                     {isSelect && <SelectBox parentRef={ref} resizeDone={handleResizeDone} />}
                 </div>
             </>

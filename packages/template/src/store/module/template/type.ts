@@ -5,7 +5,9 @@ import {
     CHANGE_ACTVIE_STAGE_INDEX,
     CREATE_NEW_STAGE,
     CREATE_CONTROL_OF_ACTIVE_STAGE,
-    SET_NEW_TEMPLATE
+    SET_NEW_TEMPLATE,
+    CHANGE_CURRENT_TIME,
+    TOGGLE_PLAY_STATE
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -17,7 +19,8 @@ export interface IBox {
 }
 
 export enum EControlTypes {
-    Img = 'img'
+    Img = 'img',
+    Video = 'video'
 }
 
 export interface IControlCommon {
@@ -40,7 +43,15 @@ export interface IImg extends IControlCommon {
     };
 }
 
-export type TControls = IImg;
+export interface IVideo extends IControlCommon {
+    type: EControlTypes.Video;
+    data: {
+        src: string;
+        posts: string;
+    };
+}
+
+export type TControls = IImg | IVideo;
 
 export interface IControls {
     [key: string]: TControls;
@@ -55,6 +66,8 @@ export interface IProject {
     activeIndex: string;
     activeStageIndex: number;
     scaleCanvas: number;
+    currentTime: number;
+    playState: boolean;
 }
 
 export interface ITemplateState {
@@ -68,5 +81,7 @@ export type TChangeNewStage = IAction<typeof CREATE_NEW_STAGE, null>;
 export type TDeleteStage = IAction<typeof CHANGE_ACTVIE_STAGE_INDEX, number>;
 export type TCreateControlOfActiveStage = IAction<typeof CREATE_CONTROL_OF_ACTIVE_STAGE, TControls>;
 export type TSetNewTemplate = IAction<typeof SET_NEW_TEMPLATE, ITemplate>;
+export type TChangeCurrentTime = IAction<typeof CHANGE_CURRENT_TIME, number>;
+export type TTogglePlayState = IAction<typeof TOGGLE_PLAY_STATE, boolean>;
 
 export type TTemplateAction = TChangeControlAction;
