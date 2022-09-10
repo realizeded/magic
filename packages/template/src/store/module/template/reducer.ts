@@ -4,7 +4,10 @@ import {
     CHANGE_ACTVIE_STAGE_INDEX,
     CREATE_NEW_STAGE,
     DELETE_STAGE,
-    CREATE_CONTROL_OF_ACTIVE_STAGE
+    CREATE_CONTROL_OF_ACTIVE_STAGE,
+    SET_NEW_TEMPLATE,
+    CHANGE_CURRENT_TIME,
+    TOGGLE_PLAY_STATE
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -15,7 +18,9 @@ import {
     TChangeActiveStageIndex,
     TChangeNewStage,
     TDeleteStage,
-    TCreateControlOfActiveStage
+    TCreateControlOfActiveStage,
+    TSetNewTemplate,
+    TTogglePlayState
 } from './type';
 
 import _ from 'lodash';
@@ -90,6 +95,22 @@ const actionTypeMapToState = {
         controls[newControlValue] = control;
 
         return { ...newState, project: { ...newState.project } };
+    },
+    [SET_NEW_TEMPLATE](state: ITemplateState, action: TSetNewTemplate) {
+        const newState = _.clone(state);
+        const newTemplate = action.data;
+
+        return { ...newState, project: { ...newState.project, template: newTemplate } };
+    },
+    [CHANGE_CURRENT_TIME](state: ITemplateState, action: TSetNewTemplate) {
+        const newState = _.clone(state);
+        const currentTime = action.data;
+        return { ...newState, project: { ...newState.project, currentTime } };
+    },
+    [TOGGLE_PLAY_STATE](state: ITemplateState, action: TTogglePlayState) {
+        const newState = _.clone(state);
+        const playState = action.data;
+        return { ...newState, project: { ...newState.project, playState } };
     }
 };
 export const templateReducer: Reducer<ITemplateState, TTemplateAction> = (state = initState, action) => {

@@ -2,13 +2,16 @@ import { EControlTypes, ITemplateState } from './type';
 
 export const initState: ITemplateState = {
     project: {
+        playState: false,
         activeIndex: '',
         activeStageIndex: 0,
+        scaleCanvas: 0.7,
+        currentTime: 0,
         template: {
             stages: [
                 {
                     name: '场景一',
-                    value: ['1212', '12123'],
+                    value: ['121233', '888'],
                     posts: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fdfdb344e89c70ce3cc0db030f61c45555f82e640.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664864710&t=efea8e64bd411cf4dec2a256c8963072'
                 },
                 {
@@ -49,7 +52,7 @@ export const initState: ITemplateState = {
             ],
             controls: {
                 '1212': {
-                    name: '3',
+                    name: '黑暗',
                     type: EControlTypes.Img,
                     box: {
                         width: '200px',
@@ -62,7 +65,7 @@ export const initState: ITemplateState = {
                     }
                 },
                 '12123': {
-                    name: '2',
+                    name: '光明',
                     type: EControlTypes.Img,
                     box: {
                         width: '200px',
@@ -75,7 +78,7 @@ export const initState: ITemplateState = {
                     }
                 },
                 '121233': {
-                    name: '1',
+                    name: '生活',
                     type: EControlTypes.Img,
                     box: {
                         width: '200px',
@@ -85,6 +88,20 @@ export const initState: ITemplateState = {
                     },
                     data: {
                         src: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F1e1184a17efc52183a73c96f3f91d726c73a72bc.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664864219&t=11ec28b1d41601ec1950770d771437cf'
+                    }
+                },
+                '888': {
+                    name: '生活',
+                    type: EControlTypes.Video,
+                    box: {
+                        width: '200px',
+                        height: '200px',
+                        top: '0px',
+                        left: '0px'
+                    },
+                    data: {
+                        posts: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F1e1184a17efc52183a73c96f3f91d726c73a72bc.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664864219&t=11ec28b1d41601ec1950770d771437cf',
+                        src: 'http://localhost:3000/mp.mp4'
                     }
                 }
             }

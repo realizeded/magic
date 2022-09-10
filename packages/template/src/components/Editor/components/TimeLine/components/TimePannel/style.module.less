@@ -1,0 +1,57 @@
+.timePannelWrapper {
+    display: flex;
+    width: calc(100vw - 164px);
+    overflow: auto;
+
+    .controlWrapper {
+        position: sticky;
+        left: 0;
+        z-index: 9999;
+        width: 240px;
+        height: 100%;
+        background-color: azure;
+        border-right: 1px solid #fff;
+    }
+
+    .life {
+        position: relative;
+
+        .lineControl {
+            width: 100%;
+            height: 32px;
+
+            &:nth-child(2n + 1) {
+                background-color: #fafafa;
+            }
+
+            &:nth-child(2n) {
+                background-color: #f0f0f0;
+            }
+        }
+    }
+
+    .controlName {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 240px;
+        height: 32px;
+        background: rgb(250 250 250);
+    }
+}
+
+.active {
+    background-color: #c5cfdb !important;
+}
+
+.verticalLine {
+    position: absolute;
+    top: 13px;
+    width: 1px;
+    height: 96px;
+    background-color: rgb(13 206 138);
+    opacity: 0.6;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}

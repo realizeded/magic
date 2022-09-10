@@ -14,7 +14,7 @@ export const BoxHoc = (C: TRenderComponentType) => {
     const Box: TBoxComponentType = (props: IBoxProps) => {
         const dispatch = useDispatch();
 
-        const { stage, controls, activeIndex, controlValue } = props;
+        const { stage, controls, activeIndex, controlValue, scaleCanvas, currentTime, playState } = props;
 
         const controlOfStage = controls[controlValue];
         const box = controlOfStage.box;
@@ -23,19 +23,24 @@ export const BoxHoc = (C: TRenderComponentType) => {
 
         const isSelect = activeIndex === controlValue;
 
+        const pxToScale = (pxStr = '') => {
+            const px = pxStr.replace('px', '');
+            return Number(px) * scaleCanvas + 'px';
+        };
+
         const boxStyle = css`
-            width: ${width};
-            height: ${height};
-            top: ${top};
-            bottom: ${bottom};
-            right: ${right};
-            left: ${left};
+            width: ${pxToScale(width)};
+            height: ${pxToScale(height)};
+            top: ${pxToScale(top)};
+            bottom: ${pxToScale(bottom)};
+            right: ${pxToScale(right)};
+            left: ${pxToScale(left)};
         `;
 
         const handleDragEnd = (position: IDragPosition) => {
             const newControl = _.clone(controlOfStage);
-            newControl.box.top = position.y + 'px';
-            newControl.box.left = position.x + 'px';
+            newControl.box.top = position.y / scaleCanvas + 'px';
+            newControl.box.left = position.x / scaleCanvas + 'px';
 
             dispatch(getChangeControlAction(controlValue, newControl));
         };
@@ -46,10 +51,10 @@ export const BoxHoc = (C: TRenderComponentType) => {
 
         const handleResizeDone = (newWdith: number, newHeight: number, top: number, left: number) => {
             const newControl = _.clone(controlOfStage);
-            newControl.box.top = top + 'px';
-            newControl.box.left = left + 'px';
-            newControl.box.width = newWdith + 'px';
-            newControl.box.height = newHeight + 'px';
+            newControl.box.top = top / scaleCanvas + 'px';
+            newControl.box.left = left / scaleCanvas + 'px';
+            newControl.box.width = newWdith / scaleCanvas + 'px';
+            newControl.box.height = newHeight / scaleCanvas + 'px';
             dispatch(getChangeControlAction(controlValue, newControl));
         };
         const ref = useRef<HTMLDivElement>(null);
@@ -61,7 +66,12 @@ export const BoxHoc = (C: TRenderComponentType) => {
         return (
             <>
                 <div className={wrapperClassNames} ref={ref}>
-                    <C controlValue={controlValue} controls={controls} />
+                    <C
+                        controlValue={controlValue}
+                        controls={controls}
+                        currentTime={currentTime}
+                        playState={playState}
+                    />
                     {isSelect && <SelectBox parentRef={ref} resizeDone={handleResizeDone} />}
                 </div>
             </>

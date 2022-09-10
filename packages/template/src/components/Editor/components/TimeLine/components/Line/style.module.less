@@ -1,0 +1,46 @@
+.lineWrapper {
+    position: relative;
+    display: flex;
+    height: 32px;
+    background-color: #fafafa;
+    cursor: pointer;
+    .grid {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        width: 100px;
+        height: 100%;
+        border-left: 1px solid #d9d9d9;
+        pointer-events: none;
+    }
+
+    .unitWrapper {
+        &:first-child {
+            border-left: none;
+        }
+        width: 10px;
+        height: 30%;
+        border-left: 1px solid #d9d9d9;
+    }
+
+    .unitText {
+        position: absolute;
+        bottom: 30%;
+        left: 0;
+    }
+
+    .middleLine {
+        height: 40% !important;
+    }
+}
+
+.vLine {
+    display: flex;
+    align-items: flex-end;
+}
+
+.verticalLine {
+    width: 10px;
+    height: 100%;
+    background-color: #fafafa;
+}
