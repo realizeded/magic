@@ -23,9 +23,47 @@ export enum EControlTypes {
     Video = 'video'
 }
 
+export enum EAnimateType {
+    LeftInto = 1
+}
+
+export interface IAnimateLeftInto {
+    start: number;
+    end: number;
+    left: number;
+    top: number;
+    type: EAnimateType.LeftInto;
+}
+
+export type TAnimate = Array<IAnimateLeftInto>;
+
+export enum EEventType {
+    Click = 1
+}
+
+export enum ETargetEventType {
+    jumpPlay = 1
+}
+
+export interface IJumpEvent {
+    type: ETargetEventType.jumpPlay;
+    start: number;
+}
+
+export type TTargetEvent = Array<IJumpEvent>;
+
+export interface IClickEvent {
+    type: EEventType.Click;
+    start: number;
+    targetEvent: TTargetEvent;
+}
+
+export type TEvent = Array<IClickEvent>;
 export interface IControlCommon {
     box: IBox;
     name: string;
+    animate?: TAnimate;
+    event?: TEvent;
 }
 
 export type TControlType = EControlTypes.Img;

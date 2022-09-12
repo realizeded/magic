@@ -1,4 +1,5 @@
-import { EControlTypes, ITemplateState } from './type';
+import { start } from 'repl';
+import { EAnimateType, EControlTypes, EEventType, ITemplateState, ETargetEventType } from './type';
 
 export const initState: ITemplateState = {
     project: {
@@ -86,6 +87,34 @@ export const initState: ITemplateState = {
                         top: '120px',
                         left: '0px'
                     },
+                    animate: [
+                        {
+                            type: EAnimateType.LeftInto,
+                            start: 1,
+                            end: 2,
+                            left: 500,
+                            top: 0
+                        },
+                        {
+                            type: EAnimateType.LeftInto,
+                            start: 4,
+                            end: 5,
+                            left: 0,
+                            top: 500
+                        }
+                    ],
+                    event: [
+                        {
+                            type: EEventType.Click,
+                            start: 2,
+                            targetEvent: [
+                                {
+                                    type: ETargetEventType.jumpPlay,
+                                    start: 0
+                                }
+                            ]
+                        }
+                    ],
                     data: {
                         src: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F1e1184a17efc52183a73c96f3f91d726c73a72bc.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664864219&t=11ec28b1d41601ec1950770d771437cf'
                     }

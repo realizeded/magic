@@ -34,6 +34,7 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
                         key={i}
                         className={classNames($style.controlItem, isActive && $style.active)}
                         onClick={() => handleChangeControl(activeStage.value[i])}
+                        draggable={true}
                     >
                         <Icon size={14} fill="#000" theme="outline" />
                         <span className={$style.text}>{name}</span>

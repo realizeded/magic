@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { IUseDragProps } from '../../type';
 
 export const useDrag = (props: IUseDragProps) => {
-    const { ref, dragEnd, dragStart } = props;
+    const { ref, dragEnd, dragStart, playState } = props;
+
+    const refPlayState = useRef(playState);
+    refPlayState.current = playState;
 
     const elStartMoveRef = useRef({ x: 0, y: 0 });
     const elPositionRef = useRef({ x: 0, y: 0 });
@@ -31,7 +34,7 @@ export const useDrag = (props: IUseDragProps) => {
     const handleMouseDown = (e: MouseEvent) => {
         const current = ref.current;
 
-        if (!current) {
+        if (!current || refPlayState.current) {
             return;
         }
         dragStart();
@@ -51,12 +54,10 @@ export const useDrag = (props: IUseDragProps) => {
 
         e.stopPropagation();
     };
-
     useEffect(() => {
         const current = ref.current;
 
         if (!current) return;
-
         current.addEventListener('mousedown', handleMouseDown);
     }, [ref]);
 };

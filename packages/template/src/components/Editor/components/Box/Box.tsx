@@ -9,8 +9,9 @@ import { useDispatch } from 'react-redux';
 import { getChangeActiveIndexAction, getChangeControlAction } from '../../../../store/module/template';
 import { SelectBox } from '../SelectBox';
 import _ from 'lodash';
+import { TAnimateComponentType } from '../Animate';
 
-export const BoxHoc = (C: TRenderComponentType) => {
+export const BoxHoc = (C: TAnimateComponentType) => {
     const Box: TBoxComponentType = (props: IBoxProps) => {
         const dispatch = useDispatch();
 
@@ -59,20 +60,20 @@ export const BoxHoc = (C: TRenderComponentType) => {
         };
         const ref = useRef<HTMLDivElement>(null);
 
-        useDrag({ ref, dragEnd: handleDragEnd, dragStart: handleDragStart });
+        useDrag({ ref, dragEnd: handleDragEnd, dragStart: handleDragStart, playState });
 
-        const wrapperClassNames = classnames($style.box, boxStyle, $style.select);
+        const wrapperClassNames = classnames(
+            $style.box,
+            boxStyle,
+            $style.select,
+            !playState ? $style.boxHover : ''
+        );
 
         return (
             <>
                 <div className={wrapperClassNames} ref={ref}>
-                    <C
-                        controlValue={controlValue}
-                        controls={controls}
-                        currentTime={currentTime}
-                        playState={playState}
-                    />
-                    {isSelect && <SelectBox parentRef={ref} resizeDone={handleResizeDone} />}
+                    <C {...props} />
+                    {isSelect && !playState && <SelectBox parentRef={ref} resizeDone={handleResizeDone} />}
                 </div>
             </>
         );

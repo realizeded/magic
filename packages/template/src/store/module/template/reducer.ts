@@ -110,7 +110,7 @@ const actionTypeMapToState = {
     [TOGGLE_PLAY_STATE](state: ITemplateState, action: TTogglePlayState) {
         const newState = _.clone(state);
         const playState = action.data;
-        return { ...newState, project: { ...newState.project, playState } };
+        return { ...newState, project: { ...newState.project, playState, activeIndex: '' } };
     }
 };
 export const templateReducer: Reducer<ITemplateState, TTemplateAction> = (state = initState, action) => {

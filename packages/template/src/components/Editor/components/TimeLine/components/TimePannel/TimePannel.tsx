@@ -1,12 +1,20 @@
 import classNames from 'classnames';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { EControlTypes, getChangeActiveIndexAction, IProject } from '../../../../../../store/module/template';
+import {
+    EAnimateType,
+    EControlTypes,
+    getChangeActiveIndexAction,
+    IProject,
+    TAnimate
+} from '../../../../../../store/module/template';
 import { TRootState } from '../../../../../../store/type';
 import { ControlPannel } from '../ControlPannel';
 import { Line } from '../Line';
 import $style from './style.module.less';
 import { CircleDoubleUp } from '@icon-park/react';
+import { start } from 'repl';
+import { animteKeyMapToText } from './constant';
 
 interface IProps {}
 
@@ -35,12 +43,14 @@ export const TimePannel: React.FC<IProps> = props => {
             <div className={$style.life}>
                 <Line />
 
-                <div className={$style.verticalLine} style={{ left: currentTime * 10 + 30 + 'px' }}>
+                <div className={$style.verticalLine} style={{ left: currentTime * 10 * 10 + 30 + 'px' }}>
                     <CircleDoubleUp theme="filled" fill="rgb(13 206 138)" size="14" />
                 </div>
                 {activeControls.map((control, i) => {
                     const isActive = activeIndex === activeStage.value[i];
                     const type = control.type;
+
+                    const animate = control.animate ?? ([] as TAnimate);
 
                     const handleClick = handleChangeControl.bind(this, activeStage.value?.[i]);
                     if (type === EControlTypes.Img) {
@@ -50,20 +60,26 @@ export const TimePannel: React.FC<IProps> = props => {
                                 className={classNames($style.lineControl, isActive && $style.active)}
                                 onClick={handleClick}
                                 // style={{ background: `url(${control.data.src})`, backgroundSize: '32px' }}
-                            ></div>
+                            >
+                                {animate.map((animateItem, i) => {
+                                    const key = animateItem.type;
+                                    const { start, end } = animateItem;
+
+                                    const width = (end - start) * 10 * 10;
+                                    return (
+                                        <div
+                                            key={i}
+                                            className={$style.animateLineItem}
+                                            style={{ width, left: start * 10 * 10 + 30 + 'px' }}
+                                        >
+                                            {animteKeyMapToText[key]}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         );
                     }
 
-                    if (type === EControlTypes.Video) {
-                        return (
-                            <div
-                                key={i}
-                                className={classNames($style.lineControl, isActive && $style.active)}
-                                onClick={handleClick}
-                                // style={{ background: `url(${control.data.posts})`, backgroundSize: '32px' }}
-                            ></div>
-                        );
-                    }
                     return (
                         <div
                             key={i}

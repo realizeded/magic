@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { getChangeCurrentTime, IProject } from '../../../../store/module/template';
 import { TRootState } from '../../../../store/type';
+import { AnimateHoc } from '../Animate';
 import { BoxHoc } from '../Box';
 import { Render } from '../Render';
 import $style from './style.module.less';
 interface IProps {}
 
-const Flow = compose(BoxHoc)(Render);
+const Flow = compose(BoxHoc, AnimateHoc)(Render);
 export const Phone: React.FC<IProps> = () => {
     const dispatch = useDispatch();
 
@@ -22,7 +23,6 @@ export const Phone: React.FC<IProps> = () => {
 
     const activeStage = stages[activeStageIndex];
     const stageValues = activeStage.value;
-
     const playStateRef = useRef<boolean>(playState);
     playStateRef.current = playState;
     useEffect(() => {
