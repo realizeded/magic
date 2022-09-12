@@ -106,7 +106,7 @@ export const initState: ITemplateState = {
                     event: [
                         {
                             type: EEventType.Click,
-                            start: 2,
+                            start: 6,
                             targetEvent: [
                                 {
                                     type: ETargetEventType.jumpPlay,

@@ -2,11 +2,12 @@ import { css } from '@emotion/css';
 import classNames from 'classnames';
 import React from 'react';
 import { EAnimateType, IAnimateLeftInto, TAnimate } from '../../../../store/module/template';
+import { TEventComponentType } from '../Event';
 import { TRenderComponentType } from '../Render';
 import $style from './style.module.less';
 import { IAnimateProps } from './type';
 
-export const AnimateHoc = (C: TRenderComponentType) => {
+export const AnimateHoc = (C: TEventComponentType) => {
     const Animate: React.FC<IAnimateProps> = props => {
         const { controls, controlValue, currentTime, playState, activeIndex } = props;
 
@@ -64,12 +65,7 @@ export const AnimateHoc = (C: TRenderComponentType) => {
 
         return (
             <div className={classNames(...classAnimate)}>
-                <C
-                    controlValue={controlValue}
-                    controls={controls}
-                    currentTime={currentTime}
-                    playState={playState}
-                />
+                <C {...props} />
             </div>
         );
     };

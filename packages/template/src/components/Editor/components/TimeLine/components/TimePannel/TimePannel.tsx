@@ -12,7 +12,7 @@ import { TRootState } from '../../../../../../store/type';
 import { ControlPannel } from '../ControlPannel';
 import { Line } from '../Line';
 import $style from './style.module.less';
-import { CircleDoubleUp } from '@icon-park/react';
+import { CircleDoubleUp, Mark } from '@icon-park/react';
 import { start } from 'repl';
 import { animteKeyMapToText } from './constant';
 
@@ -51,7 +51,7 @@ export const TimePannel: React.FC<IProps> = props => {
                     const type = control.type;
 
                     const animate = control.animate ?? ([] as TAnimate);
-
+                    const event = control.event ?? [];
                     const handleClick = handleChangeControl.bind(this, activeStage.value?.[i]);
                     if (type === EControlTypes.Img) {
                         return (
@@ -73,6 +73,16 @@ export const TimePannel: React.FC<IProps> = props => {
                                             style={{ width, left: start * 10 * 10 + 30 + 'px' }}
                                         >
                                             {animteKeyMapToText[key]}
+                                        </div>
+                                    );
+                                })}
+
+                                {event.map((eventItem, i) => {
+                                    const start = eventItem.start;
+                                    const left = start * 10 * 10 + 30 + 'px';
+                                    return (
+                                        <div key={i} className={$style.eventLineItem} style={{ left }}>
+                                            <Mark size={20} fill="#3955f6" theme="outline" />
                                         </div>
                                     );
                                 })}

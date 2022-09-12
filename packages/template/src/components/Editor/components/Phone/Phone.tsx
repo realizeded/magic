@@ -7,11 +7,12 @@ import { getChangeCurrentTime, IProject } from '../../../../store/module/templat
 import { TRootState } from '../../../../store/type';
 import { AnimateHoc } from '../Animate';
 import { BoxHoc } from '../Box';
+import { EvenHoc } from '../Event';
 import { Render } from '../Render';
 import $style from './style.module.less';
 interface IProps {}
 
-const Flow = compose(BoxHoc, AnimateHoc)(Render);
+const Flow = compose(BoxHoc, AnimateHoc, EvenHoc)(Render);
 export const Phone: React.FC<IProps> = () => {
     const dispatch = useDispatch();
 
