@@ -1,5 +1,6 @@
 import React from 'react';
 import { ImgList } from './components/ImgList';
+import { VideoList } from './components/VideoList';
 import $style from './style.module.less';
 import { EActiveType } from './type';
 
@@ -9,7 +10,11 @@ interface IProps {
 
 export const ToolModal: React.FC<IProps> = ({ activeIndex }) => {
     const activeIndexMapToC = {
-        [EActiveType.Img]: ImgList
+        [EActiveType.Img]: ImgList,
+        [EActiveType.Video]: VideoList,
+        [EActiveType.Music]: ImgList,
+        [EActiveType.Text]: ImgList,
+        [EActiveType.GraphicDesign]: ImgList
     };
 
     const C = activeIndexMapToC[activeIndex as EActiveType];

@@ -1,8 +1,12 @@
 .timePannelWrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 32px 1fr;
     width: calc(100vw - 164px);
-    overflow: auto;
-
+    box-sizing: border-box;
+    overflow: scroll;
+    height: 100%;
+    position: relative;
     .controlWrapper {
         position: sticky;
         left: 0;
@@ -13,21 +17,17 @@
         border-right: 1px solid #fff;
     }
 
-    .life {
+    .lineControl {
         position: relative;
+        width: 100%;
+        height: 32px;
 
-        .lineControl {
-            position: relative;
-            width: 100%;
-            height: 32px;
+        &:nth-child(2n + 1) {
+            background-color: #fafafa;
+        }
 
-            &:nth-child(2n + 1) {
-                background-color: #fafafa;
-            }
-
-            &:nth-child(2n) {
-                background-color: #f0f0f0;
-            }
+        &:nth-child(2n) {
+            background-color: #f0f0f0;
         }
     }
 
@@ -39,6 +39,10 @@
         height: 32px;
         background: rgb(250 250 250);
         border-right: 1px solid #fff;
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 999;
     }
 }
 
@@ -52,7 +56,7 @@
     display: flex;
     justify-content: center;
     width: 1px;
-    height: 96px;
+    height: 100%;
     background-color: rgb(13 206 138);
     opacity: 0.6;
     pointer-events: none;

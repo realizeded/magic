@@ -20,7 +20,8 @@ export interface IBox {
 
 export enum EControlTypes {
     Img = 'img',
-    Video = 'video'
+    Video = 'video',
+    Audio = 'audio'
 }
 
 export enum EAnimateType {

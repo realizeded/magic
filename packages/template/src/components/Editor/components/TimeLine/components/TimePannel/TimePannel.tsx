@@ -36,16 +36,11 @@ export const TimePannel: React.FC<IProps> = props => {
 
     return (
         <div className={$style.timePannelWrapper}>
-            <div className={$style.controlWrapper}>
-                <div className={$style.controlName}>控件名称</div>
-                <ControlPannel handleChangeControl={handleChangeControl} />
-            </div>
-            <div className={$style.life}>
-                <Line />
+            <div className={$style.controlName}>控件名称</div>
+            <Line />
 
-                <div className={$style.verticalLine} style={{ left: currentTime * 10 * 10 + 30 + 'px' }}>
-                    <CircleDoubleUp theme="filled" fill="rgb(13 206 138)" size="14" />
-                </div>
+            <ControlPannel handleChangeControl={handleChangeControl} />
+            <div>
                 {activeControls.map((control, i) => {
                     const isActive = activeIndex === activeStage.value[i];
                     const type = control.type;

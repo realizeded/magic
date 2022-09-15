@@ -4,7 +4,6 @@
     height: 100%;
 
     .lifeWrapper {
-        flex: 1;
         display: flex;
         justify-content: space-between;
         background-color: rgb(68, 177, 177);
@@ -12,4 +11,21 @@
 }
 
 .bottomScrollWrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    background-color: #ffff;
+}
+
+.verticalLine {
+    position: absolute;
+    top: 13px;
+    display: flex;
+    justify-content: center;
+    width: 1px;
+    bottom: 16px;
+    background-color: rgb(13 206 138);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 9999;
 }
