@@ -24,10 +24,6 @@ export const ToolBar: React.FC<IProps> = props => {
         {
             icon: <Text size={26} fill="#000" theme="outline" />,
             text: '文字'
-        },
-        {
-            icon: <GraphicDesign size={26} fill="#000" theme="outline" />,
-            text: '图形'
         }
     ];
 

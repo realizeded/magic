@@ -49,10 +49,10 @@ export const AudioList: React.FC<IProps> = props => {
                 type: EControlTypes.Audio,
                 name: text,
                 box: {
-                    width: '200px',
-                    height: '200px',
-                    top: '20px',
-                    left: '0px'
+                    width: '0',
+                    height: '0',
+                    top: '0',
+                    left: '0'
                 },
                 data: {
                     src: audioSrc

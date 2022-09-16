@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { EControlTypes, IProject } from '../../../../../../store/module/template';
 import { TRootState } from '../../../../../../store/type';
 import $style from './style.module.less';
-import { Pic, Video, Music } from '@icon-park/react';
+import { Pic, Video, Music, Text } from '@icon-park/react';
 import classNames from 'classnames';
 interface IProps {
     handleChangeControl: (id: string) => void;
@@ -22,7 +22,8 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
     const typeMapToIcon = {
         [EControlTypes.Img]: Pic,
         [EControlTypes.Video]: Video,
-        [EControlTypes.Audio]: Music
+        [EControlTypes.Audio]: Music,
+        [EControlTypes.Text]: Text
     };
 
     return (

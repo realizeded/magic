@@ -1,3 +1,4 @@
+import { Text } from '@icon-park/react';
 import { start } from 'repl';
 import { EAnimateType, EControlTypes, EEventType, ITemplateState, ETargetEventType } from './type';
 
@@ -12,7 +13,7 @@ export const initState: ITemplateState = {
             stages: [
                 {
                     name: '场景一',
-                    value: ['121233'],
+                    value: ['121233', '999'],
                     posts: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fdfdb344e89c70ce3cc0db030f61c45555f82e640.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664864710&t=efea8e64bd411cf4dec2a256c8963072'
                 },
                 {
@@ -130,6 +131,19 @@ export const initState: ITemplateState = {
                     },
                     data: {
                         src: 'http://localhost:3000/audio/lucky.mp3'
+                    }
+                },
+                '999': {
+                    name: '文字',
+                    type: EControlTypes.Text,
+                    box: {
+                        width: '200px',
+                        height: '200px',
+                        top: '0px',
+                        left: '0px'
+                    },
+                    data: {
+                        text: '1212'
                     }
                 }
             }

@@ -21,7 +21,8 @@ export interface IBox {
 export enum EControlTypes {
     Img = 'img',
     Video = 'video',
-    Audio = 'audio'
+    Audio = 'audio',
+    Text = 'text'
 }
 
 export enum EAnimateType {
@@ -97,7 +98,15 @@ export interface IAudio extends IControlCommon {
     };
 }
 
-export type TControls = IImg | IVideo | IAudio;
+export interface IText extends IControlCommon {
+    type: EControlTypes.Text;
+    data: {
+        text: string;
+    };
+    style?: Record<string, string>;
+}
+
+export type TControls = IImg | IVideo | IAudio | IText;
 
 export interface IControls {
     [key: string]: TControls;
