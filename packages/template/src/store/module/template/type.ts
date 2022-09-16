@@ -90,7 +90,14 @@ export interface IVideo extends IControlCommon {
     };
 }
 
-export type TControls = IImg | IVideo;
+export interface IAudio extends IControlCommon {
+    type: EControlTypes.Audio;
+    data: {
+        src: string;
+    };
+}
+
+export type TControls = IImg | IVideo | IAudio;
 
 export interface IControls {
     [key: string]: TControls;

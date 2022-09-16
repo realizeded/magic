@@ -120,8 +120,8 @@ export const initState: ITemplateState = {
                     }
                 },
                 '888': {
-                    name: '生活',
-                    type: EControlTypes.Video,
+                    name: '音乐',
+                    type: EControlTypes.Audio,
                     box: {
                         width: '200px',
                         height: '200px',
@@ -129,8 +129,7 @@ export const initState: ITemplateState = {
                         left: '0px'
                     },
                     data: {
-                        posts: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F1e1184a17efc52183a73c96f3f91d726c73a72bc.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664864219&t=11ec28b1d41601ec1950770d771437cf',
-                        src: 'http://localhost:3000/mp.mp4'
+                        src: 'http://localhost:3000/audio/lucky.mp3'
                     }
                 }
             }
