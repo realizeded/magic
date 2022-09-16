@@ -12,7 +12,7 @@ export const initState: ITemplateState = {
             stages: [
                 {
                     name: '场景一',
-                    value: ['121233', '888'],
+                    value: ['121233'],
                     posts: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fdfdb344e89c70ce3cc0db030f61c45555f82e640.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664864710&t=efea8e64bd411cf4dec2a256c8963072'
                 },
                 {
