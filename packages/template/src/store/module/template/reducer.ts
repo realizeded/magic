@@ -7,7 +7,9 @@ import {
     CREATE_CONTROL_OF_ACTIVE_STAGE,
     SET_NEW_TEMPLATE,
     CHANGE_CURRENT_TIME,
-    TOGGLE_PLAY_STATE
+    TOGGLE_PLAY_STATE,
+    DELTETE_CONTROL,
+    CHANGE_CONTRL_ZINDEX
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -20,7 +22,9 @@ import {
     TDeleteStage,
     TCreateControlOfActiveStage,
     TSetNewTemplate,
-    TTogglePlayState
+    TTogglePlayState,
+    TDeleteControl,
+    TChangeControlZindex
 } from './type';
 
 import _ from 'lodash';
@@ -111,6 +115,41 @@ const actionTypeMapToState = {
         const newState = _.clone(state);
         const playState = action.data;
         return { ...newState, project: { ...newState.project, playState, activeIndex: '' } };
+    },
+    [DELTETE_CONTROL](state: ITemplateState, action: TDeleteControl) {
+        const newState = _.clone(state);
+        const controlId = action.data;
+        let activeIndex = newState.project.activeIndex;
+        if (controlId === activeIndex) {
+            activeIndex = '';
+        }
+        const { project } = newState;
+        const { activeStageIndex, template } = project;
+        const { stages, controls } = template;
+        delete controls[controlId];
+        const activeStage = stages[activeStageIndex];
+        activeStage.value = activeStage.value.filter(val => val !== controlId);
+
+        return { ...newState, project: { ...newState.project, activeIndex } };
+    },
+    [CHANGE_CONTRL_ZINDEX](state: ITemplateState, action: TChangeControlZindex) {
+        const newState = _.clone(state);
+        const isUp = action.data;
+
+        const { project } = newState;
+        const { activeStageIndex, template, activeIndex } = project;
+        const { stages } = template;
+        const activeStage = stages[activeStageIndex];
+        const activeStageValues = activeStage.value;
+        const controlIdIndexOfValue = activeStageValues.indexOf(activeIndex);
+        activeStageValues.splice(controlIdIndexOfValue, 1);
+
+        if (isUp) {
+            activeStageValues.splice(controlIdIndexOfValue - 1, 0, activeIndex);
+        } else {
+            activeStageValues.splice(controlIdIndexOfValue + 1, 0, activeIndex);
+        }
+        return { ...newState, project: { ...newState.project } };
     }
 };
 export const templateReducer: Reducer<ITemplateState, TTemplateAction> = (state = initState, action) => {

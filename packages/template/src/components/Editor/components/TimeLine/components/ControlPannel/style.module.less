@@ -1,16 +1,18 @@
 .ControlPannel {
-    width: 240px;
-    height: 100%;
     position: sticky;
     left: 0;
     z-index: 99;
+    width: 240px;
+    height: 100%;
+
     .controlItem {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        padding-left: 40px;
         height: 32px;
+        padding-left: 40px;
         border-right: 1px solid #fff;
+
         &:nth-child(2n) {
             background-color: #f0f0f0;
         }
@@ -23,7 +25,7 @@
             padding-left: 10px;
             color: #333;
             font-size: 12px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial',
                 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
                 'Noto Color Emoji';
             font-variant: tabular-nums;
@@ -32,7 +34,7 @@
         }
 
         :global {
-            .i-icon-pic {
+            .i-icon {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -43,4 +45,21 @@
 
 .active {
     background-color: #c5cfdb !important;
+}
+
+.oper {
+    position: absolute;
+    right: 10px;
+
+    display: none;
+    align-items: center;
+
+    > div {
+        padding: 0 2px;
+        cursor: pointer;
+    }
+}
+
+.operActive {
+    display: flex;
 }

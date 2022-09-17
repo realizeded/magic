@@ -7,7 +7,9 @@ import {
     CREATE_CONTROL_OF_ACTIVE_STAGE,
     SET_NEW_TEMPLATE,
     CHANGE_CURRENT_TIME,
-    TOGGLE_PLAY_STATE
+    TOGGLE_PLAY_STATE,
+    DELTETE_CONTROL,
+    CHANGE_CONTRL_ZINDEX
 } from './actionTypes';
 import { TControls, ITemplate } from './type';
 
@@ -71,5 +73,19 @@ export const getTogglePlayState = (state: boolean) => {
     return {
         type: TOGGLE_PLAY_STATE,
         data: state
+    };
+};
+
+export const getDeleteControl = (controlId: string) => {
+    return {
+        type: DELTETE_CONTROL,
+        data: controlId
+    };
+};
+
+export const getChangeControlZindex = (changeIndexType: boolean) => {
+    return {
+        type: CHANGE_CONTRL_ZINDEX,
+        data: changeIndexType
     };
 };

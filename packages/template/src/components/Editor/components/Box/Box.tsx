@@ -6,7 +6,11 @@ import { css } from '@emotion/css';
 import classnames from 'classnames';
 import { useDrag } from './hooks/useDrag';
 import { useDispatch } from 'react-redux';
-import { getChangeActiveIndexAction, getChangeControlAction } from '../../../../store/module/template';
+import {
+    getChangeActiveIndexAction,
+    getChangeControlAction,
+    TControls
+} from '../../../../store/module/template';
 import { SelectBox } from '../SelectBox';
 import _ from 'lodash';
 import { TAnimateComponentType } from '../Animate';
@@ -24,6 +28,12 @@ export const BoxHoc = (C: TAnimateComponentType) => {
 
         const isSelect = activeIndex === controlValue;
 
+        const controlValRef = useRef<string>(controlValue);
+        controlValRef.current = controlValue;
+
+        const controlOfStageRef = useRef<TControls>(controlOfStage);
+        controlOfStageRef.current = controlOfStage;
+
         const pxToScale = (pxStr = '') => {
             const px = pxStr.replace('px', '');
             return Number(px) * scaleCanvas + 'px';
@@ -39,23 +49,26 @@ export const BoxHoc = (C: TAnimateComponentType) => {
         `;
 
         const handleDragEnd = (position: IDragPosition) => {
-            const newControl = _.clone(controlOfStage);
+            const newControl = _.clone(controlOfStageRef.current);
+
             newControl.box.top = position.y / scaleCanvas + 'px';
             newControl.box.left = position.x / scaleCanvas + 'px';
-
+            const controlValue = controlValRef.current;
             dispatch(getChangeControlAction(controlValue, newControl));
         };
 
         const handleDragStart = () => {
+            const controlValue = controlValRef.current;
             dispatch(getChangeActiveIndexAction(controlValue));
         };
 
         const handleResizeDone = (newWdith: number, newHeight: number, top: number, left: number) => {
-            const newControl = _.clone(controlOfStage);
+            const newControl = _.clone(controlOfStageRef.current);
             newControl.box.top = top / scaleCanvas + 'px';
             newControl.box.left = left / scaleCanvas + 'px';
             newControl.box.width = newWdith / scaleCanvas + 'px';
             newControl.box.height = newHeight / scaleCanvas + 'px';
+            const controlValue = controlValRef.current;
             dispatch(getChangeControlAction(controlValue, newControl));
         };
         const ref = useRef<HTMLDivElement>(null);

@@ -42,16 +42,15 @@ export const TimePannel: React.FC<IProps> = props => {
             <ControlPannel handleChangeControl={handleChangeControl} />
             <div>
                 {activeControls.map((control, i) => {
-                    const isActive = activeIndex === activeStage.value[i];
+                    const controlId = activeStage.value[i];
+                    const isActive = activeIndex === controlId;
                     const type = control.type;
-
                     const animate = control.animate ?? ([] as TAnimate);
                     const event = control.event ?? [];
                     const handleClick = handleChangeControl.bind(this, activeStage.value?.[i]);
                     if (type === EControlTypes.Img) {
                         return (
                             <div
-                                key={i}
                                 className={classNames($style.lineControl, isActive && $style.active)}
                                 onClick={handleClick}
                                 // style={{ background: `url(${control.data.src})`, backgroundSize: '32px' }}
@@ -86,8 +85,8 @@ export const TimePannel: React.FC<IProps> = props => {
                     }
 
                     return (
+                        // eslint-disable-next-line react/jsx-key
                         <div
-                            key={i}
                             onClick={handleClick}
                             className={classNames($style.lineControl, isActive && $style.active)}
                         ></div>

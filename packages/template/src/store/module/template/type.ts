@@ -7,7 +7,9 @@ import {
     CREATE_CONTROL_OF_ACTIVE_STAGE,
     SET_NEW_TEMPLATE,
     CHANGE_CURRENT_TIME,
-    TOGGLE_PLAY_STATE
+    TOGGLE_PLAY_STATE,
+    DELTETE_CONTROL,
+    CHANGE_CONTRL_ZINDEX
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -138,5 +140,7 @@ export type TCreateControlOfActiveStage = IAction<typeof CREATE_CONTROL_OF_ACTIV
 export type TSetNewTemplate = IAction<typeof SET_NEW_TEMPLATE, ITemplate>;
 export type TChangeCurrentTime = IAction<typeof CHANGE_CURRENT_TIME, number>;
 export type TTogglePlayState = IAction<typeof TOGGLE_PLAY_STATE, boolean>;
+export type TDeleteControl = IAction<typeof DELTETE_CONTROL, string>;
+export type TChangeControlZindex = IAction<typeof CHANGE_CONTRL_ZINDEX, boolean>;
 
 export type TTemplateAction = TChangeControlAction;
