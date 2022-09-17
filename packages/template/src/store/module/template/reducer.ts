@@ -9,7 +9,8 @@ import {
     CHANGE_CURRENT_TIME,
     TOGGLE_PLAY_STATE,
     DELTETE_CONTROL,
-    CHANGE_CONTRL_ZINDEX
+    CHANGE_CONTRL_ZINDEX,
+    CHANGE_ACTIVE_STAGE_NAME
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -24,7 +25,8 @@ import {
     TSetNewTemplate,
     TTogglePlayState,
     TDeleteControl,
-    TChangeControlZindex
+    TChangeControlZindex,
+    TChangeActiveStageName
 } from './type';
 
 import _ from 'lodash';
@@ -32,7 +34,7 @@ import { generatorId } from './util';
 
 const actionTypeMapToState = {
     [CHANGE_CONTROL](state: ITemplateState, action: TTemplateAction) {
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         const data = action.data;
         const { id, control } = data;
         newState.project.template.controls[id] = control;
@@ -52,12 +54,12 @@ const actionTypeMapToState = {
     },
     [CHANGE_ACTVIE_STAGE_INDEX](state: ITemplateState, action: TChangeActiveStageIndex) {
         const val = action.data;
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         newState.project.activeStageIndex = val;
         return { ...newState, project: { ...newState.project, activeIndex: '' } };
     },
     [CREATE_NEW_STAGE](state: ITemplateState, action: TChangeNewStage) {
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         const newSTage = {
             name: '空白场景',
             value: [],
@@ -69,7 +71,7 @@ const actionTypeMapToState = {
         return { ...newState, project: { ...newState.project } };
     },
     [DELETE_STAGE](state: ITemplateState, action: TDeleteStage) {
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         const index = action.data;
         const project = newState.project;
         const activeStageIndex = project.activeStageIndex;
@@ -86,7 +88,7 @@ const actionTypeMapToState = {
         return { ...newState, project: { ...newState.project, activeStageIndex: newActiveStageIndex } };
     },
     [CREATE_CONTROL_OF_ACTIVE_STAGE](state: ITemplateState, action: TCreateControlOfActiveStage) {
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         const control = action.data;
         const project = newState.project;
         const { stages, controls } = project.template;
@@ -101,23 +103,23 @@ const actionTypeMapToState = {
         return { ...newState, project: { ...newState.project } };
     },
     [SET_NEW_TEMPLATE](state: ITemplateState, action: TSetNewTemplate) {
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         const newTemplate = action.data;
 
         return { ...newState, project: { ...newState.project, template: newTemplate } };
     },
     [CHANGE_CURRENT_TIME](state: ITemplateState, action: TSetNewTemplate) {
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         const currentTime = action.data;
         return { ...newState, project: { ...newState.project, currentTime } };
     },
     [TOGGLE_PLAY_STATE](state: ITemplateState, action: TTogglePlayState) {
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         const playState = action.data;
         return { ...newState, project: { ...newState.project, playState, activeIndex: '' } };
     },
     [DELTETE_CONTROL](state: ITemplateState, action: TDeleteControl) {
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         const controlId = action.data;
         let activeIndex = newState.project.activeIndex;
         if (controlId === activeIndex) {
@@ -133,7 +135,7 @@ const actionTypeMapToState = {
         return { ...newState, project: { ...newState.project, activeIndex } };
     },
     [CHANGE_CONTRL_ZINDEX](state: ITemplateState, action: TChangeControlZindex) {
-        const newState = _.clone(state);
+        const newState = _.cloneDeep(state);
         const isUp = action.data;
 
         const { project } = newState;
@@ -150,6 +152,16 @@ const actionTypeMapToState = {
             activeStageValues.splice(controlIdIndexOfValue + 1, 0, activeIndex);
         }
         return { ...newState, project: { ...newState.project } };
+    },
+    [CHANGE_ACTIVE_STAGE_NAME](state: ITemplateState, action: TChangeActiveStageName) {
+        const newState = _.cloneDeep(state);
+        const stageName = action.data;
+        const { template, activeStageIndex } = newState.project;
+
+        const activeStage = template.stages[activeStageIndex];
+
+        activeStage.name = stageName;
+        return { ...newState };
     }
 };
 export const templateReducer: Reducer<ITemplateState, TTemplateAction> = (state = initState, action) => {

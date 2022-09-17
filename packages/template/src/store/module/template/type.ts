@@ -9,7 +9,8 @@ import {
     CHANGE_CURRENT_TIME,
     TOGGLE_PLAY_STATE,
     DELTETE_CONTROL,
-    CHANGE_CONTRL_ZINDEX
+    CHANGE_CONTRL_ZINDEX,
+    CHANGE_ACTIVE_STAGE_NAME
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -83,6 +84,7 @@ export interface IImg extends IControlCommon {
     data: {
         src: string;
     };
+    style: Record<string, string>;
 }
 
 export interface IVideo extends IControlCommon {
@@ -91,12 +93,19 @@ export interface IVideo extends IControlCommon {
         src: string;
         posts: string;
     };
+    config: {
+        volume: number;
+    };
+    style: Record<string, string>;
 }
 
 export interface IAudio extends IControlCommon {
     type: EControlTypes.Audio;
     data: {
         src: string;
+    };
+    config: {
+        volume: number;
     };
 }
 
@@ -105,7 +114,7 @@ export interface IText extends IControlCommon {
     data: {
         text: string;
     };
-    style?: Record<string, string>;
+    style: Record<string, string>;
 }
 
 export type TControls = IImg | IVideo | IAudio | IText;
@@ -142,5 +151,6 @@ export type TChangeCurrentTime = IAction<typeof CHANGE_CURRENT_TIME, number>;
 export type TTogglePlayState = IAction<typeof TOGGLE_PLAY_STATE, boolean>;
 export type TDeleteControl = IAction<typeof DELTETE_CONTROL, string>;
 export type TChangeControlZindex = IAction<typeof CHANGE_CONTRL_ZINDEX, boolean>;
+export type TChangeActiveStageName = IAction<typeof CHANGE_ACTIVE_STAGE_NAME, string>;
 
 export type TTemplateAction = TChangeControlAction;

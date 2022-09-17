@@ -85,6 +85,9 @@ export const ImgList: React.FC<IProps> = props => {
             getCreateControlAction({
                 type: EControlTypes.Img,
                 name: text,
+                style: {
+                    backgroundSize: 'contain'
+                },
                 box: {
                     width: '200px',
                     height: '200px',

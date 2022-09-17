@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import { useDrag } from './hooks/useDrag';
 import { useDispatch } from 'react-redux';
 import {
+    EControlTypes,
     getChangeActiveIndexAction,
     getChangeControlAction,
     TControls
@@ -81,6 +82,10 @@ export const BoxHoc = (C: TAnimateComponentType) => {
             $style.select,
             !playState ? $style.boxHover : ''
         );
+
+        if (controls[controlValue].type === EControlTypes.Audio) {
+            return <C {...props} />;
+        }
 
         return (
             <>

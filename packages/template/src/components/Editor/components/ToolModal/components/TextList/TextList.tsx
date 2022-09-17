@@ -2,6 +2,7 @@ import Item from 'antd/lib/list/Item';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { EControlTypes, getCreateControlAction } from '../../../../../../store/module/template';
+import { EFormField } from '../../../PropertyPannel/components/TextDesc';
 import $style from './style.module.less';
 
 interface IProps {}
@@ -16,15 +17,13 @@ export const TextList: React.FC<IProps> = props => {
                 {
                     text: '添加标题内容',
                     style: {
-                        fontSize: '17px',
-                        fontWeight: 'bold',
-                        background: 'rgb(245, 245, 245)',
-                        padding: '12px',
-                        color: 'rgb(51, 51, 51)',
-                        borderRadius: '2px',
-                        cursor: 'pointer',
-                        marginBottom: '8px',
-                        textAlign: 'center'
+                        [EFormField.fontFamily]: 'Cursive',
+                        [EFormField.fontSize]: '16px',
+                        [EFormField.textAlign]: 'center',
+                        [EFormField.verticalAlign]: 'middle',
+                        [EFormField.color]: '#000',
+                        [EFormField.lineHeight]: '22px',
+                        [EFormField.wordBreak]: 'break-all'
                     }
                 }
             ]

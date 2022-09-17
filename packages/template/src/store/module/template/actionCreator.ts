@@ -9,7 +9,8 @@ import {
     CHANGE_CURRENT_TIME,
     TOGGLE_PLAY_STATE,
     DELTETE_CONTROL,
-    CHANGE_CONTRL_ZINDEX
+    CHANGE_CONTRL_ZINDEX,
+    CHANGE_ACTIVE_STAGE_NAME
 } from './actionTypes';
 import { TControls, ITemplate } from './type';
 
@@ -87,5 +88,12 @@ export const getChangeControlZindex = (changeIndexType: boolean) => {
     return {
         type: CHANGE_CONTRL_ZINDEX,
         data: changeIndexType
+    };
+};
+
+export const getChangeActiveStageName = (stageName: string) => {
+    return {
+        type: CHANGE_ACTIVE_STAGE_NAME,
+        data: stageName
     };
 };

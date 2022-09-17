@@ -4,10 +4,11 @@ interface IProps {
     audioSrc: string;
     currentTime: number;
     playState: boolean;
+    volume: number;
 }
 
 export const CAudio: React.FC<IProps> = props => {
-    const { audioSrc, currentTime, playState } = props;
+    const { audioSrc, currentTime, playState, volume } = props;
 
     const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -22,6 +23,7 @@ export const CAudio: React.FC<IProps> = props => {
         const current = audioRef.current;
         if (current) {
             if (playState && current.paused) {
+                current.volume = volume / 100;
                 current.play();
             } else if (!playState && !current.paused) {
                 current.pause();

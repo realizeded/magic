@@ -34,9 +34,15 @@ export const VideoList: React.FC<IProps> = props => {
                     top: '20px',
                     left: '0px'
                 },
+                config: {
+                    volume: 100
+                },
                 data: {
                     src,
                     posts: imgsrc
+                },
+                style: {
+                    objectFit: 'contain'
                 }
             })
         );

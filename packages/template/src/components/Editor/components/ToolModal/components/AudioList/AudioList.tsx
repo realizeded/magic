@@ -54,6 +54,9 @@ export const AudioList: React.FC<IProps> = props => {
                     top: '0',
                     left: '0'
                 },
+                config: {
+                    volume: 100
+                },
                 data: {
                     src: audioSrc
                 }
