@@ -10,7 +10,8 @@ import {
     TOGGLE_PLAY_STATE,
     DELTETE_CONTROL,
     CHANGE_CONTRL_ZINDEX,
-    CHANGE_ACTIVE_STAGE_NAME
+    CHANGE_ACTIVE_STAGE_NAME,
+    CHANGE_ACTIVE_STAGE_POST
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -152,5 +153,6 @@ export type TTogglePlayState = IAction<typeof TOGGLE_PLAY_STATE, boolean>;
 export type TDeleteControl = IAction<typeof DELTETE_CONTROL, string>;
 export type TChangeControlZindex = IAction<typeof CHANGE_CONTRL_ZINDEX, boolean>;
 export type TChangeActiveStageName = IAction<typeof CHANGE_ACTIVE_STAGE_NAME, string>;
+export type TChangeActiveStagePosts = IAction<typeof CHANGE_ACTIVE_STAGE_POST, string>;
 
 export type TTemplateAction = TChangeControlAction;

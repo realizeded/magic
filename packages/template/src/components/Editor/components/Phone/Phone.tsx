@@ -3,7 +3,12 @@ import classNames from 'classnames';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
-import { getChangeCurrentTime, IProject } from '../../../../store/module/template';
+import {
+    getChangeActiveIndexAction,
+    getChangeActiveStageIndexAction,
+    getChangeCurrentTime,
+    IProject
+} from '../../../../store/module/template';
 import { TRootState } from '../../../../store/type';
 import { AnimateHoc } from '../Animate';
 import { BoxHoc } from '../Box';
@@ -52,7 +57,7 @@ export const Phone: React.FC<IProps> = () => {
     `;
 
     return (
-        <div className={classNames($style.phoneWrapper, phoneStyle)}>
+        <div className={classNames($style.phoneWrapper, phoneStyle)} id="phone">
             {stageValues.map((controlValue, key) => {
                 return (
                     // eslint-disable-next-line react/jsx-key

@@ -10,7 +10,8 @@ import {
     TOGGLE_PLAY_STATE,
     DELTETE_CONTROL,
     CHANGE_CONTRL_ZINDEX,
-    CHANGE_ACTIVE_STAGE_NAME
+    CHANGE_ACTIVE_STAGE_NAME,
+    CHANGE_ACTIVE_STAGE_POST
 } from './actionTypes';
 import { TControls, ITemplate } from './type';
 
@@ -95,5 +96,12 @@ export const getChangeActiveStageName = (stageName: string) => {
     return {
         type: CHANGE_ACTIVE_STAGE_NAME,
         data: stageName
+    };
+};
+
+export const getChangeStagePost = (post: string) => {
+    return {
+        type: CHANGE_ACTIVE_STAGE_POST,
+        data: post
     };
 };
