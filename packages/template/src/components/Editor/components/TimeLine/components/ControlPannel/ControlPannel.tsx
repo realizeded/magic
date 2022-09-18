@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     createAnimate,
+    createEvent,
     EControlTypes,
     getChangeControlZindex,
     getDeleteControl,
@@ -47,8 +48,8 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
         e.stopPropagation();
     };
 
-    const handleAddEvent = (id: string, e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-        dispatch(getDeleteControl(id));
+    const handleAddEvent = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        dispatch(createEvent());
         e.preventDefault();
         e.stopPropagation();
     };
@@ -84,7 +85,7 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
                                     size="16"
                                     theme="outline"
                                     color="#3c3c3c"
-                                    onClick={e => handleAddEvent(controlId, e)}
+                                    onClick={e => handleAddEvent(e)}
                                 />
                             </div>
                             <div>

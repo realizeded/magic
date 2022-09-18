@@ -14,7 +14,9 @@ import {
     CHANGE_ACTIVE_STAGE_POST,
     CHANGE_SCALE_CANVAS,
     CREATE_ANIMATE,
-    SELECT_ANIMATE_ID
+    SELECT_ANIMATE_ID,
+    CREATE_EVENT,
+    SELECT_EVENT_ID
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -82,11 +84,13 @@ export interface IAnimateOpacity {
 export type TAnimate = Array<IAnimateNomal | IAnimateOpacity | IAnimateRotate | IAnimateScale>;
 
 export enum EEventType {
-    Click = 1
+    Click = 1,
+    Auto = 2
 }
 
 export enum ETargetEventType {
-    jumpPlay = 1
+    jumpPlay = 1,
+    toggleStage = 2
 }
 
 export interface IJumpEvent {
@@ -94,12 +98,18 @@ export interface IJumpEvent {
     start: number;
 }
 
-export type TTargetEvent = Array<IJumpEvent>;
+export interface TToggleStage {
+    type: ETargetEventType.jumpPlay;
+    stageIndex: number;
+}
+
+export type TTargetEvent = Array<IJumpEvent | TToggleStage>;
 
 export interface IClickEvent {
     type: EEventType.Click;
     start: number;
     targetEvent: TTargetEvent;
+    id: string;
 }
 
 export type TEvent = Array<IClickEvent>;
@@ -174,6 +184,7 @@ export interface IProject {
     currentTime: number;
     playState: boolean;
     selectAnimateId: string;
+    selectEventId: string;
 }
 
 export interface ITemplateState {
@@ -196,4 +207,6 @@ export type TChangeActiveStagePosts = IAction<typeof CHANGE_ACTIVE_STAGE_POST, s
 export type TChangeScaleCanvas = IAction<typeof CHANGE_SCALE_CANVAS, number>;
 export type TCreateAnimate = IAction<typeof CREATE_ANIMATE, EAnimateType>;
 export type TSelectAnimateId = IAction<typeof SELECT_ANIMATE_ID, Array<string>>;
+export type TCreateEvent = IAction<typeof CREATE_EVENT, string>;
+export type TSelectEventId = IAction<typeof SELECT_EVENT_ID, Array<string>>;
 export type TTemplateAction = TChangeControlAction;

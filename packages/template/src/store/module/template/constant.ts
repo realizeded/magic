@@ -10,6 +10,7 @@ export const initState: ITemplateState = {
         scaleCanvas: 0.8,
         currentTime: 0,
         selectAnimateId: '',
+        selectEventId: '',
         template: {
             stages: [
                 {
@@ -60,6 +61,7 @@ export const initState: ITemplateState = {
                     animate: [],
                     event: [
                         {
+                            id: '1',
                             type: EEventType.Click,
                             start: 6,
                             targetEvent: [

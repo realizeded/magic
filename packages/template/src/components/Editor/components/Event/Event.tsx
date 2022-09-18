@@ -36,7 +36,10 @@ export const EvenHoc = (C: TRenderComponentType) => {
 
             targetEvent.forEach(async (tagetEventItem, i) => {
                 const type = tagetEventItem.type;
-                await targetEventProcess[type](tagetEventItem);
+                const processFn = targetEventProcess[type];
+                if (processFn) {
+                    await processFn(tagetEventItem as any);
+                }
             });
 
             const current = clickRef.current;

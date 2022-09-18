@@ -15,7 +15,9 @@ import {
     CHANGE_ACTIVE_STAGE_POST,
     CHANGE_SCALE_CANVAS,
     CREATE_ANIMATE,
-    SELECT_ANIMATE_ID
+    SELECT_ANIMATE_ID,
+    CREATE_EVENT,
+    SELECT_EVENT_ID
 } from './actionTypes';
 import { TControls, ITemplate } from './type';
 
@@ -127,6 +129,20 @@ export const createAnimate = (animateType: EAnimateType) => {
 export const selectAnimateId = (ids: Array<string>) => {
     return {
         type: SELECT_ANIMATE_ID,
+        data: ids
+    };
+};
+
+export const createEvent = () => {
+    return {
+        type: CREATE_EVENT,
+        data: null
+    };
+};
+
+export const selectEventId = (ids: Array<string>) => {
+    return {
+        type: SELECT_EVENT_ID,
         data: ids
     };
 };
