@@ -8,7 +8,7 @@ import {
 } from '../../../../../../store/module/template';
 import { TRootState } from '../../../../../../store/type';
 import $style from './style.module.less';
-import { Pic, Video, Music, Text, DeleteOne, ArrowUp, ArrowDown } from '@icon-park/react';
+import { Pic, Video, Music, Text, DeleteOne, ArrowUp, ArrowDown, AddThree, Effects } from '@icon-park/react';
 import classNames from 'classnames';
 interface IProps {
     handleChangeControl: (id: string) => void;
@@ -44,6 +44,12 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
         e.preventDefault();
         e.stopPropagation();
     };
+
+    const handleAddEvent = (id: string, e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        dispatch(getDeleteControl(id));
+        e.preventDefault();
+        e.stopPropagation();
+    };
     return (
         <div className={$style.ControlPannel}>
             {activeControls.map((control, i) => {
@@ -65,6 +71,22 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
                         <Icon size={14} fill="#000" theme="outline" />
                         <span className={$style.text}>{name}</span>
                         <div className={classNames($style.oper, isActive && $style.operActive)}>
+                            <div>
+                                <AddThree
+                                    size="16"
+                                    theme="outline"
+                                    color="#3c3c3c"
+                                    onClick={e => handleAddEvent(controlId, e)}
+                                />
+                            </div>
+                            <div>
+                                <Effects
+                                    size="16"
+                                    theme="outline"
+                                    color="#3c3c3c"
+                                    onClick={e => handleAddEvent(controlId, e)}
+                                />
+                            </div>
                             <div>
                                 <DeleteOne
                                     size="16"

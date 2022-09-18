@@ -11,7 +11,8 @@ import {
     DELTETE_CONTROL,
     CHANGE_CONTRL_ZINDEX,
     CHANGE_ACTIVE_STAGE_NAME,
-    CHANGE_ACTIVE_STAGE_POST
+    CHANGE_ACTIVE_STAGE_POST,
+    CHANGE_SCALE_CANVAS
 } from './actionTypes';
 import { TControls, ITemplate } from './type';
 
@@ -103,5 +104,12 @@ export const getChangeStagePost = (post: string) => {
     return {
         type: CHANGE_ACTIVE_STAGE_POST,
         data: post
+    };
+};
+
+export const getChangeScaleCanvas = (scale: number) => {
+    return {
+        type: CHANGE_SCALE_CANVAS,
+        data: scale
     };
 };

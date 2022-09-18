@@ -11,7 +11,8 @@ import {
     DELTETE_CONTROL,
     CHANGE_CONTRL_ZINDEX,
     CHANGE_ACTIVE_STAGE_NAME,
-    CHANGE_ACTIVE_STAGE_POST
+    CHANGE_ACTIVE_STAGE_POST,
+    CHANGE_SCALE_CANVAS
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -28,7 +29,8 @@ import {
     TDeleteControl,
     TChangeControlZindex,
     TChangeActiveStageName,
-    TChangeActiveStagePosts
+    TChangeActiveStagePosts,
+    TChangeScaleCanvas
 } from './type';
 
 import html2canvas from 'html2canvas';
@@ -173,6 +175,12 @@ const actionTypeMapToState = {
         const activeStage = template.stages[activeStageIndex];
 
         activeStage.posts = posts;
+        return { ...newState };
+    },
+    [CHANGE_SCALE_CANVAS](state: ITemplateState, action: TChangeScaleCanvas) {
+        const newState = _.cloneDeep(state);
+        const scale = action.data;
+        newState.project.scaleCanvas = scale;
         return { ...newState };
     }
 };

@@ -34,6 +34,11 @@ export const TimePannel: React.FC<IProps> = props => {
         dispatch(getChangeActiveIndexAction(id));
     };
 
+    // const handleContextMenu = (id: string, e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    //     dispatch(getChangeActiveIndexAction(id));
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    // };
     return (
         <div className={$style.timePannelWrapper}>
             <div className={$style.controlName}>控件名称</div>
@@ -47,49 +52,41 @@ export const TimePannel: React.FC<IProps> = props => {
                     const type = control.type;
                     const animate = control.animate ?? ([] as TAnimate);
                     const event = control.event ?? [];
-                    const handleClick = handleChangeControl.bind(this, activeStage.value?.[i]);
-                    if (type === EControlTypes.Img) {
-                        return (
-                            <div
-                                className={classNames($style.lineControl, isActive && $style.active)}
-                                onClick={handleClick}
-                                // style={{ background: `url(${control.data.src})`, backgroundSize: '32px' }}
-                            >
-                                {animate.map((animateItem, i) => {
-                                    const key = animateItem.type;
-                                    const { start, end } = animateItem;
-
-                                    const width = (end - start) * 10 * 10;
-                                    return (
-                                        <div
-                                            key={i}
-                                            className={$style.animateLineItem}
-                                            style={{ width, left: start * 10 * 10 + 30 + 'px' }}
-                                        >
-                                            {animteKeyMapToText[key]}
-                                        </div>
-                                    );
-                                })}
-
-                                {event.map((eventItem, i) => {
-                                    const start = eventItem.start;
-                                    const left = start * 10 * 10 + 30 + 'px';
-                                    return (
-                                        <div key={i} className={$style.eventLineItem} style={{ left }}>
-                                            <Mark size={20} fill="#3955f6" theme="outline" />
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        );
-                    }
-
+                    const handleClick = handleChangeControl.bind(this, controlId);
+                    // const handleContextMenuBind = handleContextMenu.bind(this, controlId);
                     return (
-                        // eslint-disable-next-line react/jsx-key
                         <div
-                            onClick={handleClick}
                             className={classNames($style.lineControl, isActive && $style.active)}
-                        ></div>
+                            onClick={handleClick}
+                            key={controlId}
+                            // onContextMenu={handleContextMenuBind}
+                        >
+                            {animate.map((animateItem, i) => {
+                                const key = animateItem.type;
+                                const { start, end } = animateItem;
+
+                                const width = (end - start) * 10 * 10;
+                                return (
+                                    <div
+                                        key={i}
+                                        className={$style.animateLineItem}
+                                        style={{ width, left: start * 10 * 10 + 30 + 'px' }}
+                                    >
+                                        {animteKeyMapToText[key]}
+                                    </div>
+                                );
+                            })}
+
+                            {event.map((eventItem, i) => {
+                                const start = eventItem.start;
+                                const left = start * 10 * 10 + 30 + 'px';
+                                return (
+                                    <div key={i} className={$style.eventLineItem} style={{ left }}>
+                                        <Mark size={20} fill="#3955f6" theme="outline" />
+                                    </div>
+                                );
+                            })}
+                        </div>
                     );
                 })}
             </div>

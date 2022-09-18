@@ -11,7 +11,8 @@ import {
     DELTETE_CONTROL,
     CHANGE_CONTRL_ZINDEX,
     CHANGE_ACTIVE_STAGE_NAME,
-    CHANGE_ACTIVE_STAGE_POST
+    CHANGE_ACTIVE_STAGE_POST,
+    CHANGE_SCALE_CANVAS
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -154,5 +155,6 @@ export type TDeleteControl = IAction<typeof DELTETE_CONTROL, string>;
 export type TChangeControlZindex = IAction<typeof CHANGE_CONTRL_ZINDEX, boolean>;
 export type TChangeActiveStageName = IAction<typeof CHANGE_ACTIVE_STAGE_NAME, string>;
 export type TChangeActiveStagePosts = IAction<typeof CHANGE_ACTIVE_STAGE_POST, string>;
+export type TChangeScaleCanvas = IAction<typeof CHANGE_SCALE_CANVAS, number>;
 
 export type TTemplateAction = TChangeControlAction;

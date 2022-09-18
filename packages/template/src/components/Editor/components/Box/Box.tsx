@@ -35,6 +35,9 @@ export const BoxHoc = (C: TAnimateComponentType) => {
         const controlOfStageRef = useRef<TControls>(controlOfStage);
         controlOfStageRef.current = controlOfStage;
 
+        const scaleRef = useRef<number>(scaleCanvas);
+        scaleRef.current = scaleCanvas;
+
         const pxToScale = (pxStr = '') => {
             const px = pxStr.replace('px', '');
             return Number(px) * scaleCanvas + 'px';
@@ -50,6 +53,7 @@ export const BoxHoc = (C: TAnimateComponentType) => {
         `;
 
         const handleDragEnd = (position: IDragPosition) => {
+            const scaleCanvas = scaleRef.current;
             const newControl = _.clone(controlOfStageRef.current);
 
             newControl.box.top = position.y / scaleCanvas + 'px';
@@ -64,6 +68,7 @@ export const BoxHoc = (C: TAnimateComponentType) => {
         };
 
         const handleResizeDone = (newWdith: number, newHeight: number, top: number, left: number) => {
+            const scaleCanvas = scaleRef.current;
             const newControl = _.clone(controlOfStageRef.current);
             newControl.box.top = top / scaleCanvas + 'px';
             newControl.box.left = left / scaleCanvas + 'px';

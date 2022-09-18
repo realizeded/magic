@@ -57,21 +57,23 @@ export const Phone: React.FC<IProps> = () => {
     `;
 
     return (
-        <div className={classNames($style.phoneWrapper, phoneStyle)} id="phone">
-            {stageValues.map((controlValue, key) => {
-                return (
-                    // eslint-disable-next-line react/jsx-key
-                    <Flow
-                        activeIndex={activeIndex}
-                        stage={activeStage}
-                        controls={controls}
-                        controlValue={controlValue}
-                        scaleCanvas={scaleCanvas}
-                        currentTime={currentTime}
-                        playState={playState}
-                    />
-                );
-            })}
+        <div className={$style.phoneLayoutWrapper}>
+            <div className={classNames($style.phoneWrapper, phoneStyle)} id="phone">
+                {stageValues.map((controlValue, key) => {
+                    return (
+                        // eslint-disable-next-line react/jsx-key
+                        <Flow
+                            activeIndex={activeIndex}
+                            stage={activeStage}
+                            controls={controls}
+                            controlValue={controlValue}
+                            scaleCanvas={scaleCanvas}
+                            currentTime={currentTime}
+                            playState={playState}
+                        />
+                    );
+                })}
+            </div>
         </div>
     );
 };

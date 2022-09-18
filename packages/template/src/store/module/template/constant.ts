@@ -7,7 +7,7 @@ export const initState: ITemplateState = {
         playState: false,
         activeIndex: '',
         activeStageIndex: 0,
-        scaleCanvas: 0.7,
+        scaleCanvas: 0.8,
         currentTime: 0,
         template: {
             stages: [
