@@ -12,7 +12,9 @@ import {
     CHANGE_CONTRL_ZINDEX,
     CHANGE_ACTIVE_STAGE_NAME,
     CHANGE_ACTIVE_STAGE_POST,
-    CHANGE_SCALE_CANVAS
+    CHANGE_SCALE_CANVAS,
+    CREATE_ANIMATE,
+    SELECT_ANIMATE_ID
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -30,7 +32,9 @@ import {
     TChangeControlZindex,
     TChangeActiveStageName,
     TChangeActiveStagePosts,
-    TChangeScaleCanvas
+    TChangeScaleCanvas,
+    TCreateAnimate,
+    TSelectAnimateId
 } from './type';
 
 import html2canvas from 'html2canvas';
@@ -47,13 +51,14 @@ const actionTypeMapToState = {
         return { ...newState, project: { ...newState.project } };
     },
     [CHANGE_ACTIVE_INDEX](state: ITemplateState, action: TChangeActiveIndex) {
+        const newState = _.cloneDeep(state);
         const val = action.data;
-
         return {
             ...state,
             project: {
                 ...state.project,
-                activeIndex: val
+                activeIndex: val,
+                selectAnimateId: ''
             }
         };
     },
@@ -61,6 +66,7 @@ const actionTypeMapToState = {
         const val = action.data;
         const newState = _.cloneDeep(state);
         newState.project.activeStageIndex = val;
+        newState.project.selectAnimateId = '';
         return { ...newState, project: { ...newState.project, activeIndex: '' } };
     },
     [CREATE_NEW_STAGE](state: ITemplateState, action: TChangeNewStage) {
@@ -109,7 +115,7 @@ const actionTypeMapToState = {
     [SET_NEW_TEMPLATE](state: ITemplateState, action: TSetNewTemplate) {
         const newState = _.cloneDeep(state);
         const newTemplate = action.data;
-
+        newState.project.selectAnimateId = '';
         return { ...newState, project: { ...newState.project, template: newTemplate } };
     },
     [CHANGE_CURRENT_TIME](state: ITemplateState, action: TSetNewTemplate) {
@@ -120,7 +126,10 @@ const actionTypeMapToState = {
     [TOGGLE_PLAY_STATE](state: ITemplateState, action: TTogglePlayState) {
         const newState = _.cloneDeep(state);
         const playState = action.data;
-        return { ...newState, project: { ...newState.project, playState, activeIndex: '' } };
+        return {
+            ...newState,
+            project: { ...newState.project, playState, activeIndex: '', selectAnimateId: '' }
+        };
     },
     [DELTETE_CONTROL](state: ITemplateState, action: TDeleteControl) {
         const newState = _.cloneDeep(state);
@@ -135,7 +144,7 @@ const actionTypeMapToState = {
         delete controls[controlId];
         const activeStage = stages[activeStageIndex];
         activeStage.value = activeStage.value.filter(val => val !== controlId);
-
+        newState.project.selectAnimateId = '';
         return { ...newState, project: { ...newState.project, activeIndex } };
     },
     [CHANGE_CONTRL_ZINDEX](state: ITemplateState, action: TChangeControlZindex) {
@@ -165,6 +174,7 @@ const actionTypeMapToState = {
         const activeStage = template.stages[activeStageIndex];
 
         activeStage.name = stageName;
+        newState.project.selectAnimateId = '';
         return { ...newState };
     },
     [CHANGE_ACTIVE_STAGE_POST](state: ITemplateState, action: TChangeActiveStagePosts) {
@@ -175,12 +185,54 @@ const actionTypeMapToState = {
         const activeStage = template.stages[activeStageIndex];
 
         activeStage.posts = posts;
+
         return { ...newState };
     },
     [CHANGE_SCALE_CANVAS](state: ITemplateState, action: TChangeScaleCanvas) {
         const newState = _.cloneDeep(state);
         const scale = action.data;
         newState.project.scaleCanvas = scale;
+
+        return { ...newState };
+    },
+    [CREATE_ANIMATE](state: ITemplateState, action: TCreateAnimate) {
+        const newState = _.cloneDeep(state);
+        const animateType = action.data;
+
+        const { project } = newState;
+
+        const { activeIndex, template } = project;
+
+        const { controls } = template;
+
+        const activeControl = controls[activeIndex];
+
+        const animates = activeControl.animate || [];
+
+        const animateIds = animates.map(item => item.id);
+        const id = generatorId(animateIds);
+        const animate = {
+            id,
+            type: animateType,
+            to: 0,
+            from: 0,
+            start: 0,
+            end: 1,
+            duration: 1
+        };
+
+        animates.push(animate as any);
+
+        activeControl.animate = animates;
+        newState.project.selectAnimateId = id;
+
+        return { ...newState };
+    },
+    [SELECT_ANIMATE_ID](state: ITemplateState, action: TSelectAnimateId) {
+        const newState = _.cloneDeep(state);
+        const [id, controlId] = action.data;
+        newState.project.selectAnimateId = id;
+        newState.project.activeIndex = controlId;
         return { ...newState };
     }
 };

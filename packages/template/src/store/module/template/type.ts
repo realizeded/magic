@@ -12,7 +12,9 @@ import {
     CHANGE_CONTRL_ZINDEX,
     CHANGE_ACTIVE_STAGE_NAME,
     CHANGE_ACTIVE_STAGE_POST,
-    CHANGE_SCALE_CANVAS
+    CHANGE_SCALE_CANVAS,
+    CREATE_ANIMATE,
+    SELECT_ANIMATE_ID
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -31,18 +33,53 @@ export enum EControlTypes {
 }
 
 export enum EAnimateType {
-    LeftInto = 1
+    Normal = 1,
+    Scale = 2,
+    Rotate = 3,
+    Opacity = 4
 }
 
-export interface IAnimateLeftInto {
+export interface IAnimateNomal {
     start: number;
     end: number;
     left: number;
     top: number;
-    type: EAnimateType.LeftInto;
+    type: EAnimateType.Normal;
+    id: string;
+    duration: number;
 }
 
-export type TAnimate = Array<IAnimateLeftInto>;
+export interface IAnimateScale {
+    start: number;
+    end: number;
+    to: number;
+    from: number;
+    type: EAnimateType.Scale;
+    id: string;
+    duration: number;
+}
+
+export interface IAnimateRotate {
+    start: number;
+    end: number;
+    to: number;
+    from: number;
+    type: EAnimateType.Scale;
+    id: string;
+    duration: number;
+}
+
+export interface IAnimateOpacity {
+    start: number;
+    end: number;
+    to: number;
+    from: number;
+    type: EAnimateType.Scale;
+    id: string;
+    duration: number;
+}
+
+export type TAnimate = Array<IAnimateNomal | IAnimateOpacity | IAnimateRotate | IAnimateScale>;
 
 export enum EEventType {
     Click = 1
@@ -136,6 +173,7 @@ export interface IProject {
     scaleCanvas: number;
     currentTime: number;
     playState: boolean;
+    selectAnimateId: string;
 }
 
 export interface ITemplateState {
@@ -156,5 +194,6 @@ export type TChangeControlZindex = IAction<typeof CHANGE_CONTRL_ZINDEX, boolean>
 export type TChangeActiveStageName = IAction<typeof CHANGE_ACTIVE_STAGE_NAME, string>;
 export type TChangeActiveStagePosts = IAction<typeof CHANGE_ACTIVE_STAGE_POST, string>;
 export type TChangeScaleCanvas = IAction<typeof CHANGE_SCALE_CANVAS, number>;
-
+export type TCreateAnimate = IAction<typeof CREATE_ANIMATE, EAnimateType>;
+export type TSelectAnimateId = IAction<typeof SELECT_ANIMATE_ID, Array<string>>;
 export type TTemplateAction = TChangeControlAction;

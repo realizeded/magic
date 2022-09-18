@@ -4,6 +4,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { EControlTypes, IImg, ITemplateState, IText, IVideo } from '../../../../store/module/template';
 import { TRootState } from '../../../../store/type';
+import { AnimateCreateDesc } from './components/AnimateCreateDesc';
 import { AudioDesc } from './components/AudioDesc';
 import { ImgDesc } from './components/ImgDesc';
 import { StageDesc } from './components/StageDesc';
@@ -17,10 +18,11 @@ interface IProps {}
 export const PropertyPannel: React.FC<IProps> = props => {
     const project = useSelector<TRootState, ITemplateState>(state => state.project);
     const { project: editorProject } = project;
-    const { activeStageIndex, activeIndex, template } = editorProject;
+    const { activeStageIndex, activeIndex, template, selectAnimateId } = editorProject;
     const { controls } = template;
     const activeControl = controls[activeIndex];
     const { type } = activeControl || {};
+
     const controlTypeMapToComponent = {
         [EControlTypes.Text]() {
             return <TextDesc control={activeControl as IText} controlId={activeIndex} />;
@@ -41,7 +43,8 @@ export const PropertyPannel: React.FC<IProps> = props => {
     return (
         <div className={$style.propertyPannelWrapper}>
             {!activeIndex && !_.isUndefined(activeStageIndex) && <StageDesc project={project} />}
-            {processFn && processFn()}
+            {!selectAnimateId && processFn && processFn()}
+            {selectAnimateId && <AnimateCreateDesc project={project} />}
         </div>
     );
 };

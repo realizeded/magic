@@ -6,6 +6,7 @@ import {
     EControlTypes,
     getChangeActiveIndexAction,
     IProject,
+    selectAnimateId,
     TAnimate
 } from '../../../../../../store/module/template';
 import { TRootState } from '../../../../../../store/type';
@@ -39,6 +40,16 @@ export const TimePannel: React.FC<IProps> = props => {
     //     e.stopPropagation();
     //     e.preventDefault();
     // };
+
+    const handleSelectAnimateId = (
+        e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        id: string,
+        controlId: string
+    ) => {
+        dispatch(selectAnimateId([id, controlId]));
+        e.stopPropagation();
+        e.preventDefault();
+    };
     return (
         <div className={$style.timePannelWrapper}>
             <div className={$style.controlName}>控件名称</div>
@@ -63,7 +74,7 @@ export const TimePannel: React.FC<IProps> = props => {
                         >
                             {animate.map((animateItem, i) => {
                                 const key = animateItem.type;
-                                const { start, end } = animateItem;
+                                const { start, end, id } = animateItem;
 
                                 const width = (end - start) * 10 * 10;
                                 return (
@@ -71,6 +82,7 @@ export const TimePannel: React.FC<IProps> = props => {
                                         key={i}
                                         className={$style.animateLineItem}
                                         style={{ width, left: start * 10 * 10 + 30 + 'px' }}
+                                        onClick={e => handleSelectAnimateId(e, id, controlId)}
                                     >
                                         {animteKeyMapToText[key]}
                                     </div>

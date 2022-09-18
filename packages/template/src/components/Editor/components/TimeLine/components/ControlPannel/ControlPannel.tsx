@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+    createAnimate,
     EControlTypes,
     getChangeControlZindex,
     getDeleteControl,
@@ -10,6 +11,7 @@ import { TRootState } from '../../../../../../store/type';
 import $style from './style.module.less';
 import { Pic, Video, Music, Text, DeleteOne, ArrowUp, ArrowDown, AddThree, Effects } from '@icon-park/react';
 import classNames from 'classnames';
+import { EAnimateType } from '../../../PropertyPannel/components/AnimateCreateDesc';
 interface IProps {
     handleChangeControl: (id: string) => void;
 }
@@ -50,6 +52,12 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
         e.preventDefault();
         e.stopPropagation();
     };
+
+    const handleAddNimate = (id: string, e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        dispatch(createAnimate(EAnimateType.normal));
+        e.preventDefault();
+        e.stopPropagation();
+    };
     return (
         <div className={$style.ControlPannel}>
             {activeControls.map((control, i) => {
@@ -84,7 +92,7 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
                                     size="16"
                                     theme="outline"
                                     color="#3c3c3c"
-                                    onClick={e => handleAddEvent(controlId, e)}
+                                    onClick={e => handleAddNimate(controlId, e)}
                                 />
                             </div>
                             <div>

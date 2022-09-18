@@ -1,3 +1,4 @@
+import { EAnimateType } from './../../../components/Editor/components/PropertyPannel/components/AnimateCreateDesc/constant';
 import {
     CHANGE_CONTROL,
     CHANGE_ACTIVE_INDEX,
@@ -12,7 +13,9 @@ import {
     CHANGE_CONTRL_ZINDEX,
     CHANGE_ACTIVE_STAGE_NAME,
     CHANGE_ACTIVE_STAGE_POST,
-    CHANGE_SCALE_CANVAS
+    CHANGE_SCALE_CANVAS,
+    CREATE_ANIMATE,
+    SELECT_ANIMATE_ID
 } from './actionTypes';
 import { TControls, ITemplate } from './type';
 
@@ -111,5 +114,19 @@ export const getChangeScaleCanvas = (scale: number) => {
     return {
         type: CHANGE_SCALE_CANVAS,
         data: scale
+    };
+};
+
+export const createAnimate = (animateType: EAnimateType) => {
+    return {
+        type: CREATE_ANIMATE,
+        data: animateType
+    };
+};
+
+export const selectAnimateId = (ids: Array<string>) => {
+    return {
+        type: SELECT_ANIMATE_ID,
+        data: ids
     };
 };

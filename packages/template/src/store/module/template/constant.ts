@@ -9,6 +9,7 @@ export const initState: ITemplateState = {
         activeStageIndex: 0,
         scaleCanvas: 0.8,
         currentTime: 0,
+        selectAnimateId: '',
         template: {
             stages: [
                 {
@@ -56,22 +57,7 @@ export const initState: ITemplateState = {
                         left: '0px'
                     },
                     style: {},
-                    animate: [
-                        {
-                            type: EAnimateType.LeftInto,
-                            start: 1,
-                            end: 2,
-                            left: 500,
-                            top: 0
-                        },
-                        {
-                            type: EAnimateType.LeftInto,
-                            start: 4,
-                            end: 5,
-                            left: 0,
-                            top: 500
-                        }
-                    ],
+                    animate: [],
                     event: [
                         {
                             type: EEventType.Click,
