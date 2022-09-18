@@ -36,7 +36,7 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
         const currentEvent = events.find(item => item.id === selectEventId);
 
         const { type, targetEvent, start: eventStart } = currentEvent as any;
-        const { type: tagetType, start: targetStart } = targetEvent[0] as any;
+        const { type: tagetType, start: targetStart, stageIndex } = targetEvent[0] as any;
 
         setTargetEventType(tagetType);
 
@@ -44,7 +44,8 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
             { name: EFormEfieldType.eventType, value: type },
             { name: EFormEfieldType.targetType, value: tagetType },
             { name: EFormEfieldType.jumpTargetTime, value: targetStart },
-            { name: EFormEfieldType.time, value: eventStart }
+            { name: EFormEfieldType.time, value: eventStart },
+            { name: EFormEfieldType.nextStage, value: stageIndex }
         ]);
     }, [selectEventId]);
 
@@ -60,7 +61,7 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
         const eventType = form.getFieldValue(EFormEfieldType.targetType);
         const control = controls[activeIndex];
         const currentEvent = control.event?.find(item => item.id === selectEventId) as any;
-        currentEvent.targetEvent.type = eventType;
+        currentEvent.targetEvent[0].type = eventType;
         setTargetEventType(eventType);
         dispatch(getChangeControlAction(activeIndex, control));
     };
@@ -78,6 +79,15 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
         const control = controls[activeIndex];
         const currentEvent = control.event?.find(item => item.id === selectEventId) as any;
         currentEvent.start = start;
+        dispatch(getChangeControlAction(activeIndex, control));
+    };
+
+    const handleChangeToggleStage = () => {
+        const nextStage = form.getFieldValue(EFormEfieldType.nextStage);
+        const control = controls[activeIndex];
+        const currentEvent = control.event?.find(item => item.id === selectEventId) as any;
+        currentEvent.targetEvent[0].stageIndex = nextStage;
+
         dispatch(getChangeControlAction(activeIndex, control));
     };
     return (
@@ -121,6 +131,22 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
                             <div>
                                 <Form.Item name={EFormEfieldType.jumpTargetTime} label="目标时间">
                                     <Input onChange={handleJumpTimeChange} />
+                                </Form.Item>
+                            </div>
+                        )}
+                        {targetEventType === ETargetEventType.toggleStage && (
+                            <div>
+                                <Form.Item name={EFormEfieldType.nextStage} label="场景名">
+                                    <Select onChange={handleChangeToggleStage}>
+                                        {stages.map((item, i) => {
+                                            const { name } = item;
+                                            return (
+                                                <Option value={i} key={i}>
+                                                    {name}
+                                                </Option>
+                                            );
+                                        })}
+                                    </Select>
                                 </Form.Item>
                             </div>
                         )}

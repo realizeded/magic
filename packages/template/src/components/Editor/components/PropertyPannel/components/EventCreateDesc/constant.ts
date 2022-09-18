@@ -4,17 +4,14 @@ export enum EFormEfieldType {
     targetType = 'targetType',
     eventType = 'eventType',
     jumpTargetTime = 'jumpTargetTime',
-    time = 'time'
+    time = 'time',
+    nextStage = 'nextStage'
 }
 
 export const animateTypeOptions = [
     {
         value: EEventType.Click,
         label: '点击'
-    },
-    {
-        value: EEventType.Auto,
-        label: '自动触发'
     }
 ];
 
@@ -24,7 +21,7 @@ export const targetEventOptions = [
         label: '跳转播放'
     },
     {
-        value: EEventType.Auto,
-        label: '自动触发'
+        value: ETargetEventType.toggleStage,
+        label: '切换场景'
     }
 ];

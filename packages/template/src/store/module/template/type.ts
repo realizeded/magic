@@ -84,8 +84,7 @@ export interface IAnimateOpacity {
 export type TAnimate = Array<IAnimateNomal | IAnimateOpacity | IAnimateRotate | IAnimateScale>;
 
 export enum EEventType {
-    Click = 1,
-    Auto = 2
+    Click = 1
 }
 
 export enum ETargetEventType {

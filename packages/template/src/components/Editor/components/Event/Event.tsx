@@ -4,10 +4,12 @@ import { useDispatch } from 'react-redux';
 import {
     EEventType,
     ETargetEventType,
+    getChangeActiveStageIndexAction,
     getChangeCurrentTime,
     getTogglePlayState,
     IJumpEvent,
-    TTargetEvent
+    TTargetEvent,
+    TToggleStage
 } from '../../../../store/module/template';
 import { TRenderComponentType } from '../Render';
 import $style from './style.module.less';
@@ -27,6 +29,11 @@ export const EvenHoc = (C: TRenderComponentType) => {
             [ETargetEventType.jumpPlay]: async (targetEvent: IJumpEvent) => {
                 const start = targetEvent.start;
                 await dispatch(getChangeCurrentTime(start));
+            },
+            [ETargetEventType.toggleStage]: async (targetEvent: TToggleStage) => {
+                const nextStage = targetEvent.stageIndex;
+
+                await dispatch(getChangeActiveStageIndexAction(nextStage));
             }
         };
 

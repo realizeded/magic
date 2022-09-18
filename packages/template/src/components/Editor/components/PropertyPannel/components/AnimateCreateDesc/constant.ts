@@ -11,7 +11,8 @@ export enum EFormEfieldType {
     from = 'from',
     start = 'start',
     end = 'end',
-    duration = 'duration'
+    duration = 'duration',
+    targetType = 'targetType'
 }
 
 export const animateTypeOptions = [
