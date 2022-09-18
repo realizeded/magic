@@ -28,6 +28,7 @@ export const CVideo: React.FC<IProps> = props => {
 
         if (current) {
             if (current.paused && playState) {
+                current.currentTime = currentTime;
                 current.play();
                 current.volume = volume / 100;
             } else if (!current.paused && !playState) {

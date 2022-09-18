@@ -23,6 +23,7 @@ export const CAudio: React.FC<IProps> = props => {
         const current = audioRef.current;
         if (current) {
             if (playState && current.paused) {
+                current.currentTime = currentTime;
                 current.volume = volume / 100;
                 current.play();
             } else if (!playState && !current.paused) {
