@@ -28,6 +28,7 @@ export const AnimateCreateDesc: React.FC<IProps> = ({ project }) => {
     useEffect(() => {
         const control = controls[activeIndex];
         const currentAnimate = control.animate?.find(item => item.id === selectAnimateId);
+
         const { type, to, from, start, end, duration } = currentAnimate as any;
         setAnimateType(type);
 

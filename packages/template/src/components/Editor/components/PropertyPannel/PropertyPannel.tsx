@@ -43,7 +43,7 @@ export const PropertyPannel: React.FC<IProps> = props => {
 
     return (
         <div className={$style.propertyPannelWrapper}>
-            {selectEventId && <EventCreateDesc project={project} />}
+            {!selectAnimateId && selectEventId && <EventCreateDesc project={project} />}
             {!selectEventId && !activeIndex && !_.isUndefined(activeStageIndex) && (
                 <StageDesc project={project} />
             )}

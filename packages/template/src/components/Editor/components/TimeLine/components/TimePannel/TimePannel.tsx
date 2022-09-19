@@ -108,7 +108,7 @@ export const TimePannel: React.FC<IProps> = props => {
                                         key={i}
                                         className={$style.eventLineItem}
                                         style={{ left }}
-                                        onClick={e => handleSelectAnimateId(e, id, controlId)}
+                                        onClick={e => handleSelectEventId(e, id, controlId)}
                                     >
                                         <Mark size={20} fill="#3955f6" theme="outline" />
                                     </div>

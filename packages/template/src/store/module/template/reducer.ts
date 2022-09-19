@@ -16,7 +16,8 @@ import {
     CHANGE_SCALE_CANVAS,
     CREATE_ANIMATE,
     SELECT_ANIMATE_ID,
-    CREATE_EVENT
+    CREATE_EVENT,
+    SELECT_EVENT_ID
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -242,7 +243,7 @@ const actionTypeMapToState = {
 
         activeControl.animate = animates;
         newState.project.selectAnimateId = id;
-
+        newState.project.selectEventId = '';
         return { ...newState };
     },
     [CREATE_EVENT](state: ITemplateState, action: TCreateEvent) {
@@ -277,7 +278,7 @@ const actionTypeMapToState = {
 
         activeControl.event = events;
         newState.project.selectEventId = id;
-
+        newState.project.selectAnimateId = '';
         return { ...newState };
     },
     [SELECT_ANIMATE_ID](state: ITemplateState, action: TSelectAnimateId) {
@@ -285,13 +286,15 @@ const actionTypeMapToState = {
         const [id, controlId] = action.data;
         newState.project.selectAnimateId = id;
         newState.project.activeIndex = controlId;
+        newState.project.selectEventId = '';
         return { ...newState };
     },
-    [SELECT_ANIMATE_ID](state: ITemplateState, action: TSelectEventId) {
+    [SELECT_EVENT_ID](state: ITemplateState, action: TSelectEventId) {
         const newState = _.cloneDeep(state);
         const [id, controlId] = action.data;
         newState.project.selectEventId = id;
         newState.project.activeIndex = controlId;
+        newState.project.selectAnimateId = '';
         return { ...newState };
     }
 };
