@@ -21,9 +21,6 @@ export const ToolBarPannel: React.FC<IProps> = props => {
 
     return (
         <div className={$style.ToolBarPannel}>
-            <div className={$style.toolbarItemWrapper}>
-                <Delete size={14} fill="#000" theme="outline" />
-            </div>
             <div className={$style.toolbarItemWrapper} onClick={handleChangePlayState}>
                 {playState ? (
                     <PauseOne size={14} fill="#000" theme="filled" />
@@ -32,6 +29,7 @@ export const ToolBarPannel: React.FC<IProps> = props => {
                 )}
             </div>
             <div className={$style.timePannel}>{formateTime(currentTime * 1000)}</div>
+            <div></div>
         </div>
     );
 };

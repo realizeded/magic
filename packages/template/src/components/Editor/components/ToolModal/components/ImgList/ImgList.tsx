@@ -11,40 +11,119 @@ export const ImgList: React.FC<IProps> = props => {
 
     const imgList = [
         {
-            type: 'img',
-            name: '背景1',
-            src: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fdfdb344e89c70ce3cc0db030f61c45555f82e640.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664864710&t=efea8e64bd411cf4dec2a256c8963072'
+            text: '背景图',
+            list: [
+                {
+                    text: '背景1',
+                    img: 'http://localhost:3000/imgs/bg1.jpg'
+                },
+                {
+                    text: '背景2',
+                    img: 'http://localhost:3000/imgs/bg2.jpg'
+                },
+                {
+                    text: '背景3',
+                    img: 'http://localhost:3000/imgs/bg3.jpg'
+                },
+                {
+                    text: '背景4',
+                    img: 'http://localhost:3000/imgs/bg4.jpg'
+                },
+                {
+                    text: '背景5',
+                    img: 'http://localhost:3000/imgs/bg5.jpg'
+                }
+            ]
+        },
+        {
+            text: '氛围图',
+            list: [
+                {
+                    text: '奖励1',
+                    img: 'http://localhost:3000/imgs/fen1.png'
+                },
+                {
+                    text: '氛围图1',
+                    img: 'http://localhost:3000/imgs/fen2.png'
+                },
+                {
+                    text: '氛围图2',
+                    img: 'http://localhost:3000/imgs/fen3.png'
+                },
+                {
+                    text: '氛围图3',
+                    img: 'http://localhost:3000/imgs/fen4.png'
+                }
+            ]
+        },
+        {
+            text: '按钮',
+            list: [
+                {
+                    text: '按钮1',
+                    img: 'http://localhost:3000/imgs/bt1.png'
+                },
+                {
+                    text: '按钮2',
+                    img: 'http://localhost:3000/imgs/bt4.png'
+                },
+                {
+                    text: '按钮3',
+                    img: 'http://localhost:3000/imgs/bt6.png'
+                },
+                {
+                    text: '按钮4',
+                    img: 'http://localhost:3000/imgs/bt7.png'
+                }
+            ]
         }
     ];
 
-    const handleClick = (img: any) => {
-        const { type, name, src } = img;
+    const handleClick = (img: { text: string; img: string }) => {
+        const { img: imgSrc, text } = img;
         dispatch(
             getCreateControlAction({
-                type: type,
-                name,
+                type: EControlTypes.Img,
+                name: text,
+                style: {
+                    backgroundSize: 'contain'
+                },
                 box: {
                     width: '200px',
                     height: '200px',
                     top: '20px',
-                    left: '-100px'
+                    left: '0px'
                 },
                 data: {
-                    src
+                    src: imgSrc
                 }
             })
         );
     };
 
     return (
-        <div>
-            {imgList.map(img => {
+        <div className={$style.dialog}>
+            {imgList.map((item, i) => {
+                const { text, list } = item;
                 return (
-                    <div className={$style.imgWrapper} key={img.name} onClick={() => handleClick(img)}>
-                        <div>
-                            <img src={img.src} />
+                    <div key={i} className={$style.subItemWrapper}>
+                        <div className={$style.bgTitle}>{text}</div>
+                        <div className={$style.listItems}>
+                            {list.map(item => {
+                                const { text, img } = item;
+                                return (
+                                    <div key={text} onClick={() => handleClick(item)}>
+                                        <div
+                                            className={$style.imgWrapper}
+                                            style={{ backgroundImage: `url(${img})` }}
+                                        >
+                                            <div className={$style.imgContent} />
+                                        </div>
+                                        <div className={$style.textWrapper}>{text}</div>
+                                    </div>
+                                );
+                            })}
                         </div>
-                        <div>{img.name}</div>
                     </div>
                 );
             })}

@@ -6,11 +6,17 @@ import { css } from '@emotion/css';
 import classnames from 'classnames';
 import { useDrag } from './hooks/useDrag';
 import { useDispatch } from 'react-redux';
-import { getChangeActiveIndexAction, getChangeControlAction } from '../../../../store/module/template';
+import {
+    EControlTypes,
+    getChangeActiveIndexAction,
+    getChangeControlAction,
+    TControls
+} from '../../../../store/module/template';
 import { SelectBox } from '../SelectBox';
 import _ from 'lodash';
+import { TAnimateComponentType } from '../Animate';
 
-export const BoxHoc = (C: TRenderComponentType) => {
+export const BoxHoc = (C: TAnimateComponentType) => {
     const Box: TBoxComponentType = (props: IBoxProps) => {
         const dispatch = useDispatch();
 
@@ -22,6 +28,15 @@ export const BoxHoc = (C: TRenderComponentType) => {
         const { width, height, top, right, bottom, left } = box;
 
         const isSelect = activeIndex === controlValue;
+
+        const controlValRef = useRef<string>(controlValue);
+        controlValRef.current = controlValue;
+
+        const controlOfStageRef = useRef<TControls>(controlOfStage);
+        controlOfStageRef.current = controlOfStage;
+
+        const scaleRef = useRef<number>(scaleCanvas);
+        scaleRef.current = scaleCanvas;
 
         const pxToScale = (pxStr = '') => {
             const px = pxStr.replace('px', '');
@@ -38,41 +53,50 @@ export const BoxHoc = (C: TRenderComponentType) => {
         `;
 
         const handleDragEnd = (position: IDragPosition) => {
-            const newControl = _.clone(controlOfStage);
+            const scaleCanvas = scaleRef.current;
+            const newControl = _.clone(controlOfStageRef.current);
+
             newControl.box.top = position.y / scaleCanvas + 'px';
             newControl.box.left = position.x / scaleCanvas + 'px';
-
+            const controlValue = controlValRef.current;
             dispatch(getChangeControlAction(controlValue, newControl));
         };
 
         const handleDragStart = () => {
+            const controlValue = controlValRef.current;
             dispatch(getChangeActiveIndexAction(controlValue));
         };
 
         const handleResizeDone = (newWdith: number, newHeight: number, top: number, left: number) => {
-            const newControl = _.clone(controlOfStage);
+            const scaleCanvas = scaleRef.current;
+            const newControl = _.clone(controlOfStageRef.current);
             newControl.box.top = top / scaleCanvas + 'px';
             newControl.box.left = left / scaleCanvas + 'px';
             newControl.box.width = newWdith / scaleCanvas + 'px';
             newControl.box.height = newHeight / scaleCanvas + 'px';
+            const controlValue = controlValRef.current;
             dispatch(getChangeControlAction(controlValue, newControl));
         };
         const ref = useRef<HTMLDivElement>(null);
 
-        useDrag({ ref, dragEnd: handleDragEnd, dragStart: handleDragStart });
+        useDrag({ ref, dragEnd: handleDragEnd, dragStart: handleDragStart, playState });
 
-        const wrapperClassNames = classnames($style.box, boxStyle, $style.select);
+        const wrapperClassNames = classnames(
+            $style.box,
+            boxStyle,
+            $style.select,
+            !playState ? $style.boxHover : ''
+        );
+
+        if (controls[controlValue].type === EControlTypes.Audio) {
+            return <C {...props} />;
+        }
 
         return (
             <>
                 <div className={wrapperClassNames} ref={ref}>
-                    <C
-                        controlValue={controlValue}
-                        controls={controls}
-                        currentTime={currentTime}
-                        playState={playState}
-                    />
-                    {isSelect && <SelectBox parentRef={ref} resizeDone={handleResizeDone} />}
+                    <C {...props} />
+                    {isSelect && !playState && <SelectBox parentRef={ref} resizeDone={handleResizeDone} />}
                 </div>
             </>
         );

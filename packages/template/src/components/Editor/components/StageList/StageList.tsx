@@ -2,13 +2,16 @@ import classNames from 'classnames';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+    getChangeActiveIndexAction,
     getChangeActiveStageIndexAction,
+    getChangeStagePost,
     getDeleteStageAction,
     IProject
 } from '../../../../store/module/template';
 import { TRootState } from '../../../../store/type';
 import $style from './style.module.less';
 import { Delete } from '@icon-park/react';
+import { captureImg } from '../../utils';
 
 interface IProps {}
 
@@ -21,10 +24,14 @@ export const StageList: React.FC<IProps> = props => {
 
     const { stages, controls } = template;
 
-    const handleClickStage = (key: number) => {
+    const handleClickStage = async (key: number) => {
         if (key === activeStageIndex) {
             return;
         }
+
+        await dispatch(getChangeActiveIndexAction(''));
+        const posts = await captureImg();
+        dispatch(getChangeStagePost(posts));
         dispatch(getChangeActiveStageIndexAction(key));
     };
 

@@ -3,6 +3,7 @@ import $style from './style.module.less';
 import { Layout } from '../Layout';
 import { ToolBar } from '../ToolBar';
 import { TimeLine } from '../TimeLine';
+import { PropertyPannel } from '../PropertyPannel';
 interface IProps {}
 
 export const LeftContent: React.FC<IProps> = props => {
@@ -13,7 +14,9 @@ export const LeftContent: React.FC<IProps> = props => {
                     <ToolBar />
                 </div>
                 <Layout />
-                <div className={$style.propertyPannel}></div>
+                <div className={$style.propertyPannel}>
+                    <PropertyPannel />
+                </div>
             </div>
             <div className={$style.bottom}>
                 <TimeLine />

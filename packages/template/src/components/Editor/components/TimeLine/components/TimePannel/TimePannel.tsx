@@ -1,12 +1,22 @@
 import classNames from 'classnames';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { EControlTypes, getChangeActiveIndexAction, IProject } from '../../../../../../store/module/template';
+import {
+    EAnimateType,
+    EControlTypes,
+    getChangeActiveIndexAction,
+    IProject,
+    selectAnimateId,
+    selectEventId,
+    TAnimate
+} from '../../../../../../store/module/template';
 import { TRootState } from '../../../../../../store/type';
 import { ControlPannel } from '../ControlPannel';
 import { Line } from '../Line';
 import $style from './style.module.less';
-import { CircleDoubleUp } from '@icon-park/react';
+import { CircleDoubleUp, Mark } from '@icon-park/react';
+import { start } from 'repl';
+import { animteKeyMapToText } from './constant';
 
 interface IProps {}
 
@@ -26,50 +36,85 @@ export const TimePannel: React.FC<IProps> = props => {
         dispatch(getChangeActiveIndexAction(id));
     };
 
+    // const handleContextMenu = (id: string, e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    //     dispatch(getChangeActiveIndexAction(id));
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    // };
+
+    const handleSelectAnimateId = (
+        e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        id: string,
+        controlId: string
+    ) => {
+        dispatch(selectAnimateId([id, controlId]));
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+    const handleSelectEventId = (
+        e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        id: string,
+        controlId: string
+    ) => {
+        dispatch(selectEventId([id, controlId]));
+        e.stopPropagation();
+        e.preventDefault();
+    };
     return (
         <div className={$style.timePannelWrapper}>
-            <div className={$style.controlWrapper}>
-                <div className={$style.controlName}>控件名称</div>
-                <ControlPannel handleChangeControl={handleChangeControl} />
-            </div>
-            <div className={$style.life}>
-                <Line />
+            <div className={$style.controlName}>控件名称</div>
+            <Line />
 
-                <div className={$style.verticalLine} style={{ left: currentTime * 10 + 30 + 'px' }}>
-                    <CircleDoubleUp theme="filled" fill="rgb(13 206 138)" size="14" />
-                </div>
+            <ControlPannel handleChangeControl={handleChangeControl} />
+            <div>
                 {activeControls.map((control, i) => {
-                    const isActive = activeIndex === activeStage.value[i];
+                    const controlId = activeStage.value[i];
+                    const isActive = activeIndex === controlId;
                     const type = control.type;
-
-                    const handleClick = handleChangeControl.bind(this, activeStage.value?.[i]);
-                    if (type === EControlTypes.Img) {
-                        return (
-                            <div
-                                key={i}
-                                className={classNames($style.lineControl, isActive && $style.active)}
-                                onClick={handleClick}
-                                // style={{ background: `url(${control.data.src})`, backgroundSize: '32px' }}
-                            ></div>
-                        );
-                    }
-
-                    if (type === EControlTypes.Video) {
-                        return (
-                            <div
-                                key={i}
-                                className={classNames($style.lineControl, isActive && $style.active)}
-                                onClick={handleClick}
-                                // style={{ background: `url(${control.data.posts})`, backgroundSize: '32px' }}
-                            ></div>
-                        );
-                    }
+                    const animate = control.animate ?? ([] as TAnimate);
+                    const event = control.event ?? [];
+                    const handleClick = handleChangeControl.bind(this, controlId);
+                    // const handleContextMenuBind = handleContextMenu.bind(this, controlId);
                     return (
                         <div
-                            key={i}
-                            onClick={handleClick}
                             className={classNames($style.lineControl, isActive && $style.active)}
-                        ></div>
+                            onClick={handleClick}
+                            key={controlId}
+                            // onContextMenu={handleContextMenuBind}
+                        >
+                            {animate.map((animateItem, i) => {
+                                const key = animateItem.type;
+                                const { start, end, id } = animateItem;
+
+                                const width = (end - start) * 10 * 10;
+                                return (
+                                    <div
+                                        key={i}
+                                        className={$style.animateLineItem}
+                                        style={{ width, left: start * 10 * 10 + 30 + 'px' }}
+                                        onClick={e => handleSelectAnimateId(e, id, controlId)}
+                                    >
+                                        {animteKeyMapToText[key]}
+                                    </div>
+                                );
+                            })}
+
+                            {event.map((eventItem, i) => {
+                                const { start, id } = eventItem;
+                                const left = start * 10 * 10 + 30 + 'px';
+                                return (
+                                    <div
+                                        key={i}
+                                        className={$style.eventLineItem}
+                                        style={{ left }}
+                                        onClick={e => handleSelectEventId(e, id, controlId)}
+                                    >
+                                        <Mark size={20} fill="#3955f6" theme="outline" />
+                                    </div>
+                                );
+                            })}
+                        </div>
                     );
                 })}
             </div>

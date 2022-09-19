@@ -5,10 +5,12 @@ interface IProps {
     videoSrc: string;
     currentTime: number;
     playState: boolean;
+    volume: number;
+    style: Record<string, string>;
 }
 
 export const CVideo: React.FC<IProps> = props => {
-    const { videoSrc, currentTime, playState } = props;
+    const { videoSrc, currentTime, playState, volume, style } = props;
 
     const videoRef = useRef<HTMLVideoElement>(null);
     useEffect(() => {
@@ -26,11 +28,15 @@ export const CVideo: React.FC<IProps> = props => {
 
         if (current) {
             if (current.paused && playState) {
+                current.currentTime = currentTime;
                 current.play();
+                current.volume = volume / 100;
             } else if (!current.paused && !playState) {
                 current.pause();
             }
         }
     }, [playState]);
-    return <video preload="auto" src={videoSrc} ref={videoRef} />;
+    return (
+        <video preload="auto" style={style} src={videoSrc} ref={videoRef} className={$style.videoWrapper} />
+    );
 };

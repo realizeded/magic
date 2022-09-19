@@ -21,4 +21,5 @@ export interface IUseDragProps {
     ref: React.RefObject<HTMLDivElement>;
     dragEnd: (props: IDragPosition) => void;
     dragStart: () => void;
+    playState: boolean;
 }

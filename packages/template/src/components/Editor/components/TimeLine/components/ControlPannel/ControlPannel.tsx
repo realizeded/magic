@@ -1,15 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { EControlTypes, IProject } from '../../../../../../store/module/template';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    createAnimate,
+    createEvent,
+    EControlTypes,
+    getChangeControlZindex,
+    getDeleteControl,
+    IProject
+} from '../../../../../../store/module/template';
 import { TRootState } from '../../../../../../store/type';
 import $style from './style.module.less';
-import { Pic, Video } from '@icon-park/react';
+import { Pic, Video, Music, Text, DeleteOne, ArrowUp, ArrowDown, AddThree, Effects } from '@icon-park/react';
 import classNames from 'classnames';
+import { EAnimateType } from '../../../PropertyPannel/components/AnimateCreateDesc';
 interface IProps {
     handleChangeControl: (id: string) => void;
 }
 
 export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
+    const dispatch = useDispatch();
+
     const project = useSelector<TRootState, IProject>(state => state.project.project);
 
     const { template, activeIndex, activeStageIndex } = project;
@@ -21,7 +31,33 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
 
     const typeMapToIcon = {
         [EControlTypes.Img]: Pic,
-        [EControlTypes.Video]: Video
+        [EControlTypes.Video]: Video,
+        [EControlTypes.Audio]: Music,
+        [EControlTypes.Text]: Text
+    };
+
+    const handleDeleteControl = (id: string, e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        dispatch(getDeleteControl(id));
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    const handleChangeZindex = (isUP: boolean, e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        dispatch(getChangeControlZindex(isUP));
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    const handleAddEvent = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        dispatch(createEvent());
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    const handleAddNimate = (id: string, e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        dispatch(createAnimate(EAnimateType.normal));
+        e.preventDefault();
+        e.stopPropagation();
     };
     return (
         <div className={$style.ControlPannel}>
@@ -29,14 +65,66 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
                 const { name, type } = control;
                 const Icon = typeMapToIcon[type];
                 const isActive = activeIndex === activeStage.value[i];
+
+                const controlId = activeStage.value[i];
+
+                const isFirst = i === 0;
+                const isLast = i === activeControls.length - 1;
                 return (
                     <div
-                        key={i}
+                        key={controlId}
                         className={classNames($style.controlItem, isActive && $style.active)}
                         onClick={() => handleChangeControl(activeStage.value[i])}
+                        draggable={true}
                     >
                         <Icon size={14} fill="#000" theme="outline" />
                         <span className={$style.text}>{name}</span>
+                        <div className={classNames($style.oper, isActive && $style.operActive)}>
+                            <div>
+                                <AddThree
+                                    size="16"
+                                    theme="outline"
+                                    color="#3c3c3c"
+                                    onClick={e => handleAddEvent(e)}
+                                />
+                            </div>
+                            <div>
+                                <Effects
+                                    size="16"
+                                    theme="outline"
+                                    color="#3c3c3c"
+                                    onClick={e => handleAddNimate(controlId, e)}
+                                />
+                            </div>
+                            <div>
+                                <DeleteOne
+                                    size="16"
+                                    theme="outline"
+                                    color="#3c3c3c"
+                                    onClick={e => handleDeleteControl(controlId, e)}
+                                />
+                            </div>
+                            {!isFirst && (
+                                <div>
+                                    <ArrowUp
+                                        size="16"
+                                        theme="outline"
+                                        color="#3c3c3c"
+                                        onClick={e => handleChangeZindex(true, e)}
+                                    />
+                                </div>
+                            )}
+                            {!isLast && (
+                                <div>
+                                    <ArrowDown
+                                        size="16"
+                                        theme="outline"
+                                        color="#3c3c3c"
+                                        onClick={e => handleChangeZindex(false, e)}
+                                    />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 );
             })}
