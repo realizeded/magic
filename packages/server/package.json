@@ -7,8 +7,6 @@
       "start": "nodemon",
       "build": "tsc && cross-env NODE_ENV=production pm2 start",
       "lint": "eslint ./",
-      "prepare": "husky install",
-      "commit-lint": "lint-staged",
       "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
    },
    "dependencies": {
