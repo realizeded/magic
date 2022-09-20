@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body,
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: #fafafa;
+            color: #444;
+            font-family: Helvetica Neue, arial, sans-serif;
+            font-weight: 400;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        #preact_root {
+            height: 100%
+        }
+    </style>
+    <meta name="theme-color" content="#673ab8">
+
+
+    <script>
+        window.project = (<%- config12 %>);
+    </script>
+</head>
+
+
+<body>
+    <div id="preact_root"></div>
+    <script type="__PREACT_CLI_DATA__">%7B%22preRenderData%22:%7B%22url%22:%22/%22%7D%7D</script>
+
+    <script defer="defer" crossorigin="anonymous" src="http://150.158.141.76:8900/client/template.esm.js"
+        type="module"></script>
+    <script nomodule="" defer="defer" src="http://150.158.141.76:8900/client/polyfills.js"></script>
+    <script nomodule="" defer="defer" src="http://150.158.141.76:8900/client/template.js"></script>
+</body>
+
+</html>

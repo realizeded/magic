@@ -1,0 +1,6 @@
+./yarn.lock
+./node_modules
+./package.json
+./tsconfig.json
+./dist
+./.prettierignore

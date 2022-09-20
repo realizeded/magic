@@ -452,6 +452,14 @@
       "tags": [
         "web"
       ]
+    },
+    {
+      "packageName": "@magic/serve",
+      "projectFolder": "packages/server",
+      "reviewCategory": "production",
+      "tags": [
+        "web"
+      ]
     }
   ]
 }
