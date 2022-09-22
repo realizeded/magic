@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Editor } from './components/Editor';
+import { Editor } from './pages/Editor';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { routerConfigs } from './routes';

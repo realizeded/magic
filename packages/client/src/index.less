@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+    height: 100vh;
+}
+
+::-webkit-scrollbar {
+    /* 滚动条整体部分 */
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    position: relative;
+    right: -10px;
+
+    /* 外层轨道 */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track-piece {
+    /* 内层轨道，滚动条中间部分 */
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    /* 滑块 */
+    width: 10px;
+    background: #cbcbcb;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    /* 鼠标移入滑块 */
+    background: #909090;
+}
+
+* {
+    user-select: none;
+}

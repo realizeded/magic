@@ -1,4 +1,4 @@
-import { EAnimateType } from './../../../components/Editor/components/PropertyPannel/components/AnimateCreateDesc/constant';
+import { EAnimateType } from '../../../pages/Editor/components/PropertyPannel/components/AnimateCreateDesc/constant';
 import {
     CHANGE_CONTROL,
     CHANGE_ACTIVE_INDEX,

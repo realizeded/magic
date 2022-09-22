@@ -90,11 +90,10 @@ export const Upload: React.FC<IProps> = ({ handleUploadChange, value }) => {
     }, [value]);
 
     return (
-        <div>
+        <div className={$style.uploadWrapper}>
             <AUpload
                 name="avatar"
                 listType="picture-card"
-                className="avatar-uploader"
                 showUploadList={false}
                 onChange={handleChange}
                 action={`http://localhost:8800/media/template/infor`}
