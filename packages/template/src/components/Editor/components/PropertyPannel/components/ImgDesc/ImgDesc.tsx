@@ -5,6 +5,7 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getChangeControlAction, IImg, IVideo } from '../../../../../../store/module/template';
+import { Upload } from '../../../../../Upload';
 import { EFormField, objectFitOptions } from './constant';
 import $style from './style.module.less';
 import { ITextForm } from './type';
@@ -65,6 +66,15 @@ export const ImgDesc: React.FC<IProps> = ({ control, controlId }) => {
         style[EFormField.objectFit] = objectFit;
         dispatch(getChangeControlAction(controlId, newControl));
     };
+
+    const imgUrl = control.data.src;
+
+    const handleUploadChange = (url: string) => {
+        const newControl = _.cloneDeep(control);
+        newControl.data.src = url;
+        dispatch(getChangeControlAction(controlId, newControl));
+    };
+
     return (
         <div>
             <Form form={form}>
@@ -81,6 +91,7 @@ export const ImgDesc: React.FC<IProps> = ({ control, controlId }) => {
                                 onChange={handleTextChange}
                             />
                         </Form.Item>
+                        <Upload value={imgUrl} handleUploadChange={handleUploadChange} />
 
                         <Form.Item name={EFormField.objectFit} label="图片填充">
                             <Select onChange={handleChangeObjectFit}>

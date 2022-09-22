@@ -33,3 +33,7 @@ export const SELECT_ANIMATE_ID = 'SELECT_ANIMATE_ID';
 export const CREATE_EVENT = 'CREATE_EVENT';
 
 export const SELECT_EVENT_ID = 'SELECT_EVENT_ID';
+
+export const CHANGE_NAME = 'CHANGE_NAME';
+
+export const RESET_PROJECT = 'RESET_PROJECT';

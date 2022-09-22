@@ -37,6 +37,13 @@ export const CVideo: React.FC<IProps> = props => {
         }
     }, [playState]);
     return (
-        <video preload="auto" style={style} src={videoSrc} ref={videoRef} className={$style.videoWrapper} />
+        <video
+            preload="auto"
+            crossOrigin="anonymous"
+            style={style}
+            src={videoSrc}
+            ref={videoRef}
+            className={$style.videoWrapper}
+        />
     );
 };

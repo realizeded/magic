@@ -16,7 +16,9 @@ import {
     CREATE_ANIMATE,
     SELECT_ANIMATE_ID,
     CREATE_EVENT,
-    SELECT_EVENT_ID
+    SELECT_EVENT_ID,
+    CHANGE_NAME,
+    RESET_PROJECT
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -172,6 +174,8 @@ export interface IControls {
 }
 
 export interface ITemplate {
+    name: string;
+    id: string;
     stages: IStage[];
     controls: IControls;
 }
@@ -208,4 +212,7 @@ export type TCreateAnimate = IAction<typeof CREATE_ANIMATE, EAnimateType>;
 export type TSelectAnimateId = IAction<typeof SELECT_ANIMATE_ID, Array<string>>;
 export type TCreateEvent = IAction<typeof CREATE_EVENT, string>;
 export type TSelectEventId = IAction<typeof SELECT_EVENT_ID, Array<string>>;
+export type TChangeProjectName = IAction<typeof CHANGE_NAME, string>;
+export type TResetProject = IAction<typeof RESET_PROJECT, null>;
+
 export type TTemplateAction = TChangeControlAction;

@@ -31,5 +31,5 @@ export const CAudio: React.FC<IProps> = props => {
             }
         }
     }, [playState]);
-    return <audio src={audioSrc} preload="auto" ref={audioRef} />;
+    return <audio crossOrigin="anonymous" src={audioSrc} preload="auto" ref={audioRef} />;
 };

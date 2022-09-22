@@ -5,6 +5,7 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getChangeControlAction, IVideo } from '../../../../../../store/module/template';
+import { MusicUpload } from '../../../../../MusicUpload';
 import { EFormField, objectFitOptions } from './constant';
 import $style from './style.module.less';
 import { ITextForm } from './type';
@@ -79,6 +80,15 @@ export const VideoDesc: React.FC<IProps> = ({ control, controlId }) => {
         style.objectFit = objectFit;
         dispatch(getChangeControlAction(controlId, newControl));
     };
+
+    const handleMusicUpload = (name: string, url: string) => {
+        const newControl = _.cloneDeep(control);
+        newControl.data.src = url;
+        newControl.name = name;
+        dispatch(getChangeControlAction(controlId, newControl));
+    };
+
+    const videoSrc = control.data.src;
     return (
         <div>
             <Form form={form}>
@@ -95,6 +105,9 @@ export const VideoDesc: React.FC<IProps> = ({ control, controlId }) => {
                                 onChange={handleTextChange}
                             />
                         </Form.Item>
+                        <MusicUpload handleUploadChange={handleMusicUpload}>
+                            <video src={videoSrc} />
+                        </MusicUpload>
                         <Form.Item name={EFormField.volume}>
                             <Slider min={0} max={100} onChange={handleChangeVideoVolume} />
                         </Form.Item>
