@@ -5,7 +5,9 @@ export enum EFormEfieldType {
     eventType = 'eventType',
     jumpTargetTime = 'jumpTargetTime',
     time = 'time',
-    nextStage = 'nextStage'
+    nextStage = 'nextStage',
+    Opacity = 'opacity',
+    OpacityTargetId = 'OpacityTargetId'
 }
 
 export const animateTypeOptions = [
@@ -23,5 +25,9 @@ export const targetEventOptions = [
     {
         value: ETargetEventType.toggleStage,
         label: '切换场景'
+    },
+    {
+        value: ETargetEventType.setOpacity,
+        label: '改变可见度'
     }
 ];

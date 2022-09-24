@@ -11,7 +11,8 @@ export enum EFormField {
     top = 'top',
     left = 'left',
     width = 'width',
-    height = 'height'
+    height = 'height',
+    Opacity = 'opacity'
 }
 
 export const fontOptions = [

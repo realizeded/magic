@@ -26,14 +26,14 @@ export const Line: React.FC<IProps> = props => {
         const activeStage = stages[activeStageIndex];
 
         const { value } = activeStage;
-        console.log(value);
+
         const allControls = value.map(val => controls[val]);
 
         let max = 20;
 
         allControls.forEach(control => {
             const { type, animate = [], event = [] } = control;
-            console.log(animate, event);
+
             animate.forEach(({ end }) => {
                 const endUnitNum = Math.ceil(end / (gridUnitNum * 0.1)) + 1;
                 max = max > endUnitNum ? max : endUnitNum;
@@ -48,7 +48,7 @@ export const Line: React.FC<IProps> = props => {
 
         return max;
     }, [project]);
-    console.log(gridLen);
+
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         const left = e.nativeEvent.offsetX - 30;
         const newLeft = left <= 0 ? 0 : left;

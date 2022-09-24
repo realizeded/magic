@@ -3,6 +3,6 @@ export const ptToRem = (pxNum: string | any) => {
         return '';
     }
     const num = pxNum.replace('px', '');
-    console.log(window.bodySize);
-    return Number(num) / (window.devicePixelRatio * window.bodySize) + 'rem';
+
+    return Number(num) / (2 * window.bodySize) + 'rem';
 };

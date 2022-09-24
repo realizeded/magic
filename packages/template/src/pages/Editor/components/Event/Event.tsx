@@ -1,15 +1,19 @@
 import classNames from 'classnames';
+import _ from 'lodash';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
+    EControlTypes,
     EEventType,
     ETargetEventType,
     getChangeActiveStageIndexAction,
+    getChangeControlAction,
     getChangeCurrentTime,
     getTogglePlayState,
     IJumpEvent,
     TTargetEvent,
-    TToggleStage
+    TToggleStage,
+    TTopacity
 } from '../../../../store/module/template';
 import { TRenderComponentType } from '../Render';
 import $style from './style.module.less';
@@ -33,7 +37,23 @@ export const EvenHoc = (C: TRenderComponentType) => {
             [ETargetEventType.toggleStage]: async (targetEvent: TToggleStage) => {
                 const nextStage = targetEvent.stageIndex;
 
+                await dispatch(getTogglePlayState(false));
+                await dispatch(getChangeCurrentTime(0));
                 await dispatch(getChangeActiveStageIndexAction(nextStage));
+                await dispatch(getTogglePlayState(true));
+            },
+            [ETargetEventType.setOpacity]: async (targetEvent: TTopacity) => {
+                const { targetControlId, value } = targetEvent;
+                if (!targetControlId) {
+                    return;
+                }
+                const newControl = _.cloneDeep(controls[targetControlId]);
+                if (newControl.type === EControlTypes.Audio) return;
+                const style = (newControl.style || {}) as any;
+                style.opacity = value;
+                newControl.style = style;
+
+                await dispatch(getChangeControlAction(targetControlId, newControl));
             }
         };
 

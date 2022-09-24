@@ -69,7 +69,8 @@ export enum EEventType {
 
 export enum ETargetEventType {
     jumpPlay = 1,
-    toggleStage = 2
+    toggleStage = 2,
+    setOpacity = 3
 }
 
 export interface IJumpEvent {
@@ -82,7 +83,13 @@ export interface TToggleStage {
     stageIndex: number;
 }
 
-export type TTargetEvent = Array<IJumpEvent | TToggleStage>;
+export interface TTopacity {
+    type: ETargetEventType.setOpacity;
+    value: number;
+    targetControlId: string;
+}
+
+export type TTargetEvent = Array<IJumpEvent | TToggleStage | TTopacity>;
 
 export interface IClickEvent {
     type: EEventType.Click;
@@ -156,6 +163,20 @@ export interface ITemplate {
     id: string;
     stages: IStage[];
     controls: IControls;
+}
+export interface IProject {
+    template: ITemplate;
+    activeIndex: string;
+    activeStageIndex: number;
+    scaleCanvas: number;
+    currentTime: number;
+    playState: boolean;
+    selectAnimateId: string;
+    selectEventId: string;
+}
+
+export interface ITemplateState {
+    project: IProject;
 }
 
 declare global {

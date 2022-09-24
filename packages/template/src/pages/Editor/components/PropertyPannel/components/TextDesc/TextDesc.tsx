@@ -35,7 +35,8 @@ export const TextDesc: React.FC<IProps> = ({ control, controlId }) => {
             [EFormField.verticalAlign]: verticalAlign,
             [EFormField.color]: color,
             [EFormField.lineHeight]: lineHeight,
-            [EFormField.wordBreak]: wordBreak
+            [EFormField.wordBreak]: wordBreak,
+            [EFormField.Opacity]: opacity
         } = style;
 
         const {
@@ -58,7 +59,8 @@ export const TextDesc: React.FC<IProps> = ({ control, controlId }) => {
             { name: EFormField.top, value: parseInt(top) },
             { name: EFormField.left, value: parseInt(left) },
             { name: EFormField.width, value: parseInt(width) },
-            { name: EFormField.height, value: parseInt(height) }
+            { name: EFormField.height, value: parseInt(height) },
+            { name: EFormField.Opacity, value: opacity }
         ]);
     }, [control]);
 
@@ -133,6 +135,13 @@ export const TextDesc: React.FC<IProps> = ({ control, controlId }) => {
         dispatch(getChangeControlAction(controlId, newControl));
     };
 
+    const handleChangeOpacity = () => {
+        const opacity = form.getFieldValue(EFormField.Opacity);
+        const newControl = _.cloneDeep(control);
+        const style = newControl.style;
+        style[EFormField.Opacity] = opacity;
+        dispatch(getChangeControlAction(controlId, newControl));
+    };
     return (
         <div>
             <Form form={form}>
@@ -250,6 +259,14 @@ export const TextDesc: React.FC<IProps> = ({ control, controlId }) => {
                                 defaultValue={0}
                             />
                         </Form.Item> */}
+                    </Panel>
+                </Collapse>
+
+                <Collapse accordion>
+                    <Panel header="其他" key="3">
+                        <Form.Item label="内容可见度" name={EFormField.Opacity}>
+                            <InputNumber max={1} min={0} defaultValue={1} onChange={handleChangeOpacity} />
+                        </Form.Item>
                     </Panel>
                 </Collapse>
             </Form>

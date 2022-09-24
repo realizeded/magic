@@ -91,7 +91,8 @@ export enum EEventType {
 
 export enum ETargetEventType {
     jumpPlay = 1,
-    toggleStage = 2
+    toggleStage = 2,
+    setOpacity = 3
 }
 
 export interface IJumpEvent {
@@ -104,7 +105,13 @@ export interface TToggleStage {
     stageIndex: number;
 }
 
-export type TTargetEvent = Array<IJumpEvent | TToggleStage>;
+export interface TTopacity {
+    type: ETargetEventType.setOpacity;
+    value: number;
+    targetControlId: string;
+}
+
+export type TTargetEvent = Array<IJumpEvent | TToggleStage | TTopacity>;
 
 export interface IClickEvent {
     type: EEventType.Click;

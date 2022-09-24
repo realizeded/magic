@@ -5,6 +5,7 @@ import { css } from '@emotion/css';
 import classnames from 'classnames';
 import $style from './style.module.less';
 import { ptToRem } from '../../util';
+import { EControlTypes } from '../../types';
 
 export const BoxHoc = (C: TAnimateComponent) => {
     const Box: React.FC<IBoxProps> = props => {
@@ -12,7 +13,7 @@ export const BoxHoc = (C: TAnimateComponent) => {
 
         const controlOfVal = controls[controlVal];
 
-        const { box } = controlOfVal;
+        const { box, type } = controlOfVal;
 
         const { width, height, top, left } = box;
         const boxStyle = css`
@@ -22,9 +23,16 @@ export const BoxHoc = (C: TAnimateComponent) => {
             left: ${ptToRem(left)};
         `;
 
+        let isHidden = false;
+        console.log(controlOfVal);
+        if (type !== EControlTypes.Audio) {
+            const opacity = controlOfVal.style.opacity;
+            console.log(opacity);
+            isHidden = Number(opacity) === 0;
+        }
         return (
             <div className={classnames($style.boxWrapper, boxStyle)}>
-                <C {...props} />
+                {isHidden ? null : <C {...props} />}
             </div>
         );
     };

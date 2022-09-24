@@ -1,11 +1,13 @@
-import { Collapse, Form, Input, InputNumber, Select } from 'antd';
+import { Collapse, Form, Input, InputNumber, Select, Slider } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
     ETargetEventType,
     getChangeControlAction,
+    getChangeCurrentTime,
     ITemplateState,
-    TTargetEvent
+    TTargetEvent,
+    TTopacity
 } from '../../../../../../store/module/template';
 import { animateTypeOptions, EFormEfieldType, targetEventOptions } from './constant';
 import $style from './style.module.less';
@@ -26,6 +28,7 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
     const { stages, controls } = template;
     const stageOfActive = stages[activeStageIndex];
 
+    const { value } = stageOfActive;
     const [targetEventType, setTargetEventType] = useState<ETargetEventType>(ETargetEventType.jumpPlay);
 
     const [form] = Form.useForm<IAnimateCreateDesc>();
@@ -36,7 +39,13 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
         const currentEvent = events.find(item => item.id === selectEventId);
 
         const { type, targetEvent, start: eventStart } = currentEvent as any;
-        const { type: tagetType, start: targetStart, stageIndex } = targetEvent[0] as any;
+        const {
+            type: tagetType,
+            start: targetStart,
+            stageIndex,
+            value: opacity,
+            targetControlId: controlId
+        } = targetEvent[0] as any;
 
         setTargetEventType(tagetType);
 
@@ -45,7 +54,9 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
             { name: EFormEfieldType.targetType, value: tagetType },
             { name: EFormEfieldType.jumpTargetTime, value: targetStart },
             { name: EFormEfieldType.time, value: eventStart },
-            { name: EFormEfieldType.nextStage, value: stageIndex }
+            { name: EFormEfieldType.nextStage, value: stageIndex },
+            { name: EFormEfieldType.Opacity, value: opacity },
+            { name: EFormEfieldType.OpacityTargetId, value: controlId }
         ]);
     }, [selectEventId]);
 
@@ -87,9 +98,28 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
         const control = controls[activeIndex];
         const currentEvent = control.event?.find(item => item.id === selectEventId) as any;
         currentEvent.targetEvent[0].stageIndex = nextStage;
+        dispatch(getChangeControlAction(activeIndex, control));
+    };
+
+    const handleChangeOpacity = () => {
+        const nextStage = form.getFieldValue(EFormEfieldType.Opacity);
+        const control = controls[activeIndex];
+        const currentEvent = control.event?.find(item => item.id === selectEventId) as any;
+        currentEvent.targetEvent[0].value = nextStage;
 
         dispatch(getChangeControlAction(activeIndex, control));
     };
+
+    const handleChangeControlId = () => {
+        const id = form.getFieldValue(EFormEfieldType.OpacityTargetId);
+        const control = controls[activeIndex];
+        const currentEvent = control.event?.find(item => item.id === selectEventId) as any;
+        const targetEvent = currentEvent.targetEvent[0] as unknown as TTopacity;
+        targetEvent.targetControlId = id;
+
+        dispatch(getChangeControlAction(activeIndex, control));
+    };
+
     return (
         <div>
             <Form form={form}>
@@ -147,6 +177,31 @@ export const EventCreateDesc: React.FC<IProps> = ({ project }) => {
                                             );
                                         })}
                                     </Select>
+                                </Form.Item>
+                            </div>
+                        )}
+
+                        {targetEventType === ETargetEventType.setOpacity && (
+                            <div>
+                                <Form.Item name={EFormEfieldType.OpacityTargetId} label="目标控件">
+                                    <Select onChange={handleChangeControlId}>
+                                        {value.map((controlId, i) => {
+                                            const { name } = controls[controlId];
+                                            return (
+                                                <Option value={controlId} key={i}>
+                                                    {name}
+                                                </Option>
+                                            );
+                                        })}
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item name={EFormEfieldType.Opacity} label="可见度数值">
+                                    <InputNumber
+                                        max={1}
+                                        min={0}
+                                        defaultValue={1}
+                                        onChange={handleChangeOpacity}
+                                    />
                                 </Form.Item>
                             </div>
                         )}

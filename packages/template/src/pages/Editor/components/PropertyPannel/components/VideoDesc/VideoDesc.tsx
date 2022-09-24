@@ -37,7 +37,7 @@ export const VideoDesc: React.FC<IProps> = ({ control, controlId }) => {
 
         const { [EFormField.volume]: volume } = config;
 
-        const { [EFormField.objectFit]: objectFit } = style;
+        const { [EFormField.objectFit]: objectFit, [EFormField.Opacity]: opacity } = style;
 
         form.setFields([
             { name: EFormField.name, value: name },
@@ -46,7 +46,8 @@ export const VideoDesc: React.FC<IProps> = ({ control, controlId }) => {
             { name: EFormField.width, value: parseInt(width) },
             { name: EFormField.height, value: parseInt(height) },
             { name: EFormField.volume, value: volume },
-            { name: EFormField.objectFit, value: objectFit }
+            { name: EFormField.objectFit, value: objectFit },
+            { name: EFormField.Opacity, value: opacity }
         ]);
     }, [control]);
 
@@ -85,6 +86,14 @@ export const VideoDesc: React.FC<IProps> = ({ control, controlId }) => {
         const newControl = _.cloneDeep(control);
         newControl.data.src = url;
         newControl.name = name;
+        dispatch(getChangeControlAction(controlId, newControl));
+    };
+
+    const handleChangeOpacity = () => {
+        const opacity = form.getFieldValue(EFormField.Opacity);
+        const newControl = _.cloneDeep(control);
+        const style = newControl.style;
+        style[EFormField.Opacity] = opacity;
         dispatch(getChangeControlAction(controlId, newControl));
     };
 
@@ -164,6 +173,14 @@ export const VideoDesc: React.FC<IProps> = ({ control, controlId }) => {
                                 defaultValue={0}
                             />
                         </Form.Item> */}
+                    </Panel>
+                </Collapse>
+
+                <Collapse accordion>
+                    <Panel header="其他" key="3">
+                        <Form.Item label="内容可见度" name={EFormField.Opacity}>
+                            <InputNumber max={1} min={0} defaultValue={1} onChange={handleChangeOpacity} />
+                        </Form.Item>
                     </Panel>
                 </Collapse>
             </Form>

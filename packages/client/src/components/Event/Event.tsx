@@ -2,11 +2,28 @@ import React, { useEffect, useRef } from 'react';
 import { TRenderComponent } from '../Render/type';
 import { TEventComponent } from './type';
 import $style from './style.module.less';
-import { EEventType, ETargetEventType, IJumpEvent, TTargetEvent, TToggleStage } from '../../types';
+import {
+    EControlTypes,
+    EEventType,
+    ETargetEventType,
+    IJumpEvent,
+    TTargetEvent,
+    TToggleStage,
+    TTopacity
+} from '../../types';
 
 export const EventHoc = (C: TRenderComponent) => {
     const Event: TEventComponent = props => {
-        const { controls, controlVal, currentTime, playState, setActiveStage } = props;
+        const {
+            controls,
+            controlVal,
+            currentTime,
+            playState,
+            setActiveStage,
+            handleChangeControl,
+            setPlayState,
+            handleChangeCurrentTime
+        } = props;
 
         const clickRef = useRef<HTMLDivElement>(null);
 
@@ -18,9 +35,23 @@ export const EventHoc = (C: TRenderComponent) => {
             },
             [ETargetEventType.toggleStage]: async (targetEvent: TToggleStage) => {
                 const nextStage = targetEvent.stageIndex;
-                console.log(12);
+                setPlayState(false);
                 setActiveStage(nextStage);
+                handleChangeCurrentTime(0);
+                setPlayState(true);
                 // await dispatch(getChangeActiveStageIndexAction(nextStage));
+            },
+            [ETargetEventType.setOpacity]: async (targetEvent: TTopacity) => {
+                const { targetControlId, value } = targetEvent;
+                if (!targetControlId) {
+                    return;
+                }
+                const newControl = { ...controls[targetControlId] };
+                if (newControl.type === EControlTypes.Audio) return;
+                const style = (newControl.style || {}) as any;
+                style.opacity = value;
+                newControl.style = style;
+                handleChangeControl(targetControlId, newControl);
             }
         };
 

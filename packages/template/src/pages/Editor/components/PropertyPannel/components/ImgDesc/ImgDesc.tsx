@@ -33,14 +33,15 @@ export const ImgDesc: React.FC<IProps> = ({ control, controlId }) => {
             [EFormField.width]: width,
             [EFormField.height]: height
         } = box;
-        const { [EFormField.objectFit]: objectFit } = style;
+        const { [EFormField.objectFit]: objectFit, [EFormField.Opacity]: opacity } = style;
         form.setFields([
             { name: EFormField.name, value: name },
             { name: EFormField.top, value: parseInt(top) },
             { name: EFormField.left, value: parseInt(left) },
             { name: EFormField.width, value: parseInt(width) },
             { name: EFormField.height, value: parseInt(height) },
-            { name: EFormField.objectFit, value: objectFit }
+            { name: EFormField.objectFit, value: objectFit },
+            { name: EFormField.Opacity, value: opacity }
         ]);
     }, [control]);
 
@@ -72,6 +73,14 @@ export const ImgDesc: React.FC<IProps> = ({ control, controlId }) => {
     const handleUploadChange = (url: string) => {
         const newControl = _.cloneDeep(control);
         newControl.data.src = url;
+        dispatch(getChangeControlAction(controlId, newControl));
+    };
+
+    const handleChangeOpacity = () => {
+        const opacity = form.getFieldValue(EFormField.Opacity);
+        const newControl = _.cloneDeep(control);
+        const style = newControl.style;
+        style[EFormField.Opacity] = opacity;
         dispatch(getChangeControlAction(controlId, newControl));
     };
 
@@ -146,6 +155,14 @@ export const ImgDesc: React.FC<IProps> = ({ control, controlId }) => {
                                 defaultValue={0}
                             />
                         </Form.Item> */}
+                    </Panel>
+                </Collapse>
+
+                <Collapse accordion>
+                    <Panel header="其他" key="3">
+                        <Form.Item label="内容可见度" name={EFormField.Opacity}>
+                            <InputNumber max={1} min={0} defaultValue={1} onChange={handleChangeOpacity} />
+                        </Form.Item>
                     </Panel>
                 </Collapse>
             </Form>

@@ -5,7 +5,8 @@ export enum EFormField {
     width = 'width',
     height = 'height',
     volume = 'volume',
-    objectFit = 'backgroundSize'
+    objectFit = 'backgroundSize',
+    Opacity = 'opacity'
 }
 
 export const objectFitOptions = [
