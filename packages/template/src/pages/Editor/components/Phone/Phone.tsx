@@ -51,8 +51,8 @@ export const Phone: React.FC<IProps> = () => {
     };
 
     const phoneStyle = css`
-        width: ${pxToScale('375')};
-        height: ${pxToScale('667')};
+        width: ${pxToScale('750')};
+        height: ${pxToScale('1334')};
         margin: ${pxToScale('100')} auto;
     `;
 

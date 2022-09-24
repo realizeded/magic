@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
-import { EControlTypes, IAudio, IImg, IText, IVideo, TControls } from '../../../store/module/template';
-import { CAudio } from './components/CAudio';
-import { CVideo } from './components/CVideo';
+import { EControlTypes, IAudio, IImg, IText, IVideo } from '../../types';
+import { TRenderComponent } from './type';
 import $style from './style.module.less';
-import { TRenderComponentType } from './type';
-
-export const Render: TRenderComponentType = props => {
+import { CVideo } from './components/CVideo';
+import { CAudio } from './components/CAudio';
+export const Render: TRenderComponent = props => {
     const typeMapToEl = {
         [EControlTypes.Img]: (control: IImg, currentTime: number, playState: boolean) => {
             const { data, style } = control;
@@ -47,10 +46,10 @@ export const Render: TRenderComponentType = props => {
         }
     };
 
-    const { controlValue, controls, currentTime, playState } = props;
+    const { controlVal, controls, currentTime, playState } = props;
 
     const el = useMemo(() => {
-        const control = controls[controlValue];
+        const control = controls[controlVal];
         const { type } = control;
 
         const processFn = typeMapToEl[type];
@@ -60,7 +59,7 @@ export const Render: TRenderComponentType = props => {
         }
 
         return null;
-    }, [controlValue, controls, currentTime]);
+    }, [controlVal, controls, currentTime, playState]);
 
     return <div className={$style.renderWrapper}>{el}</div>;
 };

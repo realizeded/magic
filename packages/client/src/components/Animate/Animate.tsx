@@ -1,6 +1,6 @@
-import { css } from '@emotion/css';
-import classNames from 'classnames';
 import React from 'react';
+import { TAnimateComponent } from './type';
+import $style from './style.module.less';
 import {
     EAnimateType,
     IAnimateNomal,
@@ -8,17 +8,15 @@ import {
     IAnimateRotate,
     IAnimateScale,
     TAnimate
-} from '../../store/module/template';
-import { TEventComponentType } from '../Event';
-import { TRenderComponentType } from './Render';
-import $style from './style.module.less';
-import { IAnimateProps } from './type';
+} from '../../types';
+import { css } from '@emotion/css';
+import classNames from 'classnames';
 
-export const AnimateHoc = (C: TEventComponentType) => {
-    const Animate: React.FC<IAnimateProps> = props => {
-        const { controls, controlValue, currentTime, playState, activeIndex } = props;
+export const AnimateHoc = (C: TAnimateComponent) => {
+    const Animate: TAnimateComponent = props => {
+        const { controls, controlVal, currentTime, playState } = props;
 
-        const animate = controls[controlValue]?.animate ?? ([] as TAnimate);
+        const animate = controls[controlVal]?.animate ?? ([] as TAnimate);
 
         const classAnimate = [$style.animateWrapper];
 
@@ -145,7 +143,7 @@ export const AnimateHoc = (C: TEventComponentType) => {
         });
 
         return (
-            <div className={classNames(...classAnimate)}>
+            <div className={classNames($style.animateWrapper, ...classAnimate)}>
                 <C {...props} />
             </div>
         );

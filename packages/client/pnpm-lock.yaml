@@ -65,6 +65,7 @@ specifiers:
   react-dev-utils: ^12.0.1
   react-dom: ^18.2.0
   react-refresh: ^0.11.0
+  redux: ^4.2.0
   resolve: ^1.20.0
   resolve-url-loader: ^4.0.0
   sass-loader: ^12.3.0
@@ -144,6 +145,7 @@ dependencies:
   react-dev-utils: 12.0.1_bc3cndyb4zfm7v6hebu43p6ee4
   react-dom: 18.2.0_react@18.2.0
   react-refresh: 0.11.0
+  redux: 4.2.0
   resolve: 1.22.1
   resolve-url-loader: 4.0.0
   sass-loader: 12.6.0_webpack@5.74.0
@@ -9819,6 +9821,12 @@ packages:
     dependencies:
       indent-string: 4.0.0
       strip-indent: 3.0.0
+    dev: false
+
+  /redux/4.2.0:
+    resolution: {integrity: sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA==}
+    dependencies:
+      '@babel/runtime': 7.18.9
     dev: false
 
   /regenerate-unicode-properties/10.0.1:

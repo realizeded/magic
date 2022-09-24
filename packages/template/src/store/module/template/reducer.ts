@@ -101,7 +101,7 @@ const actionTypeMapToState = {
         let newActiveStageIndex = activeStageIndex;
         if (activeStageIndex === index) {
             if (index === 0) {
-                newActiveStageIndex += 1;
+                // newActiveStageIndex += 1;
             } else {
                 newActiveStageIndex -= 1;
             }

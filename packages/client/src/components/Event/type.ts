@@ -1,13 +1,11 @@
-import { IControls, IStage } from '../../store/module/template';
+import { IControls } from '../../types';
 
 export interface IEventProps {
-    stage: IStage;
+    controlVal: string;
     controls: IControls;
-    activeIndex: string;
-    controlValue: string;
-    scaleCanvas: number;
     currentTime: number;
     playState: boolean;
+    setActiveStage: (index: number) => void;
 }
 
-export type TEventComponentType = React.FC<IEventProps>;
+export type TEventComponent = React.FC<IEventProps>;

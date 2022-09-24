@@ -25,14 +25,14 @@ export const Layout: React.FC<IProps> = props => {
     const handleMouseWheel = (e: React.WheelEvent<HTMLDivElement>) => {
         const isUp = (e.nativeEvent as any).wheelDelta > 0;
         if (isUp && scaleCanvas < 1) {
-            dispatch(getChangeScaleCanvas(scaleCanvas + 0.1));
-        } else if (scaleCanvas > 0.2) {
-            dispatch(getChangeScaleCanvas(scaleCanvas - 0.1));
+            dispatch(getChangeScaleCanvas(scaleCanvas + 0.02));
+        } else if (scaleCanvas > 0.1) {
+            dispatch(getChangeScaleCanvas(scaleCanvas - 0.02));
         }
     };
 
     useEffect(() => {
-        const scale = (0.8 * window.innerHeight) / 951;
+        const scale = (0.4 * window.innerHeight) / 951;
         dispatch(getChangeScaleCanvas(scale));
     }, []);
     return (

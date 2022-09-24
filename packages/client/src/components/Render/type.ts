@@ -1,11 +1,11 @@
 import { IControls } from '../../types';
 
-export interface IAnimateProps {
+export interface IRenderProps {
     controlVal: string;
     controls: IControls;
     currentTime: number;
-    setActiveStage: (index: number) => void;
     playState: boolean;
+    setActiveStage: (index: number) => void;
 }
 
-export type TAnimateComponent = React.FC<IAnimateProps>;
+export type TRenderComponent = React.FC<IRenderProps>;

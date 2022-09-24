@@ -1,25 +1,10 @@
-import { IStage, IControls } from '../../store/module/template/type';
-
+import { IControls } from './../../../../template/src/store/module/template/type';
 export interface IBoxProps {
-    stage: IStage;
+    controlVal: string;
     controls: IControls;
-    activeIndex: string;
-    controlValue: string;
-    scaleCanvas: number;
     currentTime: number;
     playState: boolean;
+    setActiveStage: (index: number) => void;
 }
 
-export type TBoxComponentType = React.FC<IBoxProps>;
-
-export interface IDragPosition {
-    x: number;
-    y: number;
-}
-
-export interface IUseDragProps {
-    ref: React.RefObject<HTMLDivElement>;
-    dragEnd: (props: IDragPosition) => void;
-    dragStart: () => void;
-    playState: boolean;
-}
+export type TBoxComponent = React.FC<IBoxProps>;

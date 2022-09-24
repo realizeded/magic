@@ -1,26 +1,12 @@
-import classNames from 'classnames';
 import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-    EEventType,
-    ETargetEventType,
-    getChangeActiveStageIndexAction,
-    getChangeCurrentTime,
-    getTogglePlayState,
-    IJumpEvent,
-    TTargetEvent,
-    TToggleStage
-} from '../../store/module/template';
-import { TRenderComponentType } from '../Animate/Render';
+import { TRenderComponent } from '../Render/type';
+import { TEventComponent } from './type';
 import $style from './style.module.less';
-import { IEventProps } from './type';
+import { EEventType, ETargetEventType, IJumpEvent, TTargetEvent, TToggleStage } from '../../types';
 
-interface IProps {}
-
-export const EvenHoc = (C: TRenderComponentType) => {
-    const Event: React.FC<IEventProps> = props => {
-        const dispatch = useDispatch();
-        const { controls, controlValue, currentTime, playState, activeIndex } = props;
+export const EventHoc = (C: TRenderComponent) => {
+    const Event: TEventComponent = props => {
+        const { controls, controlVal, currentTime, playState, setActiveStage } = props;
 
         const clickRef = useRef<HTMLDivElement>(null);
 
@@ -28,18 +14,19 @@ export const EvenHoc = (C: TRenderComponentType) => {
         const targetEventProcess = {
             [ETargetEventType.jumpPlay]: async (targetEvent: IJumpEvent) => {
                 const start = targetEvent.start;
-                await dispatch(getChangeCurrentTime(start));
+                // await dispatch(getChangeCurrentTime(start));
             },
             [ETargetEventType.toggleStage]: async (targetEvent: TToggleStage) => {
                 const nextStage = targetEvent.stageIndex;
-
-                await dispatch(getChangeActiveStageIndexAction(nextStage));
+                console.log(12);
+                setActiveStage(nextStage);
+                // await dispatch(getChangeActiveStageIndexAction(nextStage));
             }
         };
 
         const handleProcessTargetEvent = async () => {
             const targetEvent = targetEventRef.current;
-            dispatch(getTogglePlayState(false));
+            // dispatch(getTogglePlayState(false));
 
             targetEvent.forEach(async (tagetEventItem, i) => {
                 const type = tagetEventItem.type;
@@ -55,7 +42,7 @@ export const EvenHoc = (C: TRenderComponentType) => {
             }
 
             setTimeout(() => {
-                dispatch(getTogglePlayState(true));
+                // dispatch(getTogglePlayState(true));
             });
         };
 
@@ -78,10 +65,11 @@ export const EvenHoc = (C: TRenderComponentType) => {
         useEffect(() => {
             if (!playState) return;
 
-            const event = controls[controlValue].event || [];
+            const event = controls[controlVal].event || [];
 
             event.map(eventItem => {
                 const { type, start, targetEvent } = eventItem;
+
                 if (start <= currentTime) {
                     eventProcessMap[type](targetEvent);
                 }
@@ -90,12 +78,7 @@ export const EvenHoc = (C: TRenderComponentType) => {
 
         return (
             <div className={$style.eventWrapper} ref={clickRef}>
-                <C
-                    controlValue={controlValue}
-                    controls={controls}
-                    currentTime={currentTime}
-                    playState={playState}
-                />
+                <C {...props} />
             </div>
         );
     };
