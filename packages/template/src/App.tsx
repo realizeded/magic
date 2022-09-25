@@ -1,12 +1,21 @@
 import React from 'react';
 
-import { Editor } from './components/Editor';
+import { Editor } from './pages/Editor';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { routerConfigs } from './routes';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 export const App = () => {
     return (
         <Provider store={store}>
-            <Editor />;
+            <BrowserRouter>
+                <Routes>
+                    {routerConfigs.map(item => {
+                        const { path, component: C } = item;
+                        return <Route path={path} key={path} element={<C />} />;
+                    })}
+                </Routes>
+            </BrowserRouter>
         </Provider>
     );
 };

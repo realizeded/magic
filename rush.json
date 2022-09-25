@@ -454,6 +454,14 @@
       ]
     },
     {
+      "packageName": "@magic/client",
+      "projectFolder": "packages/client",
+      "reviewCategory": "production",
+      "tags": [
+        "web"
+      ]
+    },
+    {
       "packageName": "@magic/serve",
       "projectFolder": "packages/server",
       "reviewCategory": "production",

@@ -1,0 +1,32 @@
+.editorPage {
+    height: 100vh;
+
+    :global {
+        .ant-layout-header {
+            position: relative;
+            z-index: 1;
+            background-color: #fff;
+            border-bottom: 1px solid #d9d9d9;
+            box-shadow: rgb(0 0 0 / 8%) 0 2px 8px;
+        }
+    }
+}
+
+.editorHeader {
+    padding: 0 !important;
+    background-color: #fff;
+    box-shadow: rgb(0 0 0 / 8%) 0 2px 8px;
+}
+
+.loadingWrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.6);
+}

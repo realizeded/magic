@@ -17,7 +17,9 @@ import {
     CREATE_ANIMATE,
     SELECT_ANIMATE_ID,
     CREATE_EVENT,
-    SELECT_EVENT_ID
+    SELECT_EVENT_ID,
+    CHANGE_NAME,
+    RESET_PROJECT
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -41,7 +43,9 @@ import {
     TCreateEvent,
     EEventType,
     ETargetEventType,
-    TSelectEventId
+    TSelectEventId,
+    TChangeProjectName,
+    TResetProject
 } from './type';
 
 import html2canvas from 'html2canvas';
@@ -55,7 +59,7 @@ const actionTypeMapToState = {
         const { id, control } = data;
         newState.project.template.controls[id] = control;
 
-        return { ...newState, project: { ...newState.project } };
+        return { ...newState };
     },
     [CHANGE_ACTIVE_INDEX](state: ITemplateState, action: TChangeActiveIndex) {
         const newState = _.cloneDeep(state);
@@ -97,7 +101,7 @@ const actionTypeMapToState = {
         let newActiveStageIndex = activeStageIndex;
         if (activeStageIndex === index) {
             if (index === 0) {
-                newActiveStageIndex += 1;
+                // newActiveStageIndex += 1;
             } else {
                 newActiveStageIndex -= 1;
             }
@@ -295,6 +299,18 @@ const actionTypeMapToState = {
         newState.project.selectEventId = id;
         newState.project.activeIndex = controlId;
         newState.project.selectAnimateId = '';
+        return { ...newState };
+    },
+    [CHANGE_NAME](state: ITemplateState, action: TChangeProjectName) {
+        const newState = _.cloneDeep(state);
+        const name = action.data;
+        newState.project.template.name = name;
+        return { ...newState };
+    },
+    [RESET_PROJECT](state: ITemplateState, action: TResetProject) {
+        const newState = _.cloneDeep(state);
+
+        newState.project = initState.project;
         return { ...newState };
     }
 };

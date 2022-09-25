@@ -1,4 +1,4 @@
-import { EAnimateType } from './../../../components/Editor/components/PropertyPannel/components/AnimateCreateDesc/constant';
+import { EAnimateType } from '../../../pages/Editor/components/PropertyPannel/components/AnimateCreateDesc/constant';
 import {
     CHANGE_CONTROL,
     CHANGE_ACTIVE_INDEX,
@@ -17,7 +17,9 @@ import {
     CREATE_ANIMATE,
     SELECT_ANIMATE_ID,
     CREATE_EVENT,
-    SELECT_EVENT_ID
+    SELECT_EVENT_ID,
+    CHANGE_NAME,
+    RESET_PROJECT
 } from './actionTypes';
 import { TControls, ITemplate } from './type';
 
@@ -144,5 +146,19 @@ export const selectEventId = (ids: Array<string>) => {
     return {
         type: SELECT_EVENT_ID,
         data: ids
+    };
+};
+
+export const changeProjectName = (name: string) => {
+    return {
+        type: CHANGE_NAME,
+        data: name
+    };
+};
+
+export const resetProject = () => {
+    return {
+        type: RESET_PROJECT,
+        data: null
     };
 };
