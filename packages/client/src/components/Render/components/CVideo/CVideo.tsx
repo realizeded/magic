@@ -43,8 +43,13 @@ export const CVideo: React.FC<IProps> = props => {
             style={style}
             src={videoSrc}
             ref={videoRef}
-            playsInline
+            playsInline={true}
+            controls={false}
             className={$style.videoWrapper}
+            webkit-playsinline={true}
+            x5-video-player-type="h5"
+            x5-video-player-fullscreen={true}
+            x5-video-orientation="portraint"
         />
     );
 };

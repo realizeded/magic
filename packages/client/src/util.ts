@@ -4,5 +4,5 @@ export const ptToRem = (pxNum: string | any) => {
     }
     const num = pxNum.replace('px', '');
 
-    return Number(num) / (2 * window.bodySize) + 'rem';
+    return Number(num) / 100 + 'rem';
 };

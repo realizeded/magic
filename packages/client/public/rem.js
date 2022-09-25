@@ -1,6 +1,6 @@
 (function () {
     // 把屏幕划成7.5份
-    const unitRem = 15;
+    const unitRem = 100;
     const templateWidth = 750;
     function setBodyFontSize(num) {
         document.documentElement.style.fontSize = `${num}px`;
@@ -12,7 +12,7 @@
         const width = window.innerWidth;
         const height = window.innerHeight;
 
-        return width;
+        return width > height ? height : width;
     }
 
     function calibration() {
@@ -38,7 +38,7 @@
         const precent = clientWidth / templateWidth;
         const fontSize = unitRem * precent;
         setBodyFontSize(fontSize);
-        // calibration();
+        calibration();
     }
 
     init();
