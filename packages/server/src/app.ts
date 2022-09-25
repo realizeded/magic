@@ -12,6 +12,7 @@ const app = express();
 
 app.use(cors());
 app.use('/static', express.static(path.resolve(__dirname, '../upload')));
+app.use('/project', express.static(path.resolve(__dirname, '../project')));
 // 设置模板引擎
 app.set('views', path.join(__dirname, '../views'));
 app.engine('.html', ejs.__express);
