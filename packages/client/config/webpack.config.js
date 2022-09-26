@@ -324,7 +324,7 @@ module.exports = function (webpackEnv) {
                     babelRuntimeRegenerator
                 ]),
                 new DefinePlugin({
-                    isOnline: JSON.stringify(isEnvProduction)
+                    isOnline: process.env.NODE_ENV === 'production'
                 })
             ]
         },
