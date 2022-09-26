@@ -20,6 +20,8 @@ const paths = require('./paths');
 const modules = require('./modules');
 const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const { DefinePlugin } = require('webpack');
+
 const ForkTsCheckerWebpackPlugin =
     process.env.TSC_COMPILE_ON_ERROR === 'true'
         ? require('react-dev-utils/ForkTsCheckerWarningWebpackPlugin')
@@ -211,7 +213,7 @@ module.exports = function (webpackEnv) {
             // webpack uses `publicPath` to determine where the app is being served from.
             // It requires a trailing slash, or the file assets will get an incorrect path.
             // We inferred the "public path" (such as / or /my-project) from homepage.
-            publicPath: paths.publicUrlOrPath,
+            publicPath: isEnvProduction ? '/project/client/' : paths.publicUrlOrPath,
             // Point sourcemap entries to original disk location (format as URL on Windows)
             devtoolModuleFilenameTemplate: isEnvProduction
                 ? info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
@@ -319,7 +321,10 @@ module.exports = function (webpackEnv) {
                     babelRuntimeEntry,
                     babelRuntimeEntryHelpers,
                     babelRuntimeRegenerator
-                ])
+                ]),
+                new DefinePlugin({
+                    isOnline: process.env.NODE_ENV === 'production'
+                })
             ]
         },
         module: {

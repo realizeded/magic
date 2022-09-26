@@ -4,6 +4,7 @@ import { Upload as AUpload } from 'antd';
 import { UploadChangeParam } from 'antd/lib/upload';
 
 import $style from './style.module.less';
+import { getUrl } from '../../util';
 
 interface IProps {
     handleUploadChange: (name: string, url: string) => void;
@@ -21,7 +22,7 @@ export const MediaUpload: React.FC<IProps> = ({ handleUploadChange, children }) 
         if (info.file.status === 'done') {
             const name = info.file.name;
             // Get this url from response in real world.
-            const path = 'http://localhost:8800' + '/static/' + info.file.name;
+            const path = getUrl() + '/static/' + info.file.name;
             // Get this url from response in real world.
             setLoading(false);
             handleUploadChange(name, path);
@@ -36,7 +37,7 @@ export const MediaUpload: React.FC<IProps> = ({ handleUploadChange, children }) 
                 className={$style.uploadWrapper}
                 showUploadList={false}
                 onChange={handleChange}
-                action={`http://localhost:8800/media/template/infor`}
+                action={`${getUrl()}/media/template/infor`}
                 method="post"
             >
                 <div className={$style.posts}>{children}</div>

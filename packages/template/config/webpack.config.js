@@ -16,6 +16,7 @@ const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 const paths = require('./paths');
 const modules = require('./modules');
 const getClientEnvironment = require('./env');
@@ -211,11 +212,11 @@ module.exports = function (webpackEnv) {
             // webpack uses `publicPath` to determine where the app is being served from.
             // It requires a trailing slash, or the file assets will get an incorrect path.
             // We inferred the "public path" (such as / or /my-project) from homepage.
-            publicPath: paths.publicUrlOrPath,
+            publicPath: isEnvProduction ? '/project/client/' : paths.publicUrlOrPath,
             // Point sourcemap entries to original disk location (format as URL on Windows)
             devtoolModuleFilenameTemplate: isEnvProduction
-                ? (info) => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
-                : isEnvDevelopment && ((info) => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'))
+                ? info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
+                : isEnvDevelopment && (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'))
         },
         cache: {
             type: 'filesystem',
@@ -225,7 +226,7 @@ module.exports = function (webpackEnv) {
             buildDependencies: {
                 defaultWebpack: ['webpack/lib/'],
                 config: [__filename],
-                tsconfig: [paths.appTsConfig, paths.appJsConfig].filter((f) => fs.existsSync(f))
+                tsconfig: [paths.appTsConfig, paths.appJsConfig].filter(f => fs.existsSync(f))
             }
         },
         infrastructureLogging: {
@@ -291,8 +292,8 @@ module.exports = function (webpackEnv) {
             // `web` extension prefixes have been added for better support
             // for React Native Web.
             extensions: paths.moduleFileExtensions
-                .map((ext) => `.${ext}`)
-                .filter((ext) => useTypeScript || !ext.includes('ts')),
+                .map(ext => `.${ext}`)
+                .filter(ext => useTypeScript || !ext.includes('ts')),
             alias: {
                 // Support React Native Web
                 // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -599,6 +600,9 @@ module.exports = function (webpackEnv) {
                         : undefined
                 )
             ),
+            new DefinePlugin({
+                isOnline: process.env.NODE_ENV === 'production'
+            }),
             // Inlines the webpack runtime script. This script is too small to warrant
             // a network request.
             // https://github.com/facebook/create-react-app/issues/5358
@@ -652,7 +656,7 @@ module.exports = function (webpackEnv) {
                         manifest[file.name] = file.path;
                         return manifest;
                     }, seed);
-                    const entrypointFiles = entrypoints.main.filter((fileName) => !fileName.endsWith('.map'));
+                    const entrypointFiles = entrypoints.main.filter(fileName => !fileName.endsWith('.map'));
 
                     return {
                         files: manifestFiles,

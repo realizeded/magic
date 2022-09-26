@@ -183,5 +183,6 @@ declare global {
     interface Window {
         config: ITemplate;
         bodySize: number;
+        isOnline: boolean;
     }
 }

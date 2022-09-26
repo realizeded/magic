@@ -32,14 +32,11 @@ importers:
       '@testing-library/react': ^13.3.0
       '@testing-library/user-event': ^13.5.0
       '@types/jest': ^27.5.2
-      '@types/lodash': ^4.14.184
       '@types/node': ^16.11.49
       '@types/react': ^18.0.17
       '@types/react-dom': ^18.0.6
       '@typescript-eslint/eslint-plugin': ^5.0.0
       '@typescript-eslint/parser': ^5.33.1
-      antd: ^4.22.7
-      axios: ^0.27.2
       babel-jest: ^27.4.2
       babel-loader: ^8.2.3
       babel-plugin-named-asset-import: ^0.3.8
@@ -87,6 +84,7 @@ importers:
       react-dev-utils: ^12.0.1
       react-dom: ^18.2.0
       react-refresh: ^0.11.0
+      redux: ^4.2.0
       resolve: ^1.20.0
       resolve-url-loader: ^4.0.0
       sass-loader: ^12.3.0
@@ -119,13 +117,10 @@ importers:
       '@testing-library/react': 13.3.0_react-dom@18.2.0+react@18.2.0
       '@testing-library/user-event': 13.5.0_@testing-library+dom@7.21.4
       '@types/jest': 27.5.2
-      '@types/lodash': 4.14.185
       '@types/node': 16.11.49
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
       '@typescript-eslint/parser': 5.33.1_eslint@8.22.0+typescript@4.7.4
-      antd: 4.23.2_react-dom@18.2.0+react@18.2.0
-      axios: 0.27.2
       babel-jest: 27.5.1_@babel+core@7.18.10
       babel-loader: 8.2.5_b8bce14f87162c3885dc6907ec4c380b
       babel-plugin-named-asset-import: 0.3.8_@babel+core@7.18.10
@@ -168,6 +163,7 @@ importers:
       react-dev-utils: 12.0.1_08b6268f01e64acfd7c72069cdbfc427
       react-dom: 18.2.0_react@18.2.0
       react-refresh: 0.11.0
+      redux: 4.2.0
       resolve: 1.22.1
       resolve-url-loader: 4.0.0
       sass-loader: 12.6.0_webpack@5.74.0
