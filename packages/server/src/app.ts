@@ -42,5 +42,6 @@ app.use(bodyParser.text({ type: 'text/html' }));
 app.use('/media/template', templateRouter);
 
 app.listen(8800, () => {
+    console.log('test');
     console.log('8800----run');
 });
