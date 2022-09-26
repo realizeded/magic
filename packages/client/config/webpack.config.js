@@ -219,6 +219,7 @@ module.exports = function (webpackEnv) {
                 ? info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
                 : isEnvDevelopment && (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'))
         },
+
         cache: {
             type: 'filesystem',
             version: createEnvironmentHash(env.raw),
@@ -323,7 +324,7 @@ module.exports = function (webpackEnv) {
                     babelRuntimeRegenerator
                 ]),
                 new DefinePlugin({
-                    isOnline: process.env.NODE_ENV === 'production'
+                    isOnline: isEnvProduction
                 })
             ]
         },

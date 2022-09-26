@@ -601,7 +601,7 @@ module.exports = function (webpackEnv) {
                 )
             ),
             new DefinePlugin({
-                isOnline: process.env.NODE_ENV === 'production'
+                isOnline: isEnvProduction
             }),
             // Inlines the webpack runtime script. This script is too small to warrant
             // a network request.
