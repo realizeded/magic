@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { getUrl } from '../util';
 
 export interface IGetAxiosRequestConfig<P> extends AxiosRequestConfig {
     params: P;
@@ -47,4 +48,5 @@ const createAxiosInstance = (base: string) => {
     };
 };
 
-export const templateRequest = createAxiosInstance('http://localhost:8800/');
+const baseUrl = getUrl();
+export const templateRequest = createAxiosInstance(baseUrl);
