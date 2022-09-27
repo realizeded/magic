@@ -7,7 +7,6 @@ import { routerConfigs } from './routes';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import types from './type';
 export const App = () => {
-    console.log('test');
     return (
         <Provider store={store}>
             <BrowserRouter>
