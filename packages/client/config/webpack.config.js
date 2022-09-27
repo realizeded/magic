@@ -322,10 +322,7 @@ module.exports = function (webpackEnv) {
                     babelRuntimeEntry,
                     babelRuntimeEntryHelpers,
                     babelRuntimeRegenerator
-                ]),
-                new DefinePlugin({
-                    isOnline: process.env.NODE_ENV === 'production'
-                })
+                ])
             ]
         },
         module: {
@@ -607,6 +604,9 @@ module.exports = function (webpackEnv) {
                         : undefined
                 )
             ),
+            new DefinePlugin({
+                isOnline: process.env.NODE_ENV === 'production'
+            }),
             // Inlines the webpack runtime script. This script is too small to warrant
             // a network request.
             // https://github.com/facebook/create-react-app/issues/5358
