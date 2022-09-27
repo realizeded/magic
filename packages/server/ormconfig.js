@@ -1,6 +1,7 @@
 const env = process.env.NODE_ENV;
-
-const entitiesPath = env === 'production' ? 'build/models/entity/**/*.js' : 'src/models/entity/**/*.ts';
+const isProduction = env === 'production';
+const entitiesPath = isProduction ? 'build/models/entity/**/*.js' : 'src/models/entity/**/*.ts';
+const database = isProduction ? 'magic' : 'template';
 
 module.exports = {
     type: 'mysql',
