@@ -15,8 +15,8 @@ export const VideoList: React.FC<IProps> = props => {
             list: [
                 {
                     text: '第二屏boss',
-                    img: 'http://localhost:3000/imgs/videoPost.jpg',
-                    src: 'http://localhost:3000/video/jinggao.mp4'
+                    img: '/imgs/videoPost.jpg',
+                    src: '/video/jinggao.mp4'
                 }
             ]
         }
