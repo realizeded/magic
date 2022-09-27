@@ -9,7 +9,7 @@ module.exports = {
     port: 3306,
     username: 'root',
     password: '19981020',
-    database: 'template',
+    database: database,
     synchronize: true,
     logging: false,
     entities: [entitiesPath],
