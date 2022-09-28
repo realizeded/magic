@@ -181,7 +181,7 @@ export interface ITemplateState {
 
 declare global {
     interface Window {
-        config: ITemplate;
+        project: { id: string; name: string; template: ITemplate };
         bodySize: number;
         isOnline: boolean;
     }

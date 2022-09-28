@@ -20,23 +20,23 @@ export const AudioList: React.FC<IProps> = props => {
             list: [
                 {
                     text: '海浪',
-                    audioSrc: 'http://localhost:3000/audio/lucky.mp3'
+                    audioSrc: '/audio/lucky.mp3'
                 },
                 {
                     text: '海浪1',
-                    audioSrc: 'http://localhost:3000/audio/lucky.mp3'
+                    audioSrc: '/audio/lucky.mp3'
                 },
                 {
                     text: '海浪2',
-                    audioSrc: 'http://localhost:3000/audio/lucky.mp3'
+                    audioSrc: '/audio/lucky.mp3'
                 },
                 {
                     text: '海浪3',
-                    audioSrc: 'http://localhost:3000/audio/lucky.mp3'
+                    audioSrc: '/audio/lucky.mp3'
                 },
                 {
                     text: '海浪4',
-                    audioSrc: 'http://localhost:3000/audio/lucky.mp3'
+                    audioSrc: '/audio/lucky.mp3'
                 }
             ]
         }

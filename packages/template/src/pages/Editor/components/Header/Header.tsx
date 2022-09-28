@@ -40,7 +40,7 @@ export const Header: React.FC<IProps> = props => {
         <div className={$style.headerWrapper}>
             <div className={$style.left}>
                 <div className={$style.projectDesc}>
-                    <img src="http://localhost:3000/imgs/logo.svg" />
+                    <img src="/imgs/logo.svg" />
                 </div>
                 <div className={$style.projectNameWrappper}>
                     <div className={$style.text}>

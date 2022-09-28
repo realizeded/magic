@@ -12,7 +12,7 @@ interface IProps {}
 
 const Flow = compose(BoxHoc, AnimateHoc, EventHoc)(Render) as TBoxComponent;
 export const Layout: React.FC<IProps> = props => {
-    const templateConfig = window.config;
+    const { id, name, template: templateConfig } = window.project;
 
     const [config, setConfig] = useState<ITemplate>({ id: '0', name: '', stages: [], controls: {} });
 
@@ -22,7 +22,8 @@ export const Layout: React.FC<IProps> = props => {
     const [playState, setPlayState] = useState(true);
 
     useEffect(() => {
-        setConfig(templateConfig);
+        setConfig({ ...templateConfig, id });
+        document.title = name;
         setActiveStage(0);
         const start = Date.now();
         const fn = () => {

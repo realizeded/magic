@@ -15,23 +15,23 @@ export const ImgList: React.FC<IProps> = props => {
             list: [
                 {
                     text: '背景1',
-                    img: 'http://localhost:3000/imgs/bg1.jpg'
+                    img: '/imgs/bg1.jpg'
                 },
                 {
                     text: '背景2',
-                    img: 'http://localhost:3000/imgs/bg2.jpg'
+                    img: '/imgs/bg2.jpg'
                 },
                 {
                     text: '背景3',
-                    img: 'http://localhost:3000/imgs/bg3.jpg'
+                    img: '/imgs/bg3.jpg'
                 },
                 {
                     text: '背景4',
-                    img: 'http://localhost:3000/imgs/bg4.jpg'
+                    img: '/imgs/bg4.jpg'
                 },
                 {
                     text: '背景5',
-                    img: 'http://localhost:3000/imgs/bg5.jpg'
+                    img: '/imgs/bg5.jpg'
                 }
             ]
         },
@@ -40,19 +40,19 @@ export const ImgList: React.FC<IProps> = props => {
             list: [
                 {
                     text: '奖励1',
-                    img: 'http://localhost:3000/imgs/fen1.png'
+                    img: '/imgs/fen1.png'
                 },
                 {
                     text: '氛围图1',
-                    img: 'http://localhost:3000/imgs/fen2.png'
+                    img: '/imgs/fen2.png'
                 },
                 {
                     text: '氛围图2',
-                    img: 'http://localhost:3000/imgs/fen3.png'
+                    img: '/imgs/fen3.png'
                 },
                 {
                     text: '氛围图3',
-                    img: 'http://localhost:3000/imgs/fen4.png'
+                    img: '/imgs/fen4.png'
                 }
             ]
         },
@@ -61,19 +61,19 @@ export const ImgList: React.FC<IProps> = props => {
             list: [
                 {
                     text: '按钮1',
-                    img: 'http://localhost:3000/imgs/bt1.png'
+                    img: '/imgs/bt1.png'
                 },
                 {
                     text: '按钮2',
-                    img: 'http://localhost:3000/imgs/bt4.png'
+                    img: '/imgs/bt4.png'
                 },
                 {
                     text: '按钮3',
-                    img: 'http://localhost:3000/imgs/bt6.png'
+                    img: '/imgs/bt6.png'
                 },
                 {
                     text: '按钮4',
-                    img: 'http://localhost:3000/imgs/bt7.png'
+                    img: '/imgs/bt7.png'
                 }
             ]
         }
