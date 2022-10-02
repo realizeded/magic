@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveTemplate } from '../../../../services/template';
 import { changeProjectName, IProject } from '../../../../store/module/template';
 import { TRootState } from '../../../../store/type';
+import EditorPreview from '../EditorPreview/EditorPreview';
 import $style from './style.module.less';
 
 interface IProps {}
@@ -17,6 +18,16 @@ export const Header: React.FC<IProps> = props => {
     const { name } = template;
 
     const [toggleInputState, setToggleInputState] = useState(false);
+
+    const [showPreViewModal, setShowPreviewModal] = useState(false);
+
+    const handleClosePreviewModal = () => {
+        setShowPreviewModal(false);
+    };
+
+    const handleShowPreviewModal = () => {
+        setShowPreviewModal(true);
+    };
 
     const handleToggleState = () => {
         setToggleInputState(!toggleInputState);
@@ -56,7 +67,7 @@ export const Header: React.FC<IProps> = props => {
                 </div>
             </div>
             <div className={$style.right}>
-                <div className={$style.btnGroup}>
+                <div className={$style.btnGroup} onClick={handleShowPreviewModal}>
                     <Button icon={<PreviewOpen size="14" theme="outline" fill="#000" />} />
                     <div className={$style.btnSave}>预览</div>
                 </div>
@@ -65,6 +76,7 @@ export const Header: React.FC<IProps> = props => {
                     <div className={$style.btnSave}>保存</div>
                 </div>
             </div>
+            {showPreViewModal && <EditorPreview onClose={handleClosePreviewModal} />}
         </div>
     );
 };

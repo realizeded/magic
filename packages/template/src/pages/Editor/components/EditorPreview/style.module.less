@@ -1,0 +1,56 @@
+.editorPreviewWrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999999999999;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .preViewWrapper {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 7px;
+        padding: 16px;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+    }
+    .iframeWrapper {
+        width: 375px;
+        height: 661px;
+    }
+    .qrcodeWrapper {
+        width: 200px;
+        height: 200px;
+        padding: 16px;
+        border-radius: 8px;
+        background-color: #fff;
+        position: absolute;
+        right: -220px;
+        top: 0;
+    }
+
+    .closeWrapper {
+        position: absolute;
+        right: -270px;
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        cursor: pointer;
+        :global {
+            .i-icon-close {
+                height: 16px !important;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}
