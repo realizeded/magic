@@ -1,4 +1,4 @@
-import { CircleDoubleUp } from '@icon-park/react';
+import { CircleDoubleUp, DownSquare, FigmaFlattenSelection } from '@icon-park/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { IProject } from '../../../../store/module/template';
@@ -23,7 +23,7 @@ export const TimeLine: React.FC<IProps> = props => {
             <div className={$style.bottomScrollWrapper}>
                 <TimePannel />
                 <div className={$style.verticalLine} style={{ left: currentTime * 10 * 10 + 270 + 'px' }}>
-                    <CircleDoubleUp theme="filled" fill="rgb(13 206 138)" size="14" />
+                    <FigmaFlattenSelection theme="filled" fill="rgb(13 206 138)" size="14" />
                 </div>
             </div>
         </div>
