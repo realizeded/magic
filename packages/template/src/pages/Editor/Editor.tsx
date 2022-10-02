@@ -12,11 +12,13 @@ import { IUrlParams } from './type';
 import { getTemplate } from '../../services/template';
 import { getSetNewTemplateAction, ITemplate, resetProject } from '../../store/module/template';
 import { store } from '../../store';
+import EditorPreview from './components/EditorPreview/EditorPreview';
 
 interface IProps {}
 
 export const Editor: React.FC<IProps> = props => {
     const dispatch = useDispatch();
+
     const params = useParams<IUrlParams>();
 
     const [loading, setLoading] = useState(true);
