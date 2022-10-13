@@ -3,7 +3,7 @@
 该项目主要是分为编辑器、客户端渲染、服务三部分，主要是提供给用户进行拖拽生成多场景页面。该项目重点在于互动。
 # 项目
 * 模板编辑器平台地址 http://www.lmagic.work/home/projects
-* 互动页面例子 招聘英雄 http://www.lmagic.work/editor/5 (可以使用平台预览手机扫码访问,也可以直接使用链接pc手机模式访问) 
+* 互动页面例子 招聘英雄 http://www.lmagic.work:8800/media/template/func?id=5 (可以使用平台预览手机扫码访问,也可以直接使用链接pc手机模式访问) 
 
 
 # 开发
