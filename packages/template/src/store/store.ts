@@ -2,8 +2,8 @@ import { TRootState, TRootAction } from './type';
 import { createStore, combineReducers, compose } from 'redux';
 import { templateReducer } from './module/template';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 const reducer = combineReducers({
     project: templateReducer
 });
