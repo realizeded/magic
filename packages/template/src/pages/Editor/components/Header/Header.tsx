@@ -7,7 +7,7 @@ import { changeProjectName, IProject } from '../../../../store/module/template';
 import { TRootState } from '../../../../store/type';
 import EditorPreview from '../EditorPreview/EditorPreview';
 import $style from './style.module.less';
-
+import logo from '../../../../static/img/logo.jpg';
 interface IProps {}
 
 export const Header: React.FC<IProps> = props => {
@@ -51,7 +51,7 @@ export const Header: React.FC<IProps> = props => {
         <div className={$style.headerWrapper}>
             <div className={$style.left}>
                 <div className={$style.projectDesc}>
-                    <img src="/imgs/logo.svg" />
+                    <img src={logo} />
                 </div>
                 <div className={$style.projectNameWrappper}>
                     <div className={$style.text}>
