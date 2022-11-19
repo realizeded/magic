@@ -54,7 +54,7 @@ export const StageList: React.FC<IProps> = props => {
                         key={key}
                     >
                         <div className={$style.imgWrapper}>
-                            <img src={posts} />
+                            {posts ? <img src={posts} /> : <div className={$style.imgSwapWrapper} />}
                             <div
                                 className={classNames($style.delWrapper, stages.length === 1 && $style.hide)}
                             >
