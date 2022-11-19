@@ -9,8 +9,13 @@ import { Header as EditorHeader } from './components/Header';
 import { Provider, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { IUrlParams } from './type';
-import { getTemplate } from '../../services/template';
-import { getSetNewTemplateAction, ITemplate, resetProject } from '../../store/module/template';
+import { getComponentList, getTemplate } from '../../services/template';
+import {
+    getSetNewTemplateAction,
+    ITemplate,
+    resetProject,
+    setComponentList
+} from '../../store/module/template';
 import { store } from '../../store';
 import EditorPreview from './components/EditorPreview/EditorPreview';
 
@@ -39,6 +44,9 @@ export const Editor: React.FC<IProps> = props => {
             setLoading(false);
         });
 
+        getComponentList().then(res => {
+            dispatch(setComponentList(res || []));
+        });
         return () => {
             dispatch(resetProject());
         };

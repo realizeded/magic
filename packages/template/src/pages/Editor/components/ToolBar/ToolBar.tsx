@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import $style from './style.module.less';
-import { Pic, Video, Music, Text, GraphicDesign } from '@icon-park/react';
+import { Pic, Video, Music, Text, GraphicDesign, Components } from '@icon-park/react';
 import classNames from 'classnames';
 import { ToolModal } from '../ToolModal';
 interface IProps {}
@@ -24,6 +24,10 @@ export const ToolBar: React.FC<IProps> = props => {
         {
             icon: <Text size={26} fill="#000" theme="outline" />,
             text: '文字'
+        },
+        {
+            icon: <Components size={26} fill="#000" theme="outline" />,
+            text: '组件'
         }
     ];
 

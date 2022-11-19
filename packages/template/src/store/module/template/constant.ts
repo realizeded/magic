@@ -22,6 +22,7 @@ export const initState: ITemplateState = {
                 }
             ],
             controls: {}
-        }
+        },
+        customList: []
     }
 };

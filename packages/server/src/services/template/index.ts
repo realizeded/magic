@@ -1,6 +1,7 @@
 import { Project } from './../../models/entity/project';
 import {
     createTemplate,
+    getComponentList,
     getTemplateList,
     getTemplateOfId,
     updateTemplateOfId
@@ -39,4 +40,8 @@ export const updateTemplateOfIdServices = (project: Project) => {
 
 export const getTemplateListServices = (pageSize: number, pageNum: number) => {
     return getTemplateList(pageSize, pageNum);
+};
+
+export const getCustomComponentList = () => {
+    return getComponentList();
 };

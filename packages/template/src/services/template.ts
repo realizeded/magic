@@ -42,3 +42,13 @@ export const getTemplateList = (pageSize: number, pageNum: number): Promise<IGet
         { params: { pageNum, pageSize } }
     );
 };
+
+export interface ICustomComponent {
+    id: number;
+    name: string;
+    img: string;
+    scriptPath: string;
+}
+export const getComponentList = (): Promise<ICustomComponent[]> => {
+    return templateRequest.get<ICustomComponent[]>('/media/template/getComponentList');
+};
