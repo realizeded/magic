@@ -16,7 +16,7 @@ export const ComponentList: React.FC<IProps> = props => {
         const { name, scriptPath } = item;
         dispatch(
             getCreateControlAction({
-                type: EControlTypes.Img,
+                type: EControlTypes.Component,
                 name: name,
                 style: {},
                 box: {

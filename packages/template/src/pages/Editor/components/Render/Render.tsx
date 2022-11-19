@@ -1,6 +1,15 @@
 import React, { useMemo } from 'react';
-import { EControlTypes, IAudio, IImg, IText, IVideo, TControls } from '../../../../store/module/template';
+import {
+    EControlTypes,
+    IAudio,
+    IComponent,
+    IImg,
+    IText,
+    IVideo,
+    TControls
+} from '../../../../store/module/template';
 import { CAudio } from './components/CAudio';
+import { Custom } from './components/Custom';
 import { CVideo } from './components/CVideo';
 import $style from './style.module.less';
 import { TRenderComponentType } from './type';
@@ -44,6 +53,11 @@ export const Render: TRenderComponentType = props => {
                     {text}
                 </p>
             );
+        },
+        [EControlTypes.Component]: (control: IComponent, currentTime: number, playState: boolean) => {
+            const { style = {}, data } = control;
+            const scriptPath = data.src;
+            return <Custom scriptPath={scriptPath} />;
         }
     };
 

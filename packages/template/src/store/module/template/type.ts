@@ -147,6 +147,14 @@ export interface IImg extends IControlCommon {
     style: Record<string, string>;
 }
 
+export interface IComponent extends IControlCommon {
+    type: EControlTypes.Component;
+    data: {
+        src: string;
+    };
+    style: Record<string, string>;
+}
+
 export interface IVideo extends IControlCommon {
     type: EControlTypes.Video;
     data: {
@@ -177,7 +185,7 @@ export interface IText extends IControlCommon {
     style: Record<string, string>;
 }
 
-export type TControls = IImg | IVideo | IAudio | IText;
+export type TControls = IImg | IVideo | IAudio | IText | IComponent;
 
 export interface IControls {
     [key: string]: TControls;
