@@ -48,6 +48,7 @@ export const Editor: React.FC<IProps> = props => {
             dep.emit('magicOk');
         });
         socket.on('ready', ({ name = '', id }) => {
+            dep.addIds(id);
             dispatch(
                 getCreateControlAction({
                     id,

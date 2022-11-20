@@ -9,7 +9,7 @@ interface IProps {
 }
 
 // eslint-disable-next-line react/display-name, react/prop-types
-export const Custom: React.FC<IProps> = React.memo(({ scriptPath }) => {
+export const Custom: React.FC<IProps> = React.memo(({ scriptPath, id }) => {
     const containRef = useRef<HTMLDivElement>(null);
 
     const renderComponent = () => {
@@ -30,7 +30,9 @@ export const Custom: React.FC<IProps> = React.memo(({ scriptPath }) => {
         const current = containRef.current;
         if (current) {
             renderComponent();
-            dep.on('magicOk', renderComponent);
+            if (dep.includes(id)) {
+                dep.on('magicOk', renderComponent);
+            }
         }
     }, [containRef]);
     return <div className={$style.cutomComponent} ref={containRef}></div>;
