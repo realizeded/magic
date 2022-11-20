@@ -148,6 +148,7 @@ export interface IImg extends IControlCommon {
 }
 
 export interface IComponent extends IControlCommon {
+    id: number;
     type: EControlTypes.Component;
     data: {
         src: string;

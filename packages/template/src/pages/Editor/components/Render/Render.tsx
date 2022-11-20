@@ -55,9 +55,9 @@ export const Render: TRenderComponentType = props => {
             );
         },
         [EControlTypes.Component]: (control: IComponent, currentTime: number, playState: boolean) => {
-            const { style = {}, data } = control;
+            const { style = {}, data, id } = control;
             const scriptPath = data.src;
-            return <Custom scriptPath={scriptPath} />;
+            return <Custom scriptPath={scriptPath} id={id} />;
         }
     };
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { dep } from '../../../../../../util';
 import $style from './style.module.less';
 
 interface IProps {
@@ -30,7 +29,6 @@ export const Custom: React.FC<IProps> = React.memo(({ scriptPath }) => {
         const current = containRef.current;
         if (current) {
             renderComponent();
-            dep.on('magicOk', renderComponent);
         }
     }, [containRef]);
     return <div className={$style.cutomComponent} ref={containRef}></div>;

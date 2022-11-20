@@ -11,13 +11,15 @@ import { useParams } from 'react-router-dom';
 import { IUrlParams } from './type';
 import { getComponentList, getTemplate } from '../../services/template';
 import {
+    EControlTypes,
+    getCreateControlAction,
     getSetNewTemplateAction,
     ITemplate,
     resetProject,
     setComponentList
 } from '../../store/module/template';
-import { store } from '../../store';
-import EditorPreview from './components/EditorPreview/EditorPreview';
+import { io } from 'socket.io-client';
+import { dep } from '../../util';
 
 interface IProps {}
 
@@ -27,6 +29,44 @@ export const Editor: React.FC<IProps> = props => {
     const params = useParams<IUrlParams>();
 
     const [loading, setLoading] = useState(true);
+
+    const [isOpenDebug, setIsOpenDebug] = useState(false);
+
+    const handleOpenDebug = () => {
+        handleDebuger();
+        setIsOpenDebug(true);
+    };
+
+    const handleCloseDebug = () => {
+        location.reload();
+    };
+
+    const handleDebuger = () => {
+        const socket = io('http://localhost:1024');
+
+        socket.on('magicOk', () => {
+            dep.emit('magicOk');
+        });
+        socket.on('ready', ({ name = '', id }) => {
+            dispatch(
+                getCreateControlAction({
+                    id,
+                    type: EControlTypes.Component,
+                    name: name,
+                    style: {},
+                    box: {
+                        width: '200px',
+                        height: '200px',
+                        top: '20px',
+                        left: '0px'
+                    },
+                    data: {
+                        src: 'http://localhost:3001/static/js/bundle.js'
+                    }
+                })
+            );
+        });
+    };
 
     useEffect(() => {
         const id = params.id;
@@ -60,7 +100,11 @@ export const Editor: React.FC<IProps> = props => {
                 </div>
             )}
             <Header className={$style.editorHeader}>
-                <EditorHeader />
+                <EditorHeader
+                    isDebug={isOpenDebug}
+                    handleOpenDebug={handleOpenDebug}
+                    handleCloseDebug={handleCloseDebug}
+                />
             </Header>
             <Content>
                 <EditorCotent />

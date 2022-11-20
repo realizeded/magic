@@ -13,9 +13,10 @@ export const ComponentList: React.FC<IProps> = props => {
     const { customList } = project;
 
     const handleCreateComponent = (item: ICustomComponent) => {
-        const { name, scriptPath } = item;
+        const { name, scriptPath, id } = item;
         dispatch(
             getCreateControlAction({
+                id,
                 type: EControlTypes.Component,
                 name: name,
                 style: {},

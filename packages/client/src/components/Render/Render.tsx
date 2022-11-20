@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
-import { EControlTypes, IAudio, IImg, IText, IVideo } from '../../types';
+import { EControlTypes, IAudio, IComponent, IImg, IText, IVideo } from '../../types';
 import { TRenderComponent } from './type';
 import $style from './style.module.less';
 import { CVideo } from './components/CVideo';
 import { CAudio } from './components/CAudio';
+import { Custom } from './components/Custom';
 export const Render: TRenderComponent = props => {
     const typeMapToEl = {
         [EControlTypes.Img]: (control: IImg, currentTime: number, playState: boolean) => {
@@ -43,6 +44,20 @@ export const Render: TRenderComponent = props => {
                     {text}
                 </p>
             );
+        },
+        [EControlTypes.Text]: (control: IText, currentTime: number, playState: boolean) => {
+            const { style = {}, data } = control;
+            const text = data.text;
+            return (
+                <p className={$style.textWrapper} style={style}>
+                    {text}
+                </p>
+            );
+        },
+        [EControlTypes.Component]: (control: IComponent, currentTime: number, playState: boolean) => {
+            const { style = {}, data, id } = control;
+            const scriptPath = data.src;
+            return <Custom scriptPath={scriptPath} id={id} />;
         }
     };
 
