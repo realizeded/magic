@@ -1,4 +1,5 @@
 import { EAnimateType } from '../../../pages/Editor/components/PropertyPannel/components/AnimateCreateDesc/constant';
+import { ICustomComponent } from '../../../services/template';
 import {
     CHANGE_CONTROL,
     CHANGE_ACTIVE_INDEX,
@@ -19,7 +20,8 @@ import {
     CREATE_EVENT,
     SELECT_EVENT_ID,
     CHANGE_NAME,
-    RESET_PROJECT
+    RESET_PROJECT,
+    SET_COMPONENT_LIST
 } from './actionTypes';
 import { TControls, ITemplate } from './type';
 
@@ -160,5 +162,12 @@ export const resetProject = () => {
     return {
         type: RESET_PROJECT,
         data: null
+    };
+};
+
+export const setComponentList = (arr: ICustomComponent[]) => {
+    return {
+        type: SET_COMPONENT_LIST,
+        data: arr
     };
 };

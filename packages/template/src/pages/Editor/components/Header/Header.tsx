@@ -1,4 +1,4 @@
-import { Edit, Download, SaveOne, PreviewOpen } from '@icon-park/react';
+import { Edit, Download, SaveOne, PreviewOpen, Customer } from '@icon-park/react';
 import { Button, Input, message } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,9 +8,13 @@ import { TRootState } from '../../../../store/type';
 import EditorPreview from '../EditorPreview/EditorPreview';
 import $style from './style.module.less';
 import logo from '../../../../static/img/logo.jpg';
-interface IProps {}
+interface IProps {
+    isDebug: boolean;
+    handleOpenDebug: () => void;
+    handleCloseDebug: () => void;
+}
 
-export const Header: React.FC<IProps> = props => {
+export const Header: React.FC<IProps> = ({ isDebug, handleCloseDebug, handleOpenDebug }) => {
     const dispatch = useDispatch();
 
     const project = useSelector<TRootState, IProject>(state => state.project.project);
@@ -67,6 +71,17 @@ export const Header: React.FC<IProps> = props => {
                 </div>
             </div>
             <div className={$style.right}>
+                {!isDebug ? (
+                    <div className={$style.btnGroup} onClick={handleOpenDebug}>
+                        <Button icon={<Customer size="14" theme="outline" fill="#000" />} />
+                        <div className={$style.btnSave}>开启自定义</div>
+                    </div>
+                ) : (
+                    <div className={$style.btnGroup} onClick={handleCloseDebug}>
+                        <Button icon={<Customer size="14" theme="outline" fill="#000" />} />
+                        <div className={$style.btnSave}>关闭自定义</div>
+                    </div>
+                )}
                 <div className={$style.btnGroup} onClick={handleShowPreviewModal}>
                     <Button icon={<PreviewOpen size="14" theme="outline" fill="#000" />} />
                     <div className={$style.btnSave}>预览</div>

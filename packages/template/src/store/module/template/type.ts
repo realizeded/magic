@@ -1,3 +1,4 @@
+import { ICustomComponent } from '../../../services/template';
 import { IAction } from '../../type';
 import {
     CHANGE_ACTIVE_INDEX,
@@ -18,7 +19,8 @@ import {
     CREATE_EVENT,
     SELECT_EVENT_ID,
     CHANGE_NAME,
-    RESET_PROJECT
+    RESET_PROJECT,
+    SET_COMPONENT_LIST
 } from './actionTypes';
 export interface IBox {
     width: string;
@@ -33,7 +35,8 @@ export enum EControlTypes {
     Img = 'img',
     Video = 'video',
     Audio = 'audio',
-    Text = 'text'
+    Text = 'text',
+    Component = 'component'
 }
 
 export enum EAnimateType {
@@ -144,6 +147,15 @@ export interface IImg extends IControlCommon {
     style: Record<string, string>;
 }
 
+export interface IComponent extends IControlCommon {
+    id: number;
+    type: EControlTypes.Component;
+    data: {
+        src: string;
+    };
+    style: Record<string, string>;
+}
+
 export interface IVideo extends IControlCommon {
     type: EControlTypes.Video;
     data: {
@@ -174,7 +186,7 @@ export interface IText extends IControlCommon {
     style: Record<string, string>;
 }
 
-export type TControls = IImg | IVideo | IAudio | IText;
+export type TControls = IImg | IVideo | IAudio | IText | IComponent;
 
 export interface IControls {
     [key: string]: TControls;
@@ -195,6 +207,7 @@ export interface IProject {
     playState: boolean;
     selectAnimateId: string;
     selectEventId: string;
+    customList: Array<ICustomComponent>;
 }
 
 export interface ITemplateState {
@@ -221,5 +234,5 @@ export type TCreateEvent = IAction<typeof CREATE_EVENT, string>;
 export type TSelectEventId = IAction<typeof SELECT_EVENT_ID, Array<string>>;
 export type TChangeProjectName = IAction<typeof CHANGE_NAME, string>;
 export type TResetProject = IAction<typeof RESET_PROJECT, null>;
-
+export type TSetComponentList = IAction<typeof SET_COMPONENT_LIST, Array<ICustomComponent>>;
 export type TTemplateAction = TChangeControlAction;

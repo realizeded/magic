@@ -5,6 +5,7 @@ import { AudioList } from './components/AudioList';
 import $style from './style.module.less';
 import { EActiveType } from './type';
 import { TextList } from './components/TextList';
+import { ComponentList } from './components/ComponentList';
 
 interface IProps {
     activeIndex: number;
@@ -16,9 +17,9 @@ export const ToolModal: React.FC<IProps> = ({ activeIndex }) => {
         [EActiveType.Video]: VideoList,
         [EActiveType.Music]: AudioList,
         [EActiveType.Text]: TextList,
-        [EActiveType.GraphicDesign]: ImgList
+        [EActiveType.Component]: ComponentList
     };
-
+    console.log(activeIndex);
     const C = activeIndexMapToC[activeIndex as EActiveType];
 
     return (

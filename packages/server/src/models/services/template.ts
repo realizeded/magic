@@ -1,3 +1,4 @@
+import { Component } from '../entity/component';
 import { Project } from './../entity/project';
 import { templateSql } from './connect';
 
@@ -47,4 +48,9 @@ export const getTemplateList = (pageSize: number, pageNum: number) => {
         .take(pageSize)
         .getMany();
     return Promise.all([projectLen, projectList]);
+};
+
+export const getComponentList = () => {
+    const projectList = templateSql.connect.getRepository(Component).createQueryBuilder().getMany();
+    return projectList;
 };

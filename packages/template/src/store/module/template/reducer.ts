@@ -19,7 +19,8 @@ import {
     CREATE_EVENT,
     SELECT_EVENT_ID,
     CHANGE_NAME,
-    RESET_PROJECT
+    RESET_PROJECT,
+    SET_COMPONENT_LIST
 } from './actionTypes';
 import { Reducer, createStore } from 'redux';
 import { initState } from './constant';
@@ -45,7 +46,8 @@ import {
     ETargetEventType,
     TSelectEventId,
     TChangeProjectName,
-    TResetProject
+    TResetProject,
+    TSetComponentList
 } from './type';
 
 import html2canvas from 'html2canvas';
@@ -311,6 +313,12 @@ const actionTypeMapToState = {
         const newState = _.cloneDeep(state);
 
         newState.project = initState.project;
+        return { ...newState };
+    },
+    [SET_COMPONENT_LIST](state: ITemplateState, action: TSetComponentList) {
+        const newState = _.cloneDeep(state);
+
+        newState.project.customList = action.data ?? [];
         return { ...newState };
     }
 };

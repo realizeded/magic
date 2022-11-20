@@ -6,6 +6,7 @@ import { EControlTypes, IImg, ITemplateState, IText, IVideo } from '../../../../
 import { TRootState } from '../../../../store/type';
 import { AnimateCreateDesc } from './components/AnimateCreateDesc';
 import { AudioDesc } from './components/AudioDesc';
+import { ComponentDesc } from './components/ComponentDesc';
 import { EventCreateDesc } from './components/EventCreateDesc';
 import { ImgDesc } from './components/ImgDesc';
 import { StageDesc } from './components/StageDesc';
@@ -36,6 +37,9 @@ export const PropertyPannel: React.FC<IProps> = props => {
         },
         [EControlTypes.Img]() {
             return <ImgDesc control={activeControl as IImg} controlId={activeIndex} />;
+        },
+        [EControlTypes.Component]() {
+            return <ComponentDesc control={activeControl as IImg} controlId={activeIndex} />;
         }
     };
 

@@ -136,7 +136,7 @@ export const AnimateHoc = (C: TAnimateComponent) => {
         animate.forEach(animateItem => {
             const animteKey = animateItem.type;
 
-            const processFn = animateProcess[animteKey];
+            const processFn = (animateProcess as any)[animteKey];
             if (processFn) {
                 processFn(animateItem as any);
             }

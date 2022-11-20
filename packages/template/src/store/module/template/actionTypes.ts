@@ -37,3 +37,5 @@ export const SELECT_EVENT_ID = 'SELECT_EVENT_ID';
 export const CHANGE_NAME = 'CHANGE_NAME';
 
 export const RESET_PROJECT = 'RESET_PROJECT';
+
+export const SET_COMPONENT_LIST = 'SET_COMPONENT_LIST';

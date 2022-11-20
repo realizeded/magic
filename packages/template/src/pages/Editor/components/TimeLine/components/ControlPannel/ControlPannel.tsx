@@ -10,7 +10,18 @@ import {
 } from '../../../../../../store/module/template';
 import { TRootState } from '../../../../../../store/type';
 import $style from './style.module.less';
-import { Pic, Video, Music, Text, DeleteOne, ArrowUp, ArrowDown, AddThree, Effects } from '@icon-park/react';
+import {
+    Pic,
+    Video,
+    Music,
+    Text,
+    DeleteOne,
+    ArrowUp,
+    ArrowDown,
+    AddThree,
+    Effects,
+    Components
+} from '@icon-park/react';
 import classNames from 'classnames';
 import { EAnimateType } from '../../../PropertyPannel/components/AnimateCreateDesc';
 import _ from 'lodash';
@@ -34,7 +45,8 @@ export const ControlPannel: React.FC<IProps> = ({ handleChangeControl }) => {
         [EControlTypes.Img]: Pic,
         [EControlTypes.Video]: Video,
         [EControlTypes.Audio]: Music,
-        [EControlTypes.Text]: Text
+        [EControlTypes.Text]: Text,
+        [EControlTypes.Component]: Components
     };
 
     const handleDeleteControl = (id: string, e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {

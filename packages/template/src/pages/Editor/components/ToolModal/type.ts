@@ -3,5 +3,5 @@ export enum EActiveType {
     Video = 1,
     Music = 2,
     Text = 3,
-    GraphicDesign = 4
+    Component = 4
 }

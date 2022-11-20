@@ -11,7 +11,17 @@ export enum EControlTypes {
     Img = 'img',
     Video = 'video',
     Audio = 'audio',
-    Text = 'text'
+    Text = 'text',
+    Component = 'component'
+}
+
+export interface IComponent extends IControlCommon {
+    id: number;
+    type: EControlTypes.Component;
+    data: {
+        src: string;
+    };
+    style: Record<string, string>;
 }
 
 export enum EAnimateType {
@@ -152,7 +162,7 @@ export interface IText extends IControlCommon {
     style: Record<string, string>;
 }
 
-export type TControls = IImg | IVideo | IAudio | IText;
+export type TControls = IImg | IVideo | IAudio | IText | IComponent;
 
 export interface IControls {
     [key: string]: TControls;
