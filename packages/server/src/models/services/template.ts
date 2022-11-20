@@ -15,6 +15,54 @@ export const createTemplate = (name: string, template: string) => {
         });
 };
 
+export const isExitComponent = (id: number) => {
+    return templateSql.connect
+        .getRepository(Component)
+        .createQueryBuilder('component')
+        .where('component.id = :id', { id })
+        .getOne()
+        .then(result => {
+            if (result) {
+                return true;
+            }
+            return false;
+        });
+};
+
+const createNewComponent = (id: number, name: string, scriptPath: string, img: string) => {
+    return templateSql
+        .createQueryBuilder()
+        .insert()
+        .into(Component)
+        .values([{ id, name, scriptPath, img }])
+        .execute()
+        .then<{ id: number }>(res => {
+            const id = res.raw?.insertId;
+            return { id };
+        });
+};
+
+export const updateComponent = (id: number, name: string, scriptPath: string, img: string) => {
+    return templateSql
+        .createQueryBuilder()
+        .update(Component)
+        .set({ id, name, scriptPath, img })
+        .where('id = :id', { id })
+        .execute()
+        .then(res => {
+            return { id };
+        });
+};
+
+export const createComponent = (id: number, name: string, scriptPath: string, img: string) => {
+    return isExitComponent(id).then(res => {
+        if (!res) {
+            return createNewComponent(id, name, scriptPath, img);
+        }
+        return updateComponent(id, name, scriptPath, img);
+    });
+};
+
 export const getTemplateOfId = (id: number) => {
     return templateSql.connect
         .getRepository(Project)

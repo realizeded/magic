@@ -42,7 +42,7 @@ export const Editor: React.FC<IProps> = props => {
     };
 
     const handleDebuger = () => {
-        const socket = io('http://localhost:1024');
+        const socket = io('http://127.0.0.1:1024');
 
         socket.on('magicOk', () => {
             dep.emit('magicOk');

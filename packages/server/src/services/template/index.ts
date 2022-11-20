@@ -1,5 +1,6 @@
 import { Project } from './../../models/entity/project';
 import {
+    createComponent,
     createTemplate,
     getComponentList,
     getTemplateList,
@@ -23,6 +24,10 @@ export const createProjectServices = () => {
     const data = JSON.stringify(initTemplateData);
 
     return createTemplate('新建项目', data);
+};
+
+export const createComponentServices = (id: number, name: string, scriptPath: string, img: string) => {
+    return createComponent(id, name, scriptPath, img);
 };
 
 export const getTemplateOfIfServices = (id: number) => {

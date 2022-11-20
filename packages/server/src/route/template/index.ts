@@ -1,5 +1,9 @@
 import { Component } from './../../models/entity/component';
-import { getCustomComponentList, getTemplateListServices } from './../../services/template/index';
+import {
+    createComponentServices,
+    getCustomComponentList,
+    getTemplateListServices
+} from './../../services/template/index';
 import express = require('express');
 import { FailModel } from './../../responseModel/failModel';
 import { Project } from './../../models/entity/project';
@@ -20,11 +24,21 @@ import { getComponentList } from '../../models/services/template';
 
 const router = express.Router();
 
-// 获取所有自定义组件列表
-router.get<string, unknown, SuccessModel<Component[]> | FailModel>('/getComponentList', (req, res) => {
+// 上传自定义组件信息
+router.get<string, unknown, SuccessModel<Component[]> | FailModel>('/postcomponent', (req, res) => {
     getCustomComponentList().then(result => {
         if (!result) {
             return res.send(new FailModel('2', '获取列表失败'));
+        }
+        res.send(new SuccessModel('0', result));
+    });
+});
+
+// 获取所有自定义组件列表
+router.use<string, unknown, SuccessModel<Component[]> | FailModel>('/getComponentList', (req, res) => {
+    getComponentList().then(result => {
+        if (!result) {
+            return res.send(new FailModel('2', '获取失败'));
         }
         res.send(new SuccessModel('0', result));
     });
