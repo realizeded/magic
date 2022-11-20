@@ -20,17 +20,18 @@ import {
     IGetTemplateReqQuery
 } from '../../types/template';
 import path = require('path');
-import { getComponentList } from '../../models/services/template';
+import { createComponent, getComponentList } from '../../models/services/template';
 
 const router = express.Router();
 
 // 上传自定义组件信息
-router.get<string, unknown, SuccessModel<Component[]> | FailModel>('/postcomponent', (req, res) => {
-    getCustomComponentList().then(result => {
+router.use<string, unknown, SuccessModel<string> | FailModel>('/postcomponent', (req, res) => {
+    const { id, name, scriptPath, img } = req.body;
+    createComponent(id, name, scriptPath, img).then(result => {
         if (!result) {
-            return res.send(new FailModel('2', '获取列表失败'));
+            return res.send(new FailModel('2', '上传失败'));
         }
-        res.send(new SuccessModel('0', result));
+        res.send(new SuccessModel('0', '上传成功'));
     });
 });
 
