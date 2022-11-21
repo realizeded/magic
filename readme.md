@@ -30,4 +30,5 @@ magic-ct https://www.npmjs.com/package/magic-ct
 github + jenkins \
 http://www.lmagic.work:8081/
 
-
+## 自定义组件文档
+https://juejin.cn/post/7168103383780311070
