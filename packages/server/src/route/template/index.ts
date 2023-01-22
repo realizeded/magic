@@ -21,8 +21,12 @@ import {
 } from '../../types/template';
 import path = require('path');
 import { createComponent, getComponentList } from '../../models/services/template';
-
+import ssim from 'ssim.js';
 const router = express.Router();
+
+import imageminPngquant from 'imagemin-pngquant';
+import imageminMozJpeg = require('imagemin-mozjpeg');
+import { writeFile, readFileSync } from 'fs';
 
 // 上传自定义组件信息
 router.use<string, unknown, SuccessModel<string> | FailModel>('/postcomponent', (req, res) => {
@@ -135,6 +139,35 @@ router.get<string, string, string, unknown, IGetFuncQuery>('/func', (req, res) =
 });
 
 router.post('/infor', function (req, res) {
+    const file = req.files[0];
+    const filePath = file?.path;
+    const mimeType = file.mimetype;
+    if (/png|jpg|jpeg/.test(mimeType)) {
+        const originFileData = readFileSync(filePath);
+
+        import('imagemin')
+            .then(imagemin => {
+                const isPng = mimeType.includes('png');
+
+                return imagemin([filePath], {
+                    glob: false,
+                    plugins: [
+                        isPng ? imageminPngquant({ quality: [0.6, 0.8] }) : imageminMozJpeg({ quality: 50 })
+                    ]
+                });
+            })
+            .then(([returnValue]) => {
+                const compressionFile = returnValue?.data;
+                // const { mssim, performance } = ssim(originFileData, compressionFile);
+                writeFile(filePath, compressionFile, () => {
+                    res.send({
+                        code: 1,
+                        msg: '成功'
+                    });
+                });
+            });
+        return;
+    }
     res.send({
         code: 1,
         msg: '成功'
