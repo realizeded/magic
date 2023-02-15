@@ -3,6 +3,7 @@ import Item from 'antd/lib/list/Item';
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { EControlTypes, getCreateControlAction } from '../../../../../../store/module/template';
+import { getStaticUrl } from '../../../../../../util';
 import $style from './style.module.less';
 
 interface IProps {}
@@ -14,29 +15,31 @@ export const AudioList: React.FC<IProps> = props => {
 
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
+    const prefixUrl = getStaticUrl();
+
     const imgList = [
         {
             text: '背景图',
             list: [
                 {
                     text: '海浪',
-                    audioSrc: '/audio/lucky.mp3'
+                    audioSrc: `${prefixUrl}/audio/lucky.mp3`
                 },
                 {
                     text: '海浪1',
-                    audioSrc: '/audio/lucky.mp3'
+                    audioSrc: `${prefixUrl}/audio/lucky.mp3`
                 },
                 {
                     text: '海浪2',
-                    audioSrc: '/audio/lucky.mp3'
+                    audioSrc: `${prefixUrl}/audio/lucky.mp3`
                 },
                 {
                     text: '海浪3',
-                    audioSrc: '/audio/lucky.mp3'
+                    audioSrc: `${prefixUrl}/audio/lucky.mp3`
                 },
                 {
                     text: '海浪4',
-                    audioSrc: '/audio/lucky.mp3'
+                    audioSrc: `${prefixUrl}/audio/lucky.mp3`
                 }
             ]
         }

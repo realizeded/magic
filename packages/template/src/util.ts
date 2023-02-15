@@ -5,6 +5,13 @@ export const getUrl = (): string => {
     return isOnline ? 'https://client.lmagic.work' : 'http://localhost:8800';
 };
 
+export const getStaticUrl = (): string => {
+    const isOnline = process.env.NODE_ENV !== 'development';
+
+    // return window.isOnline ? 'http://150.158.141.76:8800' : 'http://localhost:8800';
+    return isOnline ? 'https://client.lmagic.work' : 'http://localhost:3000';
+};
+
 export class Dep {
     private ids: Array<number> = [];
     private idMap: Record<string, Array<() => void>> = {};

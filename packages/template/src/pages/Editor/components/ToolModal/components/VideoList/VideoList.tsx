@@ -2,6 +2,7 @@ import Item from 'antd/lib/list/Item';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { EControlTypes, getCreateControlAction } from '../../../../../../store/module/template';
+import { getStaticUrl } from '../../../../../../util';
 import $style from './style.module.less';
 
 interface IProps {}
@@ -9,14 +10,16 @@ interface IProps {}
 export const VideoList: React.FC<IProps> = props => {
     const dispatch = useDispatch();
 
+    const prefixUrl = getStaticUrl();
+
     const imgList = [
         {
             text: '视频',
             list: [
                 {
                     text: '第二屏boss',
-                    img: '/imgs/videoPost.jpg',
-                    src: '/video/jinggao.mp4'
+                    img: `${prefixUrl}/imgs/videoPost.jpg`,
+                    src: `${prefixUrl}/video/jinggao.mp4`
                 }
             ]
         }
