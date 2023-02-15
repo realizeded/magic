@@ -2,6 +2,7 @@ import Item from 'antd/lib/list/Item';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { EControlTypes, getCreateControlAction } from '../../../../../../store/module/template';
+import { getStaticUrl } from '../../../../../../util';
 import $style from './style.module.less';
 
 interface IProps {}
@@ -9,29 +10,31 @@ interface IProps {}
 export const ImgList: React.FC<IProps> = props => {
     const dispatch = useDispatch();
 
+    const prefixUrl = getStaticUrl();
+
     const imgList = [
         {
             text: '背景图',
             list: [
                 {
                     text: '背景1',
-                    img: '/imgs/bg1.jpg'
+                    img: `${prefixUrl}/imgs/bg1.jpg`
                 },
                 {
                     text: '背景2',
-                    img: '/imgs/bg2.jpg'
+                    img: `${prefixUrl}/imgs/bg2.jpg`
                 },
                 {
                     text: '背景3',
-                    img: '/imgs/bg3.jpg'
+                    img: `${prefixUrl}/imgs/bg3.jpg`
                 },
                 {
                     text: '背景4',
-                    img: '/imgs/bg4.jpg'
+                    img: `${prefixUrl}/imgs/bg4.jpg`
                 },
                 {
                     text: '背景5',
-                    img: '/imgs/bg5.jpg'
+                    img: `${prefixUrl}/imgs/bg5.jpg`
                 }
             ]
         },
@@ -40,19 +43,19 @@ export const ImgList: React.FC<IProps> = props => {
             list: [
                 {
                     text: '奖励1',
-                    img: '/imgs/fen1.png'
+                    img: `${prefixUrl}/imgs/fen1.png`
                 },
                 {
                     text: '氛围图1',
-                    img: '/imgs/fen2.png'
+                    img: `${prefixUrl}/imgs/fen2.png`
                 },
                 {
                     text: '氛围图2',
-                    img: '/imgs/fen3.png'
+                    img: `${prefixUrl}/imgs/fen3.png`
                 },
                 {
                     text: '氛围图3',
-                    img: '/imgs/fen4.png'
+                    img: `${prefixUrl}/imgs/fen4.png`
                 }
             ]
         },
@@ -61,19 +64,19 @@ export const ImgList: React.FC<IProps> = props => {
             list: [
                 {
                     text: '按钮1',
-                    img: '/imgs/bt1.png'
+                    img: `${prefixUrl}/imgs/bt1.png`
                 },
                 {
                     text: '按钮2',
-                    img: '/imgs/bt4.png'
+                    img: `${prefixUrl}/imgs/bt4.png`
                 },
                 {
                     text: '按钮3',
-                    img: '/imgs/bt6.png'
+                    img: `${prefixUrl}/imgs/bt6.png`
                 },
                 {
                     text: '按钮4',
-                    img: '/imgs/bt7.png'
+                    img: `${prefixUrl}/imgs/bt7.png`
                 }
             ]
         }
