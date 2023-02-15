@@ -8,8 +8,7 @@ export const getUrl = (): string => {
 export const getStaticUrl = (): string => {
     const isOnline = process.env.NODE_ENV !== 'development';
 
-    // return window.isOnline ? 'http://150.158.141.76:8800' : 'http://localhost:8800';
-    return isOnline ? 'https://client.lmagic.work' : 'http://localhost:3000';
+    return isOnline ? 'https://www.lmagic.work' : 'http://localhost:3000';
 };
 
 export class Dep {
